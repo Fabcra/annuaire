@@ -52,20 +52,17 @@ class Commentaire
     /**
      * @var int
      *
-     * @ORM\Column(name="identifiant", type="integer", unique=true)
-     * 
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Utilisateur", mappedBy="Utilisateur")
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="Utilisateur")
      */
     private $identifiant;
     
      /**
      * @var string
      *
-     * @ORM\Column(name="Description", type="string", length=255)
       * 
       * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Commentaire", inversedBy="Commentaire")
      */
-    private $description;
+    private $abus;
 
 
 
@@ -182,7 +179,17 @@ class Commentaire
      *
      * @return Utilisateur
      */
-    public function setIdentifiant($identifiant) {
+    
+
+    /**
+     * Set identifiant
+     *
+     * @param \AppBundle\Entity\Utilisateur $identifiant
+     *
+     * @return Commentaire
+     */
+    public function setIdentifiant(\AppBundle\Entity\Utilisateur $identifiant = null)
+    {
         $this->identifiant = $identifiant;
 
         return $this;
@@ -191,34 +198,34 @@ class Commentaire
     /**
      * Get identifiant
      *
-     * @return int
+     * @return \AppBundle\Entity\Utilisateur
      */
-    public function getIdentifiant() {
+    public function getIdentifiant()
+    {
         return $this->identifiant;
     }
-    
+
     /**
-     * Set description
+     * Set abus
      *
-     * @param string $description
+     * @param \AppBundle\Entity\Commentaire $abus
      *
-     * @return Abus
+     * @return Commentaire
      */
-    public function setDescription($description)
+    public function setAbus(\AppBundle\Entity\Commentaire $abus = null)
     {
-        $this->description = $description;
+        $this->abus = $abus;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Get abus
      *
-     * @return string
+     * @return \AppBundle\Entity\Commentaire
      */
-    public function getDescription()
+    public function getAbus()
     {
-        return $this->description;
+        return $this->abus;
     }
 }
-

@@ -94,4 +94,3 @@ class Images
         return $this->image;
     }
 }
-

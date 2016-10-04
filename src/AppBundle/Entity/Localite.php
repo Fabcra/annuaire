@@ -63,4 +63,3 @@ class Localite
         return $this->localite;
     }
 }
-

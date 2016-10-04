@@ -94,4 +94,3 @@ class Abus
         return $this->encodage;
     }
 }
-

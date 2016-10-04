@@ -73,10 +73,9 @@ class Promotion {
     /**
      * @var string
      *
-     * @ORM\Column(name="Nom", type="string", length=255)
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Categorie", mappedBy="Categorie")
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Categorie", inversedBy="Categorie")
      */
-    private $nom;
+    private $categorie;
 
     /**
      * Get id
@@ -241,4 +240,28 @@ class Promotion {
         return $this->affichageJusque;
     }
 
+
+    /**
+     * Set categorie
+     *
+     * @param \AppBundle\Entity\Categorie $categorie
+     *
+     * @return Promotion
+     */
+    public function setCategorie(\AppBundle\Entity\Categorie $categorie = null)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return \AppBundle\Entity\Categorie
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
 }

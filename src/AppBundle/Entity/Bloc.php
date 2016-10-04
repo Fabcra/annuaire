@@ -94,4 +94,3 @@ class Bloc
         return $this->description;
     }
 }
-

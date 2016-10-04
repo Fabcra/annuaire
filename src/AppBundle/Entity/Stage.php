@@ -280,4 +280,3 @@ class Stage
         return $this->affichageJusque;
     }
 }
-

@@ -63,4 +63,3 @@ class Commune
         return $this->commune;
     }
 }
-

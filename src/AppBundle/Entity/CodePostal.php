@@ -64,4 +64,3 @@ class CodePostal
         return $this->codePostal;
     }
 }
-

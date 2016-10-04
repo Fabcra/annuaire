@@ -59,7 +59,6 @@ class Utilisateur {
     /**
      * @var string
      *
-     * @ORM\Column(name="CodePostal", type="string", length=255)
      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\CodePostal", inversedBy="Utilisateur") 
      * 
      */
@@ -68,7 +67,6 @@ class Utilisateur {
     /**
      * @var string
      *
-     * @ORM\Column(name="Localite", type="string", length=255)
      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Localite", inversedBy="Utilisateur") 
      */
     private $localite;
@@ -76,7 +74,6 @@ class Utilisateur {
     /**
      * @var string
      *
-     * @ORM\Column(name="commune", type="string", length=255)
      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Commune", inversedBy="Utilisateur") 
      */
     private $commune;
@@ -84,9 +81,9 @@ class Utilisateur {
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=255)
+     * @ORM\Column(name="type_user", type="string", length=255)
      */
-    private $type;
+    private $type_user;
 
     /**
      * @var \DateTime
@@ -147,7 +144,6 @@ class Utilisateur {
     /**
      * @var string
      *
-     * @ORM\Column(name="Image", type="blob")
      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Images", inversedBy="Utilisateur") 
      */
     private $image;
@@ -173,31 +169,27 @@ class Utilisateur {
     /**
      * @var string
      *
-     * @ORM\Column(name="Nom", type="string", length=255)
      * @ORM\ManytoMany(targetEntity="AppBundle\Entity\Categorie", inversedBy="Categorie")
      */
-    private $nom;
+    private $categorie;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Nom", type="string", length=255)
      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Stage", inversedBy="Utilisateur")
      */
-    private $nom;
+    private $stage;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Nom", type="string", length=255)
      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Promotion", inversedBy="Utilisateur")
      */
-    private $nom;
+    private $promotion;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="Ordre", type="integer")
      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Position", inversedBy="Utilisateur")
      */
     private $ordre;
@@ -312,74 +304,8 @@ class Utilisateur {
         return $this->adressenum;
     }
 
-    /**
-     * Set codePostal
-     *
-     * @param string $codePostal
-     *
-     * @return CodePostal
-     */
-    public function setCodePostal($codePostal) {
-        $this->codePostal = $codePostal;
-
-        return $this;
-    }
-
-    /**
-     * Get codePostal
-     *
-     * @return string
-     */
-    public function getCodePostal() {
-        return $this->codePostal;
-    }
-
-    /**
-     * Set localite
-     *
-     * @param string $localite
-     *
-     * @return Localite
-     */
-    public function setLocalite($localite) {
-        $this->localite = $localite;
-
-        return $this;
-    }
-
-    /**
-     * Get localite
-     *
-     * @return string
-     */
-    public function getLocalite() {
-        return $this->localite;
-    }
-
-    public function setCommune($commune) {
-        $this->commune = $commune;
-
-        return $this;
-    }
-
-    /**
-     * Get commune
-     *
-     * @return string
-     */
-    public function getCommune() {
-        return $this->commune;
-    }
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Utilisateur
-     */
     public function setType($type) {
-        $this->type = $type;
+        $this->type_user = $type;
 
         return $this;
     }
@@ -390,7 +316,7 @@ class Utilisateur {
      * @return string
      */
     public function getType() {
-        return $this->type;
+        return $this->type_user;
     }
 
     /**
@@ -570,15 +496,6 @@ class Utilisateur {
     }
 
     /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage() {
-        return $this->image;
-    }
-
-    /**
      * Set description
      *
      * @param string $description
@@ -599,27 +516,240 @@ class Utilisateur {
     public function getDescription() {
         return $this->description;
     }
+    
+    
 
     /**
-     * Set nom
-     *
-     * @param string $nom
-     *
-     * @return Categorie
+     * Constructor
      */
-    public function setNom($nom) {
-        $this->nom = $nom;
+    public function __construct()
+    {
+        $this->categorie = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set typeUser
+     *
+     * @param string $typeUser
+     *
+     * @return Utilisateur
+     */
+    public function setTypeUser($typeUser)
+    {
+        $this->type_user = $typeUser;
 
         return $this;
     }
 
     /**
-     * Get nom
+     * Get typeUser
      *
      * @return string
      */
-    public function getNom() {
-        return $this->nom;
+    public function getTypeUser()
+    {
+        return $this->type_user;
     }
 
+    /**
+     * Set codePostal
+     *
+     * @param \AppBundle\Entity\CodePostal $codePostal
+     *
+     * @return Utilisateur
+     */
+    public function setCodePostal(\AppBundle\Entity\CodePostal $codePostal = null)
+    {
+        $this->codePostal = $codePostal;
+
+        return $this;
+    }
+
+    /**
+     * Get codePostal
+     *
+     * @return \AppBundle\Entity\CodePostal
+     */
+    public function getCodePostal()
+    {
+        return $this->codePostal;
+    }
+
+    /**
+     * Set localite
+     *
+     * @param \AppBundle\Entity\Localite $localite
+     *
+     * @return Utilisateur
+     */
+    public function setLocalite(\AppBundle\Entity\Localite $localite = null)
+    {
+        $this->localite = $localite;
+
+        return $this;
+    }
+
+    /**
+     * Get localite
+     *
+     * @return \AppBundle\Entity\Localite
+     */
+    public function getLocalite()
+    {
+        return $this->localite;
+    }
+
+    /**
+     * Set commune
+     *
+     * @param \AppBundle\Entity\Commune $commune
+     *
+     * @return Utilisateur
+     */
+    public function setCommune(\AppBundle\Entity\Commune $commune = null)
+    {
+        $this->commune = $commune;
+
+        return $this;
+    }
+
+    /**
+     * Get commune
+     *
+     * @return \AppBundle\Entity\Commune
+     */
+    public function getCommune()
+    {
+        return $this->commune;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \AppBundle\Entity\Images $image
+     *
+     * @return Utilisateur
+     */
+    public function setImage(\AppBundle\Entity\Images $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \AppBundle\Entity\Images
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Add categorie
+     *
+     * @param \AppBundle\Entity\Categorie $categorie
+     *
+     * @return Utilisateur
+     */
+    public function addCategorie(\AppBundle\Entity\Categorie $categorie)
+    {
+        $this->categorie[] = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Remove categorie
+     *
+     * @param \AppBundle\Entity\Categorie $categorie
+     */
+    public function removeCategorie(\AppBundle\Entity\Categorie $categorie)
+    {
+        $this->categorie->removeElement($categorie);
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * Set stage
+     *
+     * @param \AppBundle\Entity\Stage $stage
+     *
+     * @return Utilisateur
+     */
+    public function setStage(\AppBundle\Entity\Stage $stage = null)
+    {
+        $this->stage = $stage;
+
+        return $this;
+    }
+
+    /**
+     * Get stage
+     *
+     * @return \AppBundle\Entity\Stage
+     */
+    public function getStage()
+    {
+        return $this->stage;
+    }
+
+    /**
+     * Set promotion
+     *
+     * @param \AppBundle\Entity\Promotion $promotion
+     *
+     * @return Utilisateur
+     */
+    public function setPromotion(\AppBundle\Entity\Promotion $promotion = null)
+    {
+        $this->promotion = $promotion;
+
+        return $this;
+    }
+
+    /**
+     * Get promotion
+     *
+     * @return \AppBundle\Entity\Promotion
+     */
+    public function getPromotion()
+    {
+        return $this->promotion;
+    }
+
+    /**
+     * Set ordre
+     *
+     * @param \AppBundle\Entity\Position $ordre
+     *
+     * @return Utilisateur
+     */
+    public function setOrdre(\AppBundle\Entity\Position $ordre = null)
+    {
+        $this->ordre = $ordre;
+
+        return $this;
+    }
+
+    /**
+     * Get ordre
+     *
+     * @return \AppBundle\Entity\Position
+     */
+    public function getOrdre()
+    {
+        return $this->ordre;
+    }
 }

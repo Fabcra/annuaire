@@ -31,11 +31,10 @@ class Position {
     /**
      * @var string
      *
-     * @ORM\Column(name="Nom", type="string", length=255)
      * 
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Bloc", mappedBy="Bloc")
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Bloc", inversedBy="Bloc")
      */
-    private $nom;
+    private $nom_bloc;
 
     /**
      * Get id
@@ -68,4 +67,28 @@ class Position {
         return $this->ordre;
     }
 
+
+    /**
+     * Set nomBloc
+     *
+     * @param \AppBundle\Entity\Bloc $nomBloc
+     *
+     * @return Position
+     */
+    public function setNomBloc(\AppBundle\Entity\Bloc $nomBloc = null)
+    {
+        $this->nom_bloc = $nomBloc;
+
+        return $this;
+    }
+
+    /**
+     * Get nomBloc
+     *
+     * @return \AppBundle\Entity\Bloc
+     */
+    public function getNomBloc()
+    {
+        return $this->nom_bloc;
+    }
 }
