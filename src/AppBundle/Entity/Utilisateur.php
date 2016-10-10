@@ -27,6 +27,14 @@ class Utilisateur {
      * @ORM\Column(name="identifiant", type="integer", unique=true)
      */
     private $identifiant;
+    
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="nom", type="string", length=255)
+     */
+    private $nom;
+    
 
     /**
      * @var string
@@ -215,8 +223,23 @@ class Utilisateur {
     public function getIdentifiant() {
         return $this->identifiant;
     }
+    function getNom() {
+        return $this->nom;
+    }
 
-    /**
+    function getType_user() {
+        return $this->type_user;
+    }
+
+    function setNom($nom) {
+        $this->nom = $nom;
+    }
+
+    function setType_user($type_user) {
+        $this->type_user = $type_user;
+    }
+
+        /**
      * Set email
      *
      * @param string $email
@@ -304,20 +327,7 @@ class Utilisateur {
         return $this->adressenum;
     }
 
-    public function setType($type) {
-        $this->type_user = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType() {
-        return $this->type_user;
-    }
+  
 
     /**
      * Set inscription

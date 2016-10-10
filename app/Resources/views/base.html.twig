@@ -7,7 +7,18 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block content %}
+            
+            <ul>
+                
+                {% for a in utilisateur %}
+                    
+                    <li>
+                        {{ a.nom }},{{ a.email }}
+                    </li>
+                    
+                {% endfor %}    
+            </ul>    
+        {% endblock %}
     </body>
 </html>

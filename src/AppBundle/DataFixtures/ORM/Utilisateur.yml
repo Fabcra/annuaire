@@ -1,0 +1,24 @@
+AppBundle\Entity\CodePostal:
+#    utilisateur1:
+#        identifiant: 1
+#        nom: pussyhunter
+#        email : pussyhunter@gta.com
+#        adresse : rue Varin
+#        adressenum : 1
+#        codepostal : 4000
+#        localite: Liège
+#        commune : Liège
+#        type_user : test
+#        inscription : 09/10/2016
+#        nbessais: 0
+#        banni: false
+#        inscriptionconf : true
+#        site: pornub.com
+#        numtel : 04/102030
+#        numtva : 000
+#        newsletter : true
+#        image : https://cdn.vodfactory.com/images/bigCover/fox_avatar_poster.jpg
+    cp1:
+        codePostal : 4000
+        
+        
