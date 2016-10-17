@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/utilisateurs", name="user_list")
+     * @Route("/", name="accueil")
      */
     public function listAction()
     {
@@ -18,7 +18,7 @@ class DefaultController extends Controller
         $repo = $doctrine->getRepository('AppBundle:Utilisateur');
         
         $utilisateurs=$repo->findAll();
-        
-        return $this->render('base.html.twig', ['utilisateur' => $utilisateurs]);
+//        
+        return $this->render('base.html.twig',['utilisateurs'=>$utilisateurs]);
     }
 }

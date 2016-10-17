@@ -1,0 +1,4 @@
+AppBundle\Entity\Localite:
+    loc-{1..10}:
+        Localite: <state()>
+    

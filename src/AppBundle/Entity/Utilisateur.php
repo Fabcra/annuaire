@@ -21,12 +21,7 @@ class Utilisateur {
      */
     private $id;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="identifiant", type="integer", unique=true)
-     */
-    private $identifiant;
+   
     
     /**
      * @var string
@@ -75,7 +70,8 @@ class Utilisateur {
     /**
      * @var string
      *
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Localite", inversedBy="Utilisateur") 
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Localite", inversedBy="Utilisateur")
+     * @ORM\JoinColumn(onDelete="CASCADE") 
      */
     private $localite;
 
@@ -96,7 +92,8 @@ class Utilisateur {
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="inscription", type="datetime")
+     * @ORM\Column(name="inscription", type="datetime", nullable=true)
+     * 
      */
     private $inscription;
 
@@ -152,7 +149,8 @@ class Utilisateur {
     /**
      * @var string
      *
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Images", inversedBy="Utilisateur") 
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Images", inversedBy="Utilisateur")
+     * @ORM\JoinColumn(nullable=true) 
      */
     private $image;
 
@@ -202,27 +200,7 @@ class Utilisateur {
      */
     private $ordre;
 
-    /**
-     * Set identifiant
-     *
-     * @param integer $identifiant
-     *
-     * @return Utilisateur
-     */
-    public function setIdentifiant($identifiant) {
-        $this->identifiant = $identifiant;
-
-        return $this;
-    }
-
-    /**
-     * Get identifiant
-     *
-     * @return int
-     */
-    public function getIdentifiant() {
-        return $this->identifiant;
-    }
+  
     function getNom() {
         return $this->nom;
     }

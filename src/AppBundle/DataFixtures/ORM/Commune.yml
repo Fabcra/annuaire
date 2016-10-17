@@ -1,0 +1,3 @@
+AppBundle\Entity\Commune:
+    com-{1..10}:
+        commune: <city()>

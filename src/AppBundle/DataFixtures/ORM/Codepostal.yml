@@ -1,0 +1,4 @@
+AppBundle\Entity\CodePostal:
+    cp-{1..10}:
+        codePostal : <numberBetween(4000,4900)>
+        

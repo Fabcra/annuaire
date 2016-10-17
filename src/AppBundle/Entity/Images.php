@@ -31,7 +31,7 @@ class Images
     /**
      * @var string
      *
-     * @ORM\Column(name="Image", type="blob")
+     * @ORM\Column(name="Image", type="string")
      */
     private $image;
 

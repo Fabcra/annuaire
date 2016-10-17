@@ -1,0 +1,4 @@
+AppBundle\Entity\Images:
+    img-{1..10}:
+         Image : <image()>
+         ordre : 0
