@@ -1,4 +1,4 @@
 AppBundle\Entity\Images:
     img-{1..10}:
-         Image : <image()>
+         image : <imageUrl($width = 640, $height = 480)>
          ordre : 0

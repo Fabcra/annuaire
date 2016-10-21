@@ -24,43 +24,50 @@ class Categorie {
     /**
      * @var string
      *
-     * @ORM\Column(name="Nom", type="string", length=255)
+     * @ORM\Column(name="nom_categorie", type="string", length=255)
      */
-    private $nom;
+    private $nomCategorie;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="EnAvant", type="boolean")
+     * @ORM\Column(name="en_avant", type="boolean")
      */
     private $enAvant;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="Valide", type="boolean")
+     * @ORM\Column(name="valide", type="boolean")
      */
     private $valide;
 
     /**
-     * @var int
+     * @var string
+     * 
      *
-     * @ORM\Column(name="identifiant", type="integer", unique=true)
-     * @ORM\ManytoMany(targetEntity="Appbundle\Entity\Utilisateur", mappedBy="Utilisateur")
+     * @ORM\ManytoMany(targetEntity="AppBundle\Entity\Utilisateur", mappedBy="Utilisateur")
      */
-    private $identifiant;
+    private $utilisateur;
+
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        $this->utilisateur = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Image", type="blob")
+     * @ORM\Column(name="image", type="string")
      * @ORM\ManytoOne(targetEntity="Appbundle\Entity\Categorie", inversedBy="Categorie")
      */
     private $image;
@@ -72,28 +79,6 @@ class Categorie {
      */
     public function getId() {
         return $this->id;
-    }
-
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     *
-     * @return Categorie
-     */
-    public function setNom($nom) {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    /**
-     * Get nom
-     *
-     * @return string
-     */
-    public function getNom() {
-        return $this->nom;
     }
 
     /**
@@ -163,27 +148,12 @@ class Categorie {
     }
 
     /**
-     * Set identifiant
+     * Set image
      *
-     * @param integer $identifiant
-     *
-     * @return Utilisateur
+     * 
+     * 
+     * @return string
      */
-    public function setIdentifiant($identifiant) {
-        $this->identifiant = $identifiant;
-
-        return $this;
-    }
-
-    /**
-     * Get identifiant
-     *
-     * @return int
-     */
-    public function getIdentifiant() {
-        return $this->identifiant;
-    }
-
     public function setImage($image) {
         $this->image = $image;
 
@@ -197,6 +167,59 @@ class Categorie {
      */
     public function getImage() {
         return $this->image;
+    }
+
+    /**
+     * Set nomCategorie
+     *
+     * @param string $nomCategorie
+     *
+     * @return Categorie
+     */
+    public function setNomCategorie($nomCategorie) {
+        $this->nomCategorie = $nomCategorie;
+
+        return $this;
+    }
+
+    /**
+     * Get nomCategorie
+     *
+     * @return string
+     */
+    public function getNomCategorie() {
+        return $this->nomCategorie;
+    }
+
+    /**
+     * Add utilisateur
+     *
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
+     *
+     * @return Categorie
+     */
+    public function addUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur) {
+        $this->utilisateur[] = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Remove utilisateur
+     *
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
+     */
+    public function removeUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur) {
+        $this->utilisateur->removeElement($utilisateur);
+    }
+
+    /**
+     * Get utilisateur
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUtilisateur() {
+        return $this->utilisateur;
     }
 
 }

@@ -24,14 +24,14 @@ class Abus
     /**
      * @var string
      *
-     * @ORM\Column(name="Description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="Encodage", type="datetime")
+     * @ORM\Column(name="encodage", type="datetime")
      */
     private $encodage;
 

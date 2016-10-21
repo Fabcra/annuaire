@@ -21,15 +21,12 @@ class Utilisateur {
      */
     private $id;
 
-   
-    
     /**
      * @var string
      * 
      * @ORM\Column(name="nom", type="string", length=255)
      */
-    private $nom;
-    
+    private $nomUtilisateur;
 
     /**
      * @var string
@@ -41,7 +38,7 @@ class Utilisateur {
     /**
      * @var string
      *
-     * @ORM\Column(name="motdepasse", type="string", length=255)
+     * @ORM\Column(name="mot_de_passe", type="string", length=255)
      */
     private $motdepasse;
 
@@ -100,7 +97,7 @@ class Utilisateur {
     /**
      * @var int
      *
-     * @ORM\Column(name="nbessais", type="integer")
+     * @ORM\Column(name="nb_essais", type="integer")
      */
     private $nbessais;
 
@@ -114,7 +111,7 @@ class Utilisateur {
     /**
      * @var bool
      *
-     * @ORM\Column(name="inscriptionconf", type="boolean")
+     * @ORM\Column(name="inscription_conf", type="boolean")
      */
     private $inscriptionconf;
 
@@ -128,14 +125,14 @@ class Utilisateur {
     /**
      * @var string
      *
-     * @ORM\Column(name="numtel", type="string", length=255)
+     * @ORM\Column(name="num_tel", type="string", length=255)
      */
     private $numtel;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="numtva", type="string", length=255)
+     * @ORM\Column(name="num_tva", type="string", length=255)
      */
     private $numtva;
 
@@ -166,7 +163,7 @@ class Utilisateur {
     /**
      * @var string
      *
-     * @ORM\Column(name="Description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255)
      * 
      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Abus", inversedBy="Utilisateur")
      */
@@ -174,8 +171,10 @@ class Utilisateur {
 
     /**
      * @var string
+     * 
      *
      * @ORM\ManytoMany(targetEntity="AppBundle\Entity\Categorie", inversedBy="Categorie")
+     * @ORM\JoinTable(name="utilisateur_categorie")
      */
     private $categorie;
 
@@ -200,24 +199,8 @@ class Utilisateur {
      */
     private $ordre;
 
-  
-    function getNom() {
-        return $this->nom;
-    }
-
-    function getType_user() {
-        return $this->type_user;
-    }
-
-    function setNom($nom) {
-        $this->nom = $nom;
-    }
-
-    function setType_user($type_user) {
-        $this->type_user = $type_user;
-    }
-
-        /**
+    /**
+     * 
      * Set email
      *
      * @param string $email
@@ -304,8 +287,6 @@ class Utilisateur {
     public function getAdressenum() {
         return $this->adressenum;
     }
-
-  
 
     /**
      * Set inscription
@@ -504,14 +485,11 @@ class Utilisateur {
     public function getDescription() {
         return $this->description;
     }
-    
-    
 
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->categorie = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -522,8 +500,7 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
-    public function setTypeUser($typeUser)
-    {
+    public function setTypeUser($typeUser) {
         $this->type_user = $typeUser;
 
         return $this;
@@ -534,8 +511,7 @@ class Utilisateur {
      *
      * @return string
      */
-    public function getTypeUser()
-    {
+    public function getTypeUser() {
         return $this->type_user;
     }
 
@@ -546,8 +522,7 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
-    public function setCodePostal(\AppBundle\Entity\CodePostal $codePostal = null)
-    {
+    public function setCodePostal(\AppBundle\Entity\CodePostal $codePostal = null) {
         $this->codePostal = $codePostal;
 
         return $this;
@@ -558,8 +533,7 @@ class Utilisateur {
      *
      * @return \AppBundle\Entity\CodePostal
      */
-    public function getCodePostal()
-    {
+    public function getCodePostal() {
         return $this->codePostal;
     }
 
@@ -570,8 +544,7 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
-    public function setLocalite(\AppBundle\Entity\Localite $localite = null)
-    {
+    public function setLocalite(\AppBundle\Entity\Localite $localite = null) {
         $this->localite = $localite;
 
         return $this;
@@ -582,8 +555,7 @@ class Utilisateur {
      *
      * @return \AppBundle\Entity\Localite
      */
-    public function getLocalite()
-    {
+    public function getLocalite() {
         return $this->localite;
     }
 
@@ -594,8 +566,7 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
-    public function setCommune(\AppBundle\Entity\Commune $commune = null)
-    {
+    public function setCommune(\AppBundle\Entity\Commune $commune = null) {
         $this->commune = $commune;
 
         return $this;
@@ -606,8 +577,7 @@ class Utilisateur {
      *
      * @return \AppBundle\Entity\Commune
      */
-    public function getCommune()
-    {
+    public function getCommune() {
         return $this->commune;
     }
 
@@ -618,8 +588,7 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
-    public function setImage(\AppBundle\Entity\Images $image = null)
-    {
+    public function setImage(\AppBundle\Entity\Images $image = null) {
         $this->image = $image;
 
         return $this;
@@ -630,8 +599,7 @@ class Utilisateur {
      *
      * @return \AppBundle\Entity\Images
      */
-    public function getImage()
-    {
+    public function getImage() {
         return $this->image;
     }
 
@@ -642,8 +610,7 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
-    public function addCategorie(\AppBundle\Entity\Categorie $categorie)
-    {
+    public function addCategorie(\AppBundle\Entity\Categorie $categorie) {
         $this->categorie[] = $categorie;
 
         return $this;
@@ -654,8 +621,7 @@ class Utilisateur {
      *
      * @param \AppBundle\Entity\Categorie $categorie
      */
-    public function removeCategorie(\AppBundle\Entity\Categorie $categorie)
-    {
+    public function removeCategorie(\AppBundle\Entity\Categorie $categorie) {
         $this->categorie->removeElement($categorie);
     }
 
@@ -664,8 +630,7 @@ class Utilisateur {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCategorie()
-    {
+    public function getCategorie() {
         return $this->categorie;
     }
 
@@ -676,8 +641,7 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
-    public function setStage(\AppBundle\Entity\Stage $stage = null)
-    {
+    public function setStage(\AppBundle\Entity\Stage $stage = null) {
         $this->stage = $stage;
 
         return $this;
@@ -688,8 +652,7 @@ class Utilisateur {
      *
      * @return \AppBundle\Entity\Stage
      */
-    public function getStage()
-    {
+    public function getStage() {
         return $this->stage;
     }
 
@@ -700,8 +663,7 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
-    public function setPromotion(\AppBundle\Entity\Promotion $promotion = null)
-    {
+    public function setPromotion(\AppBundle\Entity\Promotion $promotion = null) {
         $this->promotion = $promotion;
 
         return $this;
@@ -712,8 +674,7 @@ class Utilisateur {
      *
      * @return \AppBundle\Entity\Promotion
      */
-    public function getPromotion()
-    {
+    public function getPromotion() {
         return $this->promotion;
     }
 
@@ -724,8 +685,7 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
-    public function setOrdre(\AppBundle\Entity\Position $ordre = null)
-    {
+    public function setOrdre(\AppBundle\Entity\Position $ordre = null) {
         $this->ordre = $ordre;
 
         return $this;
@@ -736,8 +696,31 @@ class Utilisateur {
      *
      * @return \AppBundle\Entity\Position
      */
-    public function getOrdre()
-    {
+    public function getOrdre() {
         return $this->ordre;
     }
+
+    /**
+     * Set nomUtilisateur
+     *
+     * @param string $nomUtilisateur
+     *
+     * @return Utilisateur
+     */
+    public function setNomUtilisateur($nomUtilisateur) {
+        $this->nomUtilisateur = $nomUtilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get nomUtilisateur
+     *
+     * @return string
+     */
+    public function getNomUtilisateur() {
+        return $this->nomUtilisateur;
+    }
+    
+   
 }

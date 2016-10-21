@@ -1,0 +1,11 @@
+AppBundle\Entity\Categorie:
+    categorie-{1..10}:
+        nomCategorie: 'test'
+        description : <realText($maxNbChars = 200, $indexSize=2)>
+        enAvant : false
+        valide : true
+        utilisateur : '<numberBetween(1,5)>x @utilisateur-*'
+        image : "@img-*"
+    
+    
+        

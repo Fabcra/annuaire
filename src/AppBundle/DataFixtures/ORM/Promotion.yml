@@ -1,0 +1,12 @@
+AppBundle\Entity\Promotion:
+    prom-{1..5}:
+        nom : <word()> 
+        description : <sentence()>
+        documentPDF : http://user.oc-static.com/pdf/5690-3d-temps-reel-avec-irrlicht.pdf
+        debut : <dateTimeThisYear($min = 'now')>
+        fin : <dateTimeThisYear($min = 'now')>
+        affichageDe : <dateTimeThisYear($min = 'now')>
+        affichageJusque : <dateTimeThisYear($min = 'now')>
+                              
+                     
+               

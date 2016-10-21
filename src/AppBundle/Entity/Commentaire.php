@@ -24,28 +24,28 @@ class Commentaire
     /**
      * @var int
      *
-     * @ORM\Column(name="Cote", type="integer")
+     * @ORM\Column(name="cote", type="integer")
      */
     private $cote;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Titre", type="string", length=255)
+     * @ORM\Column(name="titre", type="string", length=255)
      */
     private $titre;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Contenu", type="string", length=255)
+     * @ORM\Column(name="contenu", type="string", length=255)
      */
     private $contenu;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="Encodage", type="datetime")
+     * @ORM\Column(name="encodage", type="datetime")
      */
     private $encodage;
     

@@ -24,7 +24,7 @@ class Position {
     /**
      * @var int
      *
-     * @ORM\Column(name="Ordre", type="integer")
+     * @ORM\Column(name="ordre", type="integer")
      */
     private $ordre;
 
@@ -33,6 +33,7 @@ class Position {
      *
      * 
      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Bloc", inversedBy="Bloc")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $nom_bloc;
 

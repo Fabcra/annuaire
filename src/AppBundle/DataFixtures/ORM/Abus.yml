@@ -1,0 +1,4 @@
+AppBundle\Entity\Abus:
+    abus-{1..3}:
+        description : <sentence()>
+        encodage : <dateTimeThisYear($min = 'now')>

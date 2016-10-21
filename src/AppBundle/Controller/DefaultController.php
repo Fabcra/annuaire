@@ -17,8 +17,9 @@ class DefaultController extends Controller
         $doctrine=$this->getDoctrine();
         $repo = $doctrine->getRepository('AppBundle:Utilisateur');
         
-        $utilisateurs=$repo->findAll();
-//        
+        $utilisateurs=$repo->findBy(['type_user'=>'prestataire']);
+        
+        
         return $this->render('base.html.twig',['utilisateurs'=>$utilisateurs]);
     }
 }

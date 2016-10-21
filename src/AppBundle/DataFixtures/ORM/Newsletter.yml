@@ -1,0 +1,8 @@
+AppBundle\Entity\Newsletter:
+    news-{1..10}:
+        titre : <word()>
+        publication : <dateTimeThisYear($max = 'now')>
+        documentPDF : http://user.oc-static.com/pdf/240465-3ds-max-pour-les-zeros.pdf
+        
+        
+

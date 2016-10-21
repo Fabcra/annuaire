@@ -1,0 +1,13 @@
+AppBundle\Entity\Stage:
+    stg-{1..5}:
+        nom : <word()> 
+        description : <sentence()>
+        tarif : <numberBetween($min=100, $max=200)> euros
+        infoCompl : <sentence()>
+        debut : <dateTimeThisYear($min = 'now')>
+        fin : <dateTimeThisYear($min = 'now')>
+        affichageDe : <dateTimeThisYear($min = 'now')>
+        affichageJusque : <dateTimeThisYear($min = 'now')>
+                              
+                     
+               

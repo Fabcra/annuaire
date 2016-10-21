@@ -24,7 +24,7 @@ class Localite
     /**
      * @var string
      *
-     * @ORM\Column(name="Localite", type="string", length=255)
+     * @ORM\Column(name="localite", type="string", length=255)
      */
     private $localite;
 

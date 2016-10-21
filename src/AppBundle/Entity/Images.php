@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="images")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ImagesRepository")
  */
-class Images
-{
+class Images {
+
     /**
      * @var int
      *
@@ -31,18 +31,16 @@ class Images
     /**
      * @var string
      *
-     * @ORM\Column(name="Image", type="string")
+     * @ORM\Column(name="image", type="string")
      */
     private $image;
-
 
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -53,8 +51,7 @@ class Images
      *
      * @return Images
      */
-    public function setOrdre($ordre)
-    {
+    public function setOrdre($ordre) {
         $this->ordre = $ordre;
 
         return $this;
@@ -65,8 +62,7 @@ class Images
      *
      * @return int
      */
-    public function getOrdre()
-    {
+    public function getOrdre() {
         return $this->ordre;
     }
 
@@ -77,8 +73,7 @@ class Images
      *
      * @return Images
      */
-    public function setImage($image)
-    {
+    public function setImage($image) {
         $this->image = $image;
 
         return $this;
@@ -89,8 +84,13 @@ class Images
      *
      * @return string
      */
-    public function getImage()
-    {
+    public function getImage() {
         return $this->image;
     }
+    
+     public function __toString() {
+        return $this->image;
+    }
+   
+
 }

@@ -24,49 +24,49 @@ class Promotion {
     /**
      * @var string
      *
-     * @ORM\Column(name="Nom", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255)
      */
     private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="DocumentPDF", type="blob")
+     * @ORM\Column(name="documentPDF", type="string")
      */
     private $documentPDF;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="Debut", type="datetime")
+     * @ORM\Column(name="debut", type="datetime")
      */
     private $debut;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="Fin", type="datetime")
+     * @ORM\Column(name="fin", type="datetime")
      */
     private $fin;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="AffichageDe", type="datetime")
+     * @ORM\Column(name="affichage_de", type="datetime")
      */
     private $affichageDe;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="AffichageJusque", type="datetime")
+     * @ORM\Column(name="affichage_jusque", type="datetime")
      */
     private $affichageJusque;
 
