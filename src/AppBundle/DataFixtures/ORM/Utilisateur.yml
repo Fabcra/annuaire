@@ -20,5 +20,4 @@ AppBundle\Entity\Utilisateur:
         image : "@img-*"
         description : <realText($maxNbChars = 200, $indexSize=2)>
 
-
         

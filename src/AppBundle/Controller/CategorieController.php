@@ -10,20 +10,17 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="accueil")
+     * @Route("/", name="categorie")
      */
     public function listAction()
     {
         $doctrine=$this->getDoctrine();
-        $repo = $doctrine->getRepository('AppBundle:Utilisateur');
+        $repo = $doctrine->getRepository('AppBundle:Categorie');
         
-//        $utilisateurs=$repo->findBy(['type_user'=>'prestataire']);
-        $utilisateurs=$repo->findAll(); 
-        
+        $categories=$repo->findAll();
         
         
-        return $this->render('base.html.twig',['utilisateur'=>$utilisateurs]);
-    }   
-    
-  
+        
+        return $this->render('base.html.twig',['categories'=>$categories]);
+    }
 }

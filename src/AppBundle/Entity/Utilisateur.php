@@ -151,14 +151,7 @@ class Utilisateur {
      */
     private $image;
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+   
 
     /**
      * @var string
@@ -207,6 +200,19 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
+    
+    
+     /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId() {
+        return $this->id;
+    }
+    
+    
+    
     public function setEmail($email) {
         $this->email = $email;
 
