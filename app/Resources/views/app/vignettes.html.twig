@@ -7,9 +7,8 @@
     <div class="cards-simple-wrapper largeur centrage">
 
 
-
-            {% for a in utilisateurs|slice(0,8) %}
-
+        
+            {% for a in utilisateur|slice(0,8) %}
                 <div class="col-sm-6 col-md-3">
                     <div class="card-simple" data-background-image={{a.image}}>
                         <div class="card-simple-background">
@@ -22,15 +21,13 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div><!-- /.card-rating -->
-
                                 <div class="card-simple-actions">
                                     <a href="#" class="fa fa-bookmark-o"></a>
                                     <a href="#" class="fa fa-search"></a>
                                     <a href="#" class="fa fa-heart-o"></a>
                                 </div><!-- /.card-simple-actions -->
                             </div><!-- /.card-simple-content -->
-
-                            <div class="card-simple-label">{% for b in a.categorie %}{{ b.Nomcategorie}}{% endfor %}</div>
+                            <div class="card-simple-label">{% for b in a.categorie %}{{ b.nomCategorie}}{% endfor %}</div>
 
                         </div><!-- /.card-simple-background -->
                     </div><!-- /.card-simple -->
