@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="abus")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AbusRepository")
  */
-class Abus
-{
+class Abus {
+
     /**
      * @var int
      *
@@ -35,14 +35,29 @@ class Abus
      */
     private $encodage;
 
+    /**
+     *
+     * @var type
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="abus")
+     *  
+     */
+    private $utilisateur;
+    
+    
+    /**
+     *
+     * @var type 
+     * 
+     * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Abus", mappedBy="abus")
+     */
+    private $commentaires;
 
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -53,8 +68,7 @@ class Abus
      *
      * @return Abus
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
 
         return $this;
@@ -65,8 +79,7 @@ class Abus
      *
      * @return string
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
@@ -77,8 +90,7 @@ class Abus
      *
      * @return Abus
      */
-    public function setEncodage($encodage)
-    {
+    public function setEncodage($encodage) {
         $this->encodage = $encodage;
 
         return $this;
@@ -89,8 +101,59 @@ class Abus
      *
      * @return \DateTime
      */
-    public function getEncodage()
-    {
+    public function getEncodage() {
         return $this->encodage;
+    }
+
+    function getUtilisateur() {
+        return $this->utilisateur;
+    }
+
+    function setUtilisateur(type $utilisateur) {
+        $this->utilisateur = $utilisateur;
+    }
+
+    
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add commentaire
+     *
+     * @param \AppBundle\Entity\Abus $commentaire
+     *
+     * @return Abus
+     */
+    public function addCommentaire(\AppBundle\Entity\Abus $commentaire)
+    {
+        $this->commentaires[] = $commentaire;
+
+        return $this;
+    }
+
+    /**
+     * Remove commentaire
+     *
+     * @param \AppBundle\Entity\Abus $commentaire
+     */
+    public function removeCommentaire(\AppBundle\Entity\Abus $commentaire)
+    {
+        $this->commentaires->removeElement($commentaire);
+    }
+
+    /**
+     * Get commentaires
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCommentaires()
+    {
+        return $this->commentaires;
     }
 }

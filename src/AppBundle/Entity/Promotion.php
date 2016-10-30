@@ -73,9 +73,14 @@ class Promotion {
     /**
      * @var string
      *
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Categorie", inversedBy="Categorie")
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Categorie", inversedBy="promotions")
      */
     private $categorie;
+    
+    /**
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="promotions")
+     */
+    private $utilisateur;
 
     /**
      * Get id
@@ -264,4 +269,14 @@ class Promotion {
     {
         return $this->categorie;
     }
+    
+    function getUtilisateur() {
+        return $this->utilisateur;
+    }
+
+    function setUtilisateur($utilisateur) {
+        $this->utilisateur = $utilisateur;
+    }
+
+
 }

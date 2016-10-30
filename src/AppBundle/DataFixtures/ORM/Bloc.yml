@@ -1,4 +1,4 @@
 AppBundle\Entity\Bloc:
     bloc-{1..10}:
-        nom : <word()>
-        description : <sentence()>
+        nom_bloc : <word()>
+        description_bloc : <sentence()>

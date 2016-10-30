@@ -7,10 +7,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class CategorieController extends Controller
 {
     /**
-     * @Route("/", name="categorie")
+     * @Route("/categorie", name="categorie")
      */
     public function listAction()
     {
@@ -21,6 +21,6 @@ class DefaultController extends Controller
         
         
         
-        return $this->render('base.html.twig',['categories'=>$categories]);
+        return $this->render('app/navbar.html.twig',['categorie'=>$categories]);
     }
 }

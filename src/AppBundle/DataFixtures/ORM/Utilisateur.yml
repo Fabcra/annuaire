@@ -6,7 +6,7 @@ AppBundle\Entity\Utilisateur:
         adresse : <streetName()>
         adressenum : <buildingNumber()>
         codepostal : "@cp-*"
-        localite: "@loc-*"
+        localite: '@loc-*'
         commune : "@com-*"
         type_user : <userType()>
         inscriptionconf : true
@@ -17,7 +17,6 @@ AppBundle\Entity\Utilisateur:
         numtel : <phoneNumber()>
         numtva : 000
         newsletter : true
-        image : "@img-*"
-        description : <realText($maxNbChars = 200, $indexSize=2)>
-
-        
+        abus : '<numberBetween(1,5)>x @abus-*'
+        categories : '<numberBetween(1,5)>x @categorie-*'
+        stages: "<numberBetween(1,5)>x @stg-*"

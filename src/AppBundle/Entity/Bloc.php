@@ -24,16 +24,16 @@ class Bloc
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom_bloc", type="string", length=255)
      */
-    private $nom;
+    private $nom_bloc;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description_bloc", type="string", length=255)
      */
-    private $description;
+    private $description_bloc;
 
 
     /**
@@ -92,5 +92,53 @@ class Bloc
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set nomBloc
+     *
+     * @param string $nomBloc
+     *
+     * @return Bloc
+     */
+    public function setNomBloc($nomBloc)
+    {
+        $this->nom_bloc = $nomBloc;
+
+        return $this;
+    }
+
+    /**
+     * Get nomBloc
+     *
+     * @return string
+     */
+    public function getNomBloc()
+    {
+        return $this->nom_bloc;
+    }
+
+    /**
+     * Set descriptionBloc
+     *
+     * @param string $descriptionBloc
+     *
+     * @return Bloc
+     */
+    public function setDescriptionBloc($descriptionBloc)
+    {
+        $this->description_bloc = $descriptionBloc;
+
+        return $this;
+    }
+
+    /**
+     * Get descriptionBloc
+     *
+     * @return string
+     */
+    public function getDescriptionBloc()
+    {
+        return $this->description_bloc;
     }
 }

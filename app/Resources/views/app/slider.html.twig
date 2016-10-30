@@ -1,18 +1,30 @@
 {% block slider %}
-    <div style="background-image: url({{asset('assets/img/tmp/slider-large-3.jpg')}})">
-        <div class="centrage largeur">
-            <div class="hero-slider">
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
+    <div style="background-image: url({{asset('assets/img/tmp/slider-large-3.jpg')}})">
+        
+        <div class="centrage largeur">
+         
+            <div class="hero-slider">
+
+
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                       <ul>
+                <li class="hidden-xs test">
+                                        <div class="special register">
+                                            <a href="register.html">Sign Up Now</a>
+                                        </div><!-- /.special-->
+                                    </li>
+            </ul>
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
                             <div class="item-bg" style="background-image: url({{asset('assets/img/tmp/slider-2.jpg')}})"></div>
                             <img src="{{asset('assets/img/tmp/slider-2.jpg')}}" alt="">
 
                             <div class="carousel-caption">
-                                <div class="hero-slider-content">
-                                    <h1>O`Harrys Tuning Workshop</h1>
 
+                                <div class="hero-slider-content">
+                                    <h1>Buvez de l'eau</h1>
+                                    
                                     <div class="hero-slider-rating">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -36,7 +48,7 @@
 
                             <div class="carousel-caption">
                                 <div class="hero-slider-content">
-                                    <h1>O`Harrys Tuning Workshop</h1>
+                                    <h1>Bouffez des cailloux</h1>
 
                                     <div class="hero-slider-rating">
                                         <i class="fa fa-star"></i>
@@ -61,7 +73,7 @@
 
                             <div class="carousel-caption">
                                 <div class="hero-slider-content">
-                                    <h1>O`Harrys Tuning Workshop</h1>
+                                    <h1>et fumez de l'herbe</h1>
 
                                     <div class="hero-slider-rating">
                                         <i class="fa fa-star"></i>
@@ -91,6 +103,13 @@
                     </a>
                 </div>
             </div><!-- /.hero-slider -->
+            {#<div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for event, hotel, restaurant, job ... ">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button">Search</button>
+                </span>
+            </div><!-- /.input-group -->#}
+
 
         </div>
     </div>

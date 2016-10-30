@@ -53,24 +53,33 @@ class Categorie {
      * @var string
      * 
      *
-     * @ORM\ManytoMany(targetEntity="AppBundle\Entity\Utilisateur", mappedBy="Utilisateur")
+     * @ORM\ManytoMany(targetEntity="AppBundle\Entity\Utilisateur", mappedBy="categories")
      */
-    private $utilisateur;
-
-    /**
-     * Constructor
-     */
-    public function __construct() {
-        $this->utilisateur = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    private $utilisateurs;
 
     /**
      * @var string
      *
      * @ORM\Column(name="image", type="string")
-     * @ORM\ManytoOne(targetEntity="Appbundle\Entity\Categorie", inversedBy="Categorie")
+     * @ORM\OnetoOne(targetEntity="AppBundle\Entity\Categorie", inversedBy="categorie")
      */
     private $image;
+    
+    
+    /**
+     * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Promotion", mappedBy="categorie")
+     */
+    private $promotions;
+    
+     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->utilisateurs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->promotions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+   
 
     /**
      * Get id
@@ -199,7 +208,7 @@ class Categorie {
      * @return Categorie
      */
     public function addUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur) {
-        $this->utilisateur[] = $utilisateur;
+        $this->utilisateurs[] = $utilisateur;
 
         return $this;
     }
@@ -210,7 +219,7 @@ class Categorie {
      * @param \AppBundle\Entity\Utilisateur $utilisateur
      */
     public function removeUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur) {
-        $this->utilisateur->removeElement($utilisateur);
+        $this->utilisateurs->removeElement($utilisateur);
     }
 
     /**
@@ -218,8 +227,44 @@ class Categorie {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getUtilisateur() {
-        return $this->utilisateur;
+    public function getUtilisateurs() {
+        return $this->utilisateurs;
     }
+
+
+    /**
+     * Add promotion
+     *
+     * @param \AppBundle\Entity\Promotion $promotion
+     *
+     * @return Categorie
+     */
+    public function addPromotion(\AppBundle\Entity\Promotion $promotion)
+    {
+        $this->promotions[] = $promotion;
+
+        return $this;
+    }
+
+    /**
+     * Remove promotion
+     *
+     * @param \AppBundle\Entity\Promotion $promotion
+     */
+    public function removePromotion(\AppBundle\Entity\Promotion $promotion)
+    {
+        $this->promotions->removeElement($promotion);
+    }
+
+    /**
+     * Get promotions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPromotions()
+    {
+        return $this->promotions;
+    }
+   
 
 }

@@ -33,13 +33,13 @@ class AppFixtures extends AbstractLoader {
         );
         return $usertypes[array_rand($usertypes)];
     }
-    
-    public function categorie(){
+
+    public function categorie() {
         $categories = array(
-            'salon de massage',
-            'thalasso',
-            'fitness',
-            'spa',
+            'massages ',
+            'thalasso ',
+            'fitness ',
+            'spa ',
         );
         return $categories[array_rand($categories)];
     }

@@ -1,19 +1,20 @@
 {% block content %}
+    
     <div class="page-header">
-        <h1>Most Recent Places &amp; Events</h1>
-        <p>List of most recent interesting places and events in our directory submitted <br>by our users. Check whats going on in the city now.</p>
+        <h1>Les meilleurs centres de bien-être</h1>
+        <p>Retrouver ici la liste des centres de bien-être sélectionnés <br>par les clients et classés par localité.</p>
     </div><!-- /.page-header -->
 
-    <div class="cards-simple-wrapper largeur centrage">
+    <div class="cards-simple-wrapper largeur centrage" >
 
 
         
-            {% for a in utilisateur|slice(0,8) %}
+            {% for u in utilisateur|slice(0,8) %}
                 <div class="col-sm-6 col-md-3">
-                    <div class="card-simple" data-background-image={{a.image}}>
+                    <div class="card-simple" data-background-image= {% for i in image%}{{i.url}}{%endfor%}>
                         <div class="card-simple-background">
                             <div class="card-simple-content">
-                                <h2><a href="#">{{a.nomUtilisateur}}</a></h2>
+                                <h2><a href="#">{{u.nomUtilisateur}}</a></h2>
                                 <div class="card-simple-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -27,7 +28,7 @@
                                     <a href="#" class="fa fa-heart-o"></a>
                                 </div><!-- /.card-simple-actions -->
                             </div><!-- /.card-simple-content -->
-                            <div class="card-simple-label">{% for b in a.categorie %}{{ b.nomCategorie}}{% endfor %}</div>
+                            <div class="card-simple-label">{{ u.localite.localite }}</div>
 
                         </div><!-- /.card-simple-background -->
                     </div><!-- /.card-simple -->

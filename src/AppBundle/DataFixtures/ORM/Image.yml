@@ -1,4 +1,5 @@
-AppBundle\Entity\Images:
+AppBundle\Entity\Image:
     img-{1..10}:
-         image : <imageUrl($width = 640, $height = 480)>
+         url : <imageUrl($width = 640, $height = 480)>
          ordre : 0
+         #utilisateur: "@utilisateur-*"

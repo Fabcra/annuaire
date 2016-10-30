@@ -59,29 +59,6 @@ class Utilisateur {
     /**
      * @var string
      *
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\CodePostal", inversedBy="Utilisateur") 
-     * 
-     */
-    private $codePostal;
-
-    /**
-     * @var string
-     *
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Localite", inversedBy="Utilisateur")
-     * @ORM\JoinColumn(onDelete="CASCADE") 
-     */
-    private $localite;
-
-    /**
-     * @var string
-     *
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Commune", inversedBy="Utilisateur") 
-     */
-    private $commune;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="type_user", type="string", length=255)
      */
     private $type_user;
@@ -142,55 +119,109 @@ class Utilisateur {
      * @ORM\Column(name="newsletter", type="boolean")
      */
     private $newsletter;
+    
+    
+      /**
+     * @var string
+     *
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\CodePostal") 
+     * 
+     */
+    private $codePostal;
 
     /**
      * @var string
      *
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Images", inversedBy="Utilisateur")
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Localite")
+     * @ORM\JoinColumn(onDelete="CASCADE", name="localite", referencedColumnName="id")
+     * 
+     */
+    private $localite;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Commune")
+     *  
+     */
+    private $commune;
+    
+    /**
+     * @var string
+     *
+     * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Image", mappedBy="utilisateur")
      * @ORM\JoinColumn(nullable=true) 
      */
-    private $image;
-
-   
-
+    private $images;
+    
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
      * 
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Abus", inversedBy="Utilisateur")
+     * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Abus", mappedBy="utilisateur")
      */
-    private $description;
+    private $abus;
 
     /**
      * @var string
      * 
      *
-     * @ORM\ManytoMany(targetEntity="AppBundle\Entity\Categorie", inversedBy="Categorie")
+     * @ORM\ManytoMany(targetEntity="AppBundle\Entity\Categorie")
      * @ORM\JoinTable(name="utilisateur_categorie")
      */
-    private $categorie;
+    private $categories;
 
     /**
      * @var string
      *
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Stage", inversedBy="Utilisateur")
+     * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Stage", mappedBy="utilisateur")
      */
-    private $stage;
+    private $stages;
 
     /**
      * @var string
      *
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Promotion", inversedBy="Utilisateur")
+     * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Promotion", mappedBy="utilisateur")
      */
-    private $promotion;
+    private $promotions;
 
     /**
      * @var int
      *
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Position", inversedBy="Utilisateur")
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Position")
      */
-    private $ordre;
+    private $position;
+
+    
+    /**
+     * 
+     * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Commentaire", mappedBy="utilisateur")
+     */
+    private $commentaires;
+
+    
+
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        $this->categorie = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->stages = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->promotions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->abus = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
+        
+    }
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId() {
+        return $this->id;
+    }
 
     /**
      * 
@@ -200,19 +231,6 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
-    
-    
-     /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
-    
-    
-    
     public function setEmail($email) {
         $this->email = $email;
 
@@ -469,36 +487,7 @@ class Utilisateur {
     public function getNewsletter() {
         return $this->newsletter;
     }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Abus
-     */
-    public function setDescription($description) {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription() {
-        return $this->description;
-    }
-
-    /**
-     * Constructor
-     */
-    public function __construct() {
-        $this->categorie = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
+    
     /**
      * Set typeUser
      *
@@ -590,12 +579,12 @@ class Utilisateur {
     /**
      * Set image
      *
-     * @param \AppBundle\Entity\Images $image
+     * @param \AppBundle\Entity\Image $image
      *
      * @return Utilisateur
      */
-    public function setImage(\AppBundle\Entity\Images $image = null) {
-        $this->image = $image;
+    public function setImages(array $images = null) {
+        $this->images = $images;
 
         return $this;
     }
@@ -603,65 +592,19 @@ class Utilisateur {
     /**
      * Get image
      *
-     * @return \AppBundle\Entity\Images
+     * @return ArrayCollection
      */
-    public function getImage() {
-        return $this->image;
+    public function getImages() {
+        return $this->images;
     }
 
-    /**
-     * Add categorie
-     *
-     * @param \AppBundle\Entity\Categorie $categorie
-     *
-     * @return Utilisateur
-     */
-    public function addCategorie(\AppBundle\Entity\Categorie $categorie) {
-        $this->categorie[] = $categorie;
-
-        return $this;
+    public function getFirstImage() {
+        if (isset($this->images[0])) {
+            return $this->images[0];
+        }
+        return null;
     }
-
-    /**
-     * Remove categorie
-     *
-     * @param \AppBundle\Entity\Categorie $categorie
-     */
-    public function removeCategorie(\AppBundle\Entity\Categorie $categorie) {
-        $this->categorie->removeElement($categorie);
-    }
-
-    /**
-     * Get categorie
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCategorie() {
-        return $this->categorie;
-    }
-
-    /**
-     * Set stage
-     *
-     * @param \AppBundle\Entity\Stage $stage
-     *
-     * @return Utilisateur
-     */
-    public function setStage(\AppBundle\Entity\Stage $stage = null) {
-        $this->stage = $stage;
-
-        return $this;
-    }
-
-    /**
-     * Get stage
-     *
-     * @return \AppBundle\Entity\Stage
-     */
-    public function getStage() {
-        return $this->stage;
-    }
-
+ 
     /**
      * Set promotion
      *
@@ -670,7 +613,7 @@ class Utilisateur {
      * @return Utilisateur
      */
     public function setPromotion(\AppBundle\Entity\Promotion $promotion = null) {
-        $this->promotion = $promotion;
+        $this->promotions = $promotion;
 
         return $this;
     }
@@ -681,29 +624,7 @@ class Utilisateur {
      * @return \AppBundle\Entity\Promotion
      */
     public function getPromotion() {
-        return $this->promotion;
-    }
-
-    /**
-     * Set ordre
-     *
-     * @param \AppBundle\Entity\Position $ordre
-     *
-     * @return Utilisateur
-     */
-    public function setOrdre(\AppBundle\Entity\Position $ordre = null) {
-        $this->ordre = $ordre;
-
-        return $this;
-    }
-
-    /**
-     * Get ordre
-     *
-     * @return \AppBundle\Entity\Position
-     */
-    public function getOrdre() {
-        return $this->ordre;
+        return $this->promotions;
     }
 
     /**
@@ -727,6 +648,238 @@ class Utilisateur {
     public function getNomUtilisateur() {
         return $this->nomUtilisateur;
     }
+
+    /**
+     * Add image
+     *
+     * @param \AppBundle\Entity\Images $image
+     *
+     * @return Utilisateur
+     */
+    public function addImage(\AppBundle\Entity\Image $image) {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \AppBundle\Entity\Images $image
+     */
+    public function removeImage(\AppBundle\Entity\Image $image) {
+        $this->images->removeElement($image);
+    }
+
     
-   
+    
+    /**
+     * Set position
+     *
+     * @param \AppBundle\Entity\Position $position
+     *
+     * @return Utilisateur
+     */
+    public function setPosition(\AppBundle\Entity\Position $position = null)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return \AppBundle\Entity\Position
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * Add category
+     *
+     * @param \AppBundle\Entity\Categorie $category
+     *
+     * @return Utilisateur
+     */
+    public function addCategory(\AppBundle\Entity\Categorie $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \AppBundle\Entity\Categorie $category
+     */
+    public function removeCategory(\AppBundle\Entity\Categorie $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * Add stage
+     *
+     * @param \AppBundle\Entity\Stage $stage
+     *
+     * @return Utilisateur
+     */
+    public function addStage(\AppBundle\Entity\Stage $stage)
+    {
+        $this->stages[] = $stage;
+
+        return $this;
+    }
+
+    /**
+     * Remove stage
+     *
+     * @param \AppBundle\Entity\Stage $stage
+     */
+    public function removeStage(\AppBundle\Entity\Stage $stage)
+    {
+        $this->stages->removeElement($stage);
+    }
+
+    /**
+     * Get stages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStages()
+    {
+        return $this->stages;
+    }
+
+    /**
+     * Add promotion
+     *
+     * @param \AppBundle\Entity\Promotion $promotion
+     *
+     * @return Utilisateur
+     */
+    public function addPromotion(\AppBundle\Entity\Promotion $promotion)
+    {
+        $this->promotions[] = $promotion;
+
+        return $this;
+    }
+
+    /**
+     * Remove promotion
+     *
+     * @param \AppBundle\Entity\Promotion $promotion
+     */
+    public function removePromotion(\AppBundle\Entity\Promotion $promotion)
+    {
+        $this->promotions->removeElement($promotion);
+    }
+
+    /**
+     * Get promotions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPromotions()
+    {
+        return $this->promotions;
+    }
+    
+    
+
+    /**
+     * Set abus
+     *
+     * @param string $abus
+     *
+     * @return Utilisateur
+     */
+    public function setAbus($abus)
+    {
+        $this->abus = $abus;
+
+        return $this;
+    }
+
+    /**
+     * Get abus
+     *
+     * @return string
+     */
+    public function getAbus()
+    {
+        return $this->abus;
+    }
+
+    /**
+     * Add abus
+     *
+     * @param \AppBundle\Entity\Abus $abus
+     *
+     * @return Utilisateur
+     */
+    public function addAbus(\AppBundle\Entity\Abus $abus)
+    {
+        $this->abus[] = $abus;
+
+        return $this;
+    }
+
+    /**
+     * Remove abus
+     *
+     * @param \AppBundle\Entity\Abus $abus
+     */
+    public function removeAbus(\AppBundle\Entity\Abus $abus)
+    {
+        $this->abus->removeElement($abus);
+    }
+
+    /**
+     * Add commentaire
+     *
+     * @param \AppBundle\Entity\Commentaire $commentaire
+     *
+     * @return Utilisateur
+     */
+    public function addCommentaire(\AppBundle\Entity\Commentaire $commentaire)
+    {
+        $this->commentaires[] = $commentaire;
+
+        return $this;
+    }
+
+    /**
+     * Remove commentaire
+     *
+     * @param \AppBundle\Entity\Commentaire $commentaire
+     */
+    public function removeCommentaire(\AppBundle\Entity\Commentaire $commentaire)
+    {
+        $this->commentaires->removeElement($commentaire);
+    }
+
+    /**
+     * Get commentaires
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCommentaires()
+    {
+        return $this->commentaires;
+    }
 }

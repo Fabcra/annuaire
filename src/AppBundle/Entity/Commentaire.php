@@ -52,15 +52,15 @@ class Commentaire
     /**
      * @var int
      *
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="Utilisateur")
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="utilisateur")
      */
-    private $identifiant;
+    private $utilisateur;
     
      /**
      * @var string
      *
       * 
-      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Commentaire", inversedBy="Commentaire")
+      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Commentaire", inversedBy="commentaires")
      */
     private $abus;
 
@@ -188,23 +188,7 @@ class Commentaire
      *
      * @return Commentaire
      */
-    public function setIdentifiant(\AppBundle\Entity\Utilisateur $identifiant = null)
-    {
-        $this->identifiant = $identifiant;
-
-        return $this;
-    }
-
-    /**
-     * Get identifiant
-     *
-     * @return \AppBundle\Entity\Utilisateur
-     */
-    public function getIdentifiant()
-    {
-        return $this->identifiant;
-    }
-
+  
     /**
      * Set abus
      *
@@ -227,5 +211,29 @@ class Commentaire
     public function getAbus()
     {
         return $this->abus;
+    }
+
+    /**
+     * Set utilisateur
+     *
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
+     *
+     * @return Commentaire
+     */
+    public function setUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur = null)
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get utilisateur
+     *
+     * @return \AppBundle\Entity\Utilisateur
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
     }
 }

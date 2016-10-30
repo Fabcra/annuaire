@@ -76,6 +76,14 @@ class Stage
      * @ORM\Column(name="affichage_jusque", type="datetime")
      */
     private $affichageJusque;
+    
+    /**
+     *
+     * @var type 
+     * 
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="stage")
+     */
+    private $utilisateur;
 
 
     /**
@@ -279,6 +287,14 @@ class Stage
     {
         return $this->affichageJusque;
     }
-    
+    function getUtilisateur() {
+        return $this->utilisateur;
+    }
+
+    function setUtilisateur(type $utilisateur) {
+        $this->utilisateur = $utilisateur;
+    }
+
+
      
 }

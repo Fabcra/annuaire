@@ -1,10 +1,43 @@
 .centrage{
     margin : 0 auto;
     padding-bottom: 0;
-    
+
 }
 
 .largeur{
     width : 1000px;
 }
+
+.maxlarg{
+    width : 100%;
+    display : table;
+}
+
+.rightalign{
+    text-align: right;
+}
+
+.log{
+    width : 80px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.marg{
+    margin-top: 15px;
+
+}
+
+.register{
+    top : 220px;
+    right : 400px;
+    left : 400px;
+    bottom : 300px;
+}
+
+.test{
+    margin-top : 0;
+}
+
+
 
