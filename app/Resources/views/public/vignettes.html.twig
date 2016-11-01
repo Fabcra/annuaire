@@ -1,3 +1,5 @@
+{% extends "layout/layout.html.twig" %}
+
 {% block content %}
     
     <div class="page-header">
@@ -11,7 +13,7 @@
         
             {% for u in utilisateur|slice(0,8) %}
                 <div class="col-sm-6 col-md-3">
-                    <div class="card-simple" data-background-image= {% for i in image%}{{i.url}}{%endfor%}>
+                    <div class="card-simple" data-background-image= >
                         <div class="card-simple-background">
                             <div class="card-simple-content">
                                 <h2><a href="#">{{u.nomUtilisateur}}</a></h2>

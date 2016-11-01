@@ -16,16 +16,14 @@ class DefaultController extends Controller
     {
         $doctrine=$this->getDoctrine();
         $repo = $doctrine->getRepository('AppBundle:Utilisateur');
-        $repo2 = $doctrine->getRepository('AppBundle:Categorie');
-        $repo3 = $doctrine->getRepository('AppBundle:Image');
-//        $utilisateurs=$repo->findBy(['type_user'=>'prestataire']);
-        $utilisateurs=$repo->findAll();
-        $categorie=$repo2->findAll();
-        $image=$repo3->findAll();
+        $repocateg = $doctrine->getRepository('AppBundle:Categorie');
+        $utilisateurs=$repo->findBy(['type_user'=>'prestataire']);
+//        $utilisateurs=$repo->findAll();
+        $categorie=$repocateg->findAll();
         
         
         
-        return $this->render('base.html.twig',['utilisateur'=>$utilisateurs,'categorie'=>$categorie, 'image'=>$image]);
+        return $this->render('public/vignettes.html.twig',['utilisateur'=>$utilisateurs,'categorie'=>$categorie]);
     }   
     
   
