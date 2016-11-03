@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Categorie
@@ -24,7 +25,7 @@ class Categorie {
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_categorie", type="string", length=255)
+     * @ORM\Column(name="nomCategorie", type="string", length=255)
      */
     private $nomCategorie;
 
@@ -70,6 +71,15 @@ class Categorie {
      * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Promotion", mappedBy="categorie")
      */
     private $promotions;
+    
+    
+    /**
+     * @Gedmo\Slug(fields={"nomCategorie"})
+     * @ORM\column(length=128, unique=true)
+     */
+    private $slug;
+    
+    
     
      /**
      * Constructor
@@ -267,4 +277,28 @@ class Categorie {
     }
    
 
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Categorie
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
 }
