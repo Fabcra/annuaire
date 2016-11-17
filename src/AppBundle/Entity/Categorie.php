@@ -62,7 +62,7 @@ class Categorie {
      * @var string
      *
      * @ORM\Column(name="image", type="string")
-     * @ORM\OnetoOne(targetEntity="AppBundle\Entity\Categorie", inversedBy="categorie")
+     * @ORM\OnetoOne(targetEntity="AppBundle\Entity\Image")
      */
     private $image;
     
@@ -75,7 +75,7 @@ class Categorie {
     
     /**
      * @Gedmo\Slug(fields={"nomCategorie"})
-     * @ORM\column(length=128, unique=true)
+     * @ORM\column(length=128, nullable=true)
      */
     private $slug;
     
