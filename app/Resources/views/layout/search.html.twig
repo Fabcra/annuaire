@@ -1,0 +1,22 @@
+<form method="post" action="{{path('recherche_prestataires')}}" >
+    <div class="">
+        <input type="text" name="recherche_nom" class="form-control" placeholder="Nom">
+    </div><!-- /.form-group -->
+
+
+    <div class="">
+        <input type="text" name="recherche_localite" class="form-control" placeholder="Localité">
+    </div><!-- /.form-group -->
+
+    <div>
+        <select class="" title="Catégorie" name="recherche_categorie">
+            {% for c in categorie %}
+                <option value="{{c.nomCategorie}}">{{c.nomCategorie}}</option>
+            {% endfor %}
+            </select>
+        </div><!-- /.form-group -->
+
+
+
+        <button type="submit" class="">Search</button>
+    </form>{# empty Twig template #}

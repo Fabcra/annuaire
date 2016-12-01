@@ -1,0 +1,12 @@
+{% extends "layout/layout.html.twig" %}
+
+{% block content %}
+    
+{{form_start(userForm)}}
+{{ form_widget(userForm) }}
+<button type="submit">Save</button>
+{{ form_end(userForm) }}
+
+{% endblock %}
+
+

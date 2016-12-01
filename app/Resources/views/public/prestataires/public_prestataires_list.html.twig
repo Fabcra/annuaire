@@ -1,0 +1,59 @@
+{% extends "layout/layout.html.twig" %}
+{% block content %}
+    <div class="cards-row">
+        {% for a in prestataires %}
+            <div class="card-row">
+                <div class="card-row-inner">
+
+                    <div class="card-row-image" data-background-image={% for c in a.categories%}{{asset(c.image)}}{%endfor%}>
+                        <div class="card-row-label">
+
+
+                            <a href="{{path('show_prestataire',{'slug':a.username})}}">{{ a.username }} {{ a.typeUser}}</a>
+
+
+                        </div><!-- /.card-row-label -->
+
+
+                    </div><!-- /.card-row-image -->
+
+                    <div class="card-row-body">
+
+                        <h2 class="card-row-title">{%for c in a.categories%}<a href="listing-detail.html">{{c.nomCategorie}}</a>{%endfor%}</h2>
+                        <div class="card-row-content">
+                            {% for c in a.categories %}
+                                <p>{{c.description}}</p>
+                            {%endfor%}
+
+                        </div>
+                    </div><!-- /.card-row-body -->
+
+                    <div class="card-row-properties">
+                        <dl>
+
+
+
+
+
+                            <dd>Catégorie</dd> {% for c in a.categories %}<dt>{{c.nomCategorie}} </dt>{% endfor %}
+
+
+
+                            <dd>Location</dd><dt>{{ a.localite }}</dt>
+
+
+                            <dd>Rating</dd>
+                            <dt>
+                            <div class="card-row-rating">
+                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                            </div><!-- /.card-row-rating -->
+                            </dt>
+                        </dl>
+                    </div><!-- /.card-row-properties -->
+                </div><!-- /.card-row-inner -->
+            </div><!-- /.card-row -->
+
+        {% endfor %}
+
+    </div><!-- /.cards-row -->
+{% endblock %}

@@ -1,5 +1,5 @@
 AppBundle\Entity\Categorie:
-    categorie-{1..10}:
+    categorie-{1..4}:
         nomCategorie: <categorie()>
         description : <realText($maxNbChars = 200, $indexSize=2)>
         enAvant : false

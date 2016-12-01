@@ -63,4 +63,8 @@ class CodePostal
     {
         return $this->codePostal;
     }
+    
+     public function __toString() {
+        return $this->codePostal;
+    }
 }

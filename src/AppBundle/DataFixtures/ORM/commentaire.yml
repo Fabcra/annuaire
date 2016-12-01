@@ -1,0 +1,7 @@
+AppBundle\Entity\Commentaire:
+    comm-{1..3}:
+        cote: numberBetween($min=1, $max=10)
+        titre: <word()>
+        contenu: <sentence()>
+        encodage: <dateTimeThisYear($min = 'now')>
+        

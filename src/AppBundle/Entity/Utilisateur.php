@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Utilisateur
@@ -10,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="utilisateur")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UtilisateurRepository")
  */
-class Utilisateur {
+class Utilisateur implements UserInterface, \Serializable {
 
     /**
      * @var int
@@ -24,9 +26,9 @@ class Utilisateur {
     /**
      * @var string
      * 
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="username", type="string", length=255)
      */
-    private $nomUtilisateur;
+    private $username;
 
     /**
      * @var string
@@ -38,9 +40,9 @@ class Utilisateur {
     /**
      * @var string
      *
-     * @ORM\Column(name="mot_de_passe", type="string", length=255)
+     * @ORM\Column(name="password", type="string", length=255)
      */
-    private $motdepasse;
+    private $password;
 
     /**
      * @var string
@@ -59,9 +61,9 @@ class Utilisateur {
     /**
      * @var string
      *
-     * @ORM\Column(name="type_user", type="string", length=255)
+     * @ORM\Column(name="typeUser", type="string", length=255)
      */
-    private $type_user;
+    private $typeUser;
 
     /**
      * @var \DateTime
@@ -119,9 +121,8 @@ class Utilisateur {
      * @ORM\Column(name="newsletter", type="boolean")
      */
     private $newsletter;
-    
-    
-      /**
+
+    /**
      * @var string
      *
      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\CodePostal") 
@@ -145,7 +146,7 @@ class Utilisateur {
      *  
      */
     private $commune;
-    
+
     /**
      * @var string
      *
@@ -153,7 +154,7 @@ class Utilisateur {
      * @ORM\JoinColumn(nullable=true) 
      */
     private $images;
-    
+
     /**
      * @var string
      *
@@ -166,7 +167,7 @@ class Utilisateur {
      * @var string
      * 
      *
-     * @ORM\ManytoMany(targetEntity="AppBundle\Entity\Categorie")
+     * @ORM\ManytoMany(targetEntity="AppBundle\Entity\Categorie", inversedBy="utilisateurs")
      * @ORM\JoinTable(name="utilisateur_categorie")
      */
     private $categories;
@@ -188,18 +189,27 @@ class Utilisateur {
     /**
      * @var int
      *
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Position")
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Position", inversedBy="utilisateurs")
      */
     private $position;
 
-    
     /**
      * 
      * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Commentaire", mappedBy="utilisateur")
      */
     private $commentaires;
 
-    
+    /**
+     * @Gedmo\Slug(fields={"username"})
+     * @ORM\column(length=128, nullable=true)
+     */
+    private $slug;
+
+    /**
+     *
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
 
     /**
      * Constructor
@@ -211,7 +221,7 @@ class Utilisateur {
         $this->promotions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->abus = new \Doctrine\Common\Collections\ArrayCollection();
         $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
-        
+        $this->isActive = true;
     }
 
     /**
@@ -253,8 +263,8 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
-    public function setMotdepasse($motdepasse) {
-        $this->motdepasse = $motdepasse;
+    public function setPassword($password) {
+        $this->password = $password;
 
         return $this;
     }
@@ -264,8 +274,8 @@ class Utilisateur {
      *
      * @return string
      */
-    public function getMotdepasse() {
-        return $this->motdepasse;
+    public function getPassword() {
+        return $this->password;
     }
 
     /**
@@ -487,28 +497,6 @@ class Utilisateur {
     public function getNewsletter() {
         return $this->newsletter;
     }
-    
-    /**
-     * Set typeUser
-     *
-     * @param string $typeUser
-     *
-     * @return Utilisateur
-     */
-    public function setTypeUser($typeUser) {
-        $this->type_user = $typeUser;
-
-        return $this;
-    }
-
-    /**
-     * Get typeUser
-     *
-     * @return string
-     */
-    public function getTypeUser() {
-        return $this->type_user;
-    }
 
     /**
      * Set codePostal
@@ -604,7 +592,7 @@ class Utilisateur {
         }
         return null;
     }
- 
+
     /**
      * Set promotion
      *
@@ -628,25 +616,25 @@ class Utilisateur {
     }
 
     /**
-     * Set nomUtilisateur
+     * Set Username
      *
-     * @param string $nomUtilisateur
+     * @param string $username
      *
      * @return Utilisateur
      */
-    public function setNomUtilisateur($nomUtilisateur) {
-        $this->nomUtilisateur = $nomUtilisateur;
+    public function setUsername($username) {
+        $this->username = $username;
 
         return $this;
     }
 
     /**
-     * Get nomUtilisateur
+     * Get Username
      *
      * @return string
      */
-    public function getNomUtilisateur() {
-        return $this->nomUtilisateur;
+    public function getUsername() {
+        return $this->username;
     }
 
     /**
@@ -671,8 +659,6 @@ class Utilisateur {
         $this->images->removeElement($image);
     }
 
-    
-    
     /**
      * Set position
      *
@@ -680,8 +666,7 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
-    public function setPosition(\AppBundle\Entity\Position $position = null)
-    {
+    public function setPosition(\AppBundle\Entity\Position $position = null) {
         $this->position = $position;
 
         return $this;
@@ -692,8 +677,7 @@ class Utilisateur {
      *
      * @return \AppBundle\Entity\Position
      */
-    public function getPosition()
-    {
+    public function getPosition() {
         return $this->position;
     }
 
@@ -704,8 +688,7 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
-    public function addCategory(\AppBundle\Entity\Categorie $category)
-    {
+    public function addCategory(\AppBundle\Entity\Categorie $category) {
         $this->categories[] = $category;
 
         return $this;
@@ -716,8 +699,7 @@ class Utilisateur {
      *
      * @param \AppBundle\Entity\Categorie $category
      */
-    public function removeCategory(\AppBundle\Entity\Categorie $category)
-    {
+    public function removeCategory(\AppBundle\Entity\Categorie $category) {
         $this->categories->removeElement($category);
     }
 
@@ -726,8 +708,7 @@ class Utilisateur {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCategories()
-    {
+    public function getCategories() {
         return $this->categories;
     }
 
@@ -738,8 +719,7 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
-    public function addStage(\AppBundle\Entity\Stage $stage)
-    {
+    public function addStage(\AppBundle\Entity\Stage $stage) {
         $this->stages[] = $stage;
 
         return $this;
@@ -750,8 +730,7 @@ class Utilisateur {
      *
      * @param \AppBundle\Entity\Stage $stage
      */
-    public function removeStage(\AppBundle\Entity\Stage $stage)
-    {
+    public function removeStage(\AppBundle\Entity\Stage $stage) {
         $this->stages->removeElement($stage);
     }
 
@@ -760,8 +739,7 @@ class Utilisateur {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getStages()
-    {
+    public function getStages() {
         return $this->stages;
     }
 
@@ -772,8 +750,7 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
-    public function addPromotion(\AppBundle\Entity\Promotion $promotion)
-    {
+    public function addPromotion(\AppBundle\Entity\Promotion $promotion) {
         $this->promotions[] = $promotion;
 
         return $this;
@@ -784,8 +761,7 @@ class Utilisateur {
      *
      * @param \AppBundle\Entity\Promotion $promotion
      */
-    public function removePromotion(\AppBundle\Entity\Promotion $promotion)
-    {
+    public function removePromotion(\AppBundle\Entity\Promotion $promotion) {
         $this->promotions->removeElement($promotion);
     }
 
@@ -794,12 +770,9 @@ class Utilisateur {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPromotions()
-    {
+    public function getPromotions() {
         return $this->promotions;
     }
-    
-    
 
     /**
      * Set abus
@@ -808,8 +781,7 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
-    public function setAbus($abus)
-    {
+    public function setAbus($abus) {
         $this->abus = $abus;
 
         return $this;
@@ -820,8 +792,7 @@ class Utilisateur {
      *
      * @return string
      */
-    public function getAbus()
-    {
+    public function getAbus() {
         return $this->abus;
     }
 
@@ -832,8 +803,7 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
-    public function addAbus(\AppBundle\Entity\Abus $abus)
-    {
+    public function addAbus(\AppBundle\Entity\Abus $abus) {
         $this->abus[] = $abus;
 
         return $this;
@@ -844,8 +814,7 @@ class Utilisateur {
      *
      * @param \AppBundle\Entity\Abus $abus
      */
-    public function removeAbus(\AppBundle\Entity\Abus $abus)
-    {
+    public function removeAbus(\AppBundle\Entity\Abus $abus) {
         $this->abus->removeElement($abus);
     }
 
@@ -856,8 +825,7 @@ class Utilisateur {
      *
      * @return Utilisateur
      */
-    public function addCommentaire(\AppBundle\Entity\Commentaire $commentaire)
-    {
+    public function addCommentaire(\AppBundle\Entity\Commentaire $commentaire) {
         $this->commentaires[] = $commentaire;
 
         return $this;
@@ -868,8 +836,7 @@ class Utilisateur {
      *
      * @param \AppBundle\Entity\Commentaire $commentaire
      */
-    public function removeCommentaire(\AppBundle\Entity\Commentaire $commentaire)
-    {
+    public function removeCommentaire(\AppBundle\Entity\Commentaire $commentaire) {
         $this->commentaires->removeElement($commentaire);
     }
 
@@ -878,8 +845,75 @@ class Utilisateur {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCommentaires()
-    {
+    public function getCommentaires() {
         return $this->commentaires;
     }
+
+    public function getRoles() {
+        return array('ROLE_USER');
+    }
+
+    public function eraseCredentials() {
+        
+    }
+
+    public function serialize() {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+        ));
+    }
+
+    public function unserialize($serialized) {
+        list(
+                $this->id,
+                $this->username,
+                $this->password,
+                ) = unserialize($serialized);
+    }
+
+    public function getSalt() {
+
+        return null;
+    }
+
+    public function getSlug() {
+        return $this->slug;
+    }
+
+    function setSlug($slug) {
+        $this->slug = $slug;
+    }
+
+    function getTypeUser() {
+        return $this->typeUser;
+    }
+
+    function setTypeUser($typeUser) {
+        $this->typeUser = $typeUser;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     *
+     * @return Utilisateur
+     */
+    public function setIsActive($isActive) {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive() {
+        return $this->isActive;
+    }
+
 }

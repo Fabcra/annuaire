@@ -34,6 +34,12 @@ class Bloc
      * @ORM\Column(name="description_bloc", type="string", length=255)
      */
     private $description_bloc;
+    
+    /**
+     *
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Position", inversedBy="blocs")
+     */
+    private $position;
 
 
     /**
@@ -140,5 +146,29 @@ class Bloc
     public function getDescriptionBloc()
     {
         return $this->description_bloc;
+    }
+
+    /**
+     * Set position
+     *
+     * @param \AppBundle\Entity\Position $position
+     *
+     * @return Bloc
+     */
+    public function setPosition(\AppBundle\Entity\Position $position = null)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return \AppBundle\Entity\Position
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 }

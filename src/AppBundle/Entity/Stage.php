@@ -81,7 +81,7 @@ class Stage
      *
      * @var type 
      * 
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="stage")
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="stages")
      */
     private $utilisateur;
 

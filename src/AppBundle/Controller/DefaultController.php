@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Categorie;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -17,14 +17,16 @@ class DefaultController extends Controller
         $doctrine=$this->getDoctrine();
         $repo = $doctrine->getRepository('AppBundle:Utilisateur');
         $repocateg = $doctrine->getRepository('AppBundle:Categorie');
-        $utilisateurs=$repo->findBy(['type_user'=>'prestataire']);
-//        $utilisateurs=$repo->findAll();
+        $utilisateurs=$repo->findBy(['typeUser'=>'prestataire']);
         $categorie=$repocateg->findAll();
+        
         
         
         
         return $this->render('public/vignettes.html.twig',['utilisateur'=>$utilisateurs,'categorie'=>$categorie]);
     }   
     
+   
+   
   
 }

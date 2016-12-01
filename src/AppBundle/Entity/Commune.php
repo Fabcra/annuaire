@@ -62,4 +62,8 @@ class Commune
     {
         return $this->commune;
     }
+    
+     public function __toString() {
+        return $this->commune;
+    }
 }

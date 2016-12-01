@@ -48,7 +48,7 @@ class Abus {
      *
      * @var type 
      * 
-     * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Abus", mappedBy="abus")
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Commentaire", inversedBy="abus")
      */
     private $commentaires;
 
@@ -155,5 +155,19 @@ class Abus {
     public function getCommentaires()
     {
         return $this->commentaires;
+    }
+
+    /**
+     * Set commentaires
+     *
+     * @param \AppBundle\Entity\Commentaire $commentaires
+     *
+     * @return Abus
+     */
+    public function setCommentaires(\AppBundle\Entity\Commentaire $commentaires = null)
+    {
+        $this->commentaires = $commentaires;
+
+        return $this;
     }
 }

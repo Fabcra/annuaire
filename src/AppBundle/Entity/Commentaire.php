@@ -52,7 +52,7 @@ class Commentaire
     /**
      * @var int
      *
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="utilisateur")
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="commentaires")
      */
     private $utilisateur;
     
@@ -60,7 +60,7 @@ class Commentaire
      * @var string
      *
       * 
-      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Commentaire", inversedBy="commentaires")
+      * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Abus", mappedBy="commentaires")
      */
     private $abus;
 
@@ -235,5 +235,36 @@ class Commentaire
     public function getUtilisateur()
     {
         return $this->utilisateur;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->abus = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add abus
+     *
+     * @param \AppBundle\Entity\Abus $abus
+     *
+     * @return Commentaire
+     */
+    public function addAbus(\AppBundle\Entity\Abus $abus)
+    {
+        $this->abus[] = $abus;
+
+        return $this;
+    }
+
+    /**
+     * Remove abus
+     *
+     * @param \AppBundle\Entity\Abus $abus
+     */
+    public function removeAbus(\AppBundle\Entity\Abus $abus)
+    {
+        $this->abus->removeElement($abus);
     }
 }

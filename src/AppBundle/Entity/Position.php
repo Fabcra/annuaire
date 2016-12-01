@@ -28,14 +28,19 @@ class Position {
      */
     private $ordre;
 
+   
     /**
-     * @var string
      *
-     * 
-     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Bloc", inversedBy="Bloc")
-     * @ORM\JoinColumn(onDelete="CASCADE")
+     * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Utilisateur", mappedBy="position")
      */
-    private $nom_bloc;
+    private $utilisateurs;
+    
+    
+    /**
+     *
+     * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Bloc", mappedBy="position")
+     */
+    private $blocs;
 
     /**
      * Get id
@@ -91,5 +96,81 @@ class Position {
     public function getNomBloc()
     {
         return $this->nom_bloc;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->utilisateurs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->blocs = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add utilisateur
+     *
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
+     *
+     * @return Position
+     */
+    public function addUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
+    {
+        $this->utilisateurs[] = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Remove utilisateur
+     *
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
+     */
+    public function removeUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
+    {
+        $this->utilisateurs->removeElement($utilisateur);
+    }
+
+    /**
+     * Get utilisateurs
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUtilisateurs()
+    {
+        return $this->utilisateurs;
+    }
+
+    /**
+     * Add bloc
+     *
+     * @param \AppBundle\Entity\Bloc $bloc
+     *
+     * @return Position
+     */
+    public function addBloc(\AppBundle\Entity\Bloc $bloc)
+    {
+        $this->blocs[] = $bloc;
+
+        return $this;
+    }
+
+    /**
+     * Remove bloc
+     *
+     * @param \AppBundle\Entity\Bloc $bloc
+     */
+    public function removeBloc(\AppBundle\Entity\Bloc $bloc)
+    {
+        $this->blocs->removeElement($bloc);
+    }
+
+    /**
+     * Get blocs
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBlocs()
+    {
+        return $this->blocs;
     }
 }

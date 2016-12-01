@@ -1,31 +1,25 @@
-{% block navbar %}
-    <div class="page-wrapper">
-
-        <header class="header header-transparent" style="background-image: url({{asset('assets/img/tmp/slider-large-3.jpg')}})">
+<header class="header header-transparent" style="background-image: url({{asset('assets/img/tmp/slider-large-3.jpg')}})">
             <div class="header-wrapper">
                 <div class="container">
                     <div class="header-inner">
                         <div class="header-logo">
-                            <a href="index.html">
+                            <a href={{path('accueil')}}>
                                 <img src={{asset("assets/img/logo.png")}} alt="Logo">
                                 <span>Bien-être</span>
                             </a>
                         </div><!-- /.header-logo -->
                        
                         <div class="header-content">
+                            
                             <div class="header-top">
-                                <div class="header-search">
-                                    <input type="text" class="form-control" placeholder="Search for...">
-                                </div><!-- /.header-search -->
-                                
-                                
-                                <form method="post" action="?">
+                              
+                               <form method="post" action="{{ path('login') }}">
                                     <ul class="fa header-nav-primary nav nav-pills collapse navbar-collapse marg">
                                         <li><label for="login-form-email">E-mail</label></li>
-                                        <li><input type="email" name="email" id="login-form-email" class="log"></li>
+                                        <li><input type="" name="_username" id="login-form-email" class="log"></li>
 
                                         <li><label for="login-form-password">Password</label></li>
-                                        <li><input type="password" name="password" id="login-form-password" class="log"></li>
+                                        <li><input type="password" name="_password" id="login-form-password" class="log"></li>
 
                                         <li><button type="submit">Login</button></li>
                                         
@@ -37,17 +31,13 @@
 
                             <div class="header-bottom">
                                
-
+                               
                                 <ul class="header-nav-primary nav nav-pills collapse navbar-collapse">
 
                                     <li class="active">
-                                        <a href="#">Categories <i class="fa fa-chevron-down"></i></a>
+                                        <a href="{{path('list_categ')}}">Categories <i class="fa"></i></a>
 
-                                        <ul class="sub-menu">
-                                            {% for c in categorie %}
-                                            <li><a href="">{{c.nomCategorie}}</a></li>
-                                            {% endfor %}
-                                        </ul>
+                                       
                                     </li>
 
                                     <li >
@@ -84,10 +74,9 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-
                             </div><!-- /.header-bottom -->
                         </div><!-- /.header-content -->
                     </div><!-- /.header-inner -->
                 </div><!-- /.container -->
             </div><!-- /.header-wrapper -->
-        {% endblock %}
+            

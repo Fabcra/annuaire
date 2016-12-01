@@ -45,7 +45,7 @@ class Image {
     private $utilisateur;
     
     /**
-     * @ORM\OnetoOne(targetEntity="AppBundle\Entity\Categorie", mappedBy="image")
+     * 
      */
     private $categorie;
 

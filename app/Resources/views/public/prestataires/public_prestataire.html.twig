@@ -1,0 +1,31 @@
+{% extends "layout/layout.html.twig" %}
+
+{% block content %}
+
+    <div class="cards-simple-wrapper largeur centrage">
+        <div class="page-title">
+            <h1>{{presta.username}}</h1>
+        </div><!-- /.page-title -->
+
+        <div class="posts post-detail">
+
+
+
+
+            <div class="post-content">
+                <p>{{presta.adresse}} {{presta.adressenum}}</p>
+                <p>{{presta.email}}</p>
+                <p>{{presta.codePostal}} {{presta.commune}}</p>
+                <p>{{presta.localite}}</p>
+               
+                    
+                <h3>Catégories de services</h3>
+                {% for u in presta.categories %}
+                    <p>{{u.nomCategorie}}</p>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>      
+
+{% endblock %}

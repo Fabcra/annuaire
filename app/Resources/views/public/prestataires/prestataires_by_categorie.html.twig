@@ -1,23 +1,18 @@
 {% extends "layout/layout.html.twig" %}
 
-{% block content %}
-    {% include 'public/slider.html.twig' %}
+{% block content %} 
+<div class="cards-simple-wrapper largeur centrage" >
+
     
-    <div class="page-header">
-        <h1>Les meilleurs centres de bien-être</h1>
-        <p>Retrouver ici la liste des centres de bien-être sélectionnés <br>par les clients et classés par localité.</p>
-    </div><!-- /.page-header -->
-
-    <div class="cards-simple-wrapper largeur centrage" >
 
 
-        
-            {% for u in utilisateur|slice(0,8) %}
+{% for u in categorie.utilisateurs %}
+
                 <div class="col-sm-6 col-md-3">
-                    <div class="card-simple" data-background-image= >
+                    <div class="card-simple" data-background-image={% for c in u.images%}{{asset(c.url)}}{%endfor%} >
                         <div class="card-simple-background">
                             <div class="card-simple-content">
-                                <h2><a href="#">{{u.username}}</a></h2>
+                                <h2><a href="{{path('show_prestataire', {slug:u.username})}}">{{u.username}} {{ u.typeUser}}</a></h2>
                                 <div class="card-simple-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -31,11 +26,12 @@
                                     <a href="#" class="fa fa-heart-o"></a>
                                 </div><!-- /.card-simple-actions -->
                             </div><!-- /.card-simple-content -->
-                            <div class="card-simple-label">{{ u.localite.localite }}</div>
+                            <div class="card-simple-label">{{u.localite}}</div>
+                            
 
                         </div><!-- /.card-simple-background -->
                     </div><!-- /.card-simple -->
                 </div><!-- /.col-* -->
-            {% endfor %}
+               {%endfor%} 
     </div><!-- /.cards-simple-wrapper -->
-{% endblock %}
+    {% endblock %}

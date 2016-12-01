@@ -1,0 +1,22 @@
+{% extends "layout/layout.html.twig" %}
+
+{% block content %}
+
+    <div class="cards-simple-wrapper largeur centrage">
+        <div class="page-title">
+            <h1>{{cat.nomCategorie}}</h1>
+        </div><!-- /.page-title -->
+
+        <div class="posts post-detail">
+
+            <img src={{cat.image}} alt={{"A Clockwork Origin"}}>
+
+              
+
+        <div class="post-content">
+            <p class='drop-cap'>{{cat.description}}</p>
+        </div>
+    </div>
+</div>      
+
+    {% endblock %}
