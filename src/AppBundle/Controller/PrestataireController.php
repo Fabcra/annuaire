@@ -78,14 +78,14 @@ class PrestataireController extends Controller {
      * 
      */
     public function preregister(Request $request) {
-           
+
         $newuser = new Preregister();
 
 
         $form = $this->createForm(PreregisterType::class, $newuser);
 
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             $newuser->setToken();
@@ -143,7 +143,17 @@ class PrestataireController extends Controller {
             $user->setEmail($mail);
             $form = $this->createForm(UtilisateurType::class, $user);
 
+            $form->handleRequest($request);
 
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($newuser);
+                $em->flush();
+
+                $this->addFlash('success', 'Vous êtes à présent enregistré en tant que prestataire de service');
+
+                return $this->redirectToRoute('accueil');
+            }
 
             return $this->render('/public/prestataires/new.html.twig', array(
                         'userForm' => $form->createView()));
@@ -153,57 +163,6 @@ class PrestataireController extends Controller {
             ));
         }
     }
+
     
-    
-    public function newAction(Request $request){
-        
-        
-    /**
-     * 
-     * @Route("/prestataires/new", name="save_prestataire"
-     * 
-     */    
-     $newuser = new Utilisateur();
-
-
-        $form = $this->createForm(UtilisateurType::class, $newuser);
-
-        $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) {
-
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($newuser);
-            $em->flush();
-
-            $this->addFlash('success', 'Vous êtes à présent enregistré en tant que prestataire de service');
-
-            $nom = $newuser->getUsername();
-            $mail = $newuser->getEmail();
-            $password = $newuser->getPassword();
-            $adresse = $newuser->getAdresse();
-            $adressenum = $newuser->getAdressenum();
-            $localite = $newuser->getLocalite();
-            $codepostal = $newuser->getCodePostal();
-            $categorie = $newuser->getCategories();
-            $site = $newuser->getSite();
-            $numtva = $newuser->getNumtva();
-            $numtel = $newuser->getNumtel();
-
-
-
-            
-
-            return $this->redirectToRoute('accueil');
-        }
-
-        return $this->render('public/prestataires/new.html.twig', [
-                    'userForm' => $form->createView()]);
-    }
-    
-    
-    
-    
-
 }
