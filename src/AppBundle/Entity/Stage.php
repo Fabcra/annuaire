@@ -295,6 +295,12 @@ class Stage
         $this->utilisateur = $utilisateur;
     }
 
+    public function __toString() {
+        
+        return $this->getNom();
+    
+        
+    }
 
      
 }

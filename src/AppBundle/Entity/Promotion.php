@@ -278,5 +278,5 @@ class Promotion {
         $this->utilisateur = $utilisateur;
     }
 
-
+   
 }

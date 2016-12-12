@@ -47,24 +47,12 @@
             <div class="form-group">
                 {{form_row(userForm.numtel)}}
             </div><!-- /.form-group -->
-            <div class="form-group">
-                {{form_row(userForm.numtva)}}
-            </div><!-- /.form-group -->
-            <div class="form-group">
-                {{form_row(userForm.site)}}
-            </div><!-- /.form-group -->
-
-            <div class="form-group">
-                {{form_row(userForm.categories)}}
-            </div><!-- /.form-group -->
-
-
 
             {{ form_row(userForm._token)}}
 
             <button type="submit" class="btn btn-primary pull-right">Register</button>
 
-            {{form_end(userForm)}}
+            {{form_end(userForm,{'render_rest':false})}}
             {#        </form>#}
         </div><!-- /.col-sm-4 -->
     </div><!-- /.row -->

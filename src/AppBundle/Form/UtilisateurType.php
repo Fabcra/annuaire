@@ -19,21 +19,14 @@ class UtilisateurType extends AbstractType
                 ->add('password')
                 ->add('adresse')
                 ->add('adressenum')
-                ->add('typeUser')
-                ->add('inscription')
-                ->add('nbessais')
-                ->add('banni')
-                ->add('inscriptionconf')
-                ->add('site')
-                ->add('numtel')
-                ->add('numtva')
-                ->add('newsletter')
-                ->add('slug')
-                ->add('isActive')
                 ->add('codePostal')
                 ->add('localite')
                 ->add('commune')
+                ->add('numtel')
+                ->add('numtva')
+                ->add('site')
                 ->add('categories');
+        
     }
     
     /**

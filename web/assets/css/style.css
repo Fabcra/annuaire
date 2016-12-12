@@ -35,6 +35,13 @@
     bottom : 300px;
 }
 
+.register_presta{
+    top : 220px;
+    right : 400px;
+    left : 400px;
+    bottom : 120px;
+}
+
 .test{
     margin-top : 0;
 }
@@ -54,5 +61,7 @@
     transition: all linear 0.12s;
     white-space: nowrap;
     z-index: 2; }
+
+
 
 

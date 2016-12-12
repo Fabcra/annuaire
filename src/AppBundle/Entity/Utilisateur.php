@@ -68,7 +68,7 @@ class Utilisateur implements UserInterface, \Serializable {
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="inscription", type="datetime", nullable=true)
+     * @ORM\Column(name="inscription", type="datetime")
      * 
      */
     private $inscription;
@@ -76,49 +76,49 @@ class Utilisateur implements UserInterface, \Serializable {
     /**
      * @var int
      *
-     * @ORM\Column(name="nb_essais", type="integer")
+     * @ORM\Column(name="nb_essais", type="integer", nullable=true)
      */
     private $nbessais;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="banni", type="boolean")
+     * @ORM\Column(name="banni", type="boolean", nullable=true)
      */
     private $banni;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="inscription_conf", type="boolean")
+     * @ORM\Column(name="inscription_conf", type="boolean", nullable=true)
      */
     private $inscriptionconf;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="site", type="string", length=255)
+     * @ORM\Column(name="site", type="string", length=255, nullable=true)
      */
     private $site;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="num_tel", type="string", length=255)
+     * @ORM\Column(name="num_tel", type="string", length=255, nullable=true)
      */
     private $numtel;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="num_tva", type="string", length=255)
+     * @ORM\Column(name="num_tva", type="string", length=255, nullable=true)
      */
     private $numtva;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="newsletter", type="boolean")
+     * @ORM\Column(name="newsletter", type="boolean", nullable=true)
      */
     private $newsletter;
 
@@ -222,6 +222,7 @@ class Utilisateur implements UserInterface, \Serializable {
         $this->abus = new \Doctrine\Common\Collections\ArrayCollection();
         $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
         $this->isActive = true;
+        $this->inscription = new \DateTime();
     }
 
     /**

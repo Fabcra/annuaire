@@ -10734,7 +10734,7 @@ ol li {
   right: 0px;
   top: 0px; }
   .special:after {
-    background-color: rgba(0, 0, 0, 0.35);
+    background-color: rgba(0, 0, 0, 0);
     bottom: 0px;
     content: '';
     left: 0px;

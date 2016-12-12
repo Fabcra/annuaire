@@ -19,4 +19,3 @@ AppBundle\Entity\Utilisateur:
         newsletter : true
         abus : '<numberBetween(1,5)>x @abus-*'
         categories : '<numberBetween(1,5)>x @categorie-*'
-        stages: "<numberBetween(1,5)>x @stg-*"
