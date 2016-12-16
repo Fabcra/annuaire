@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="stage")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\StageRepository")
  */
-class Stage
-{
+class Stage {
+
     /**
      * @var int
      *
@@ -76,7 +76,7 @@ class Stage
      * @ORM\Column(name="affichage_jusque", type="datetime")
      */
     private $affichageJusque;
-    
+
     /**
      *
      * @var type 
@@ -84,15 +84,14 @@ class Stage
      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="stages")
      */
     private $utilisateur;
-
-
+    
+    
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -103,8 +102,7 @@ class Stage
      *
      * @return Stage
      */
-    public function setNom($nom)
-    {
+    public function setNom($nom) {
         $this->nom = $nom;
 
         return $this;
@@ -115,8 +113,7 @@ class Stage
      *
      * @return string
      */
-    public function getNom()
-    {
+    public function getNom() {
         return $this->nom;
     }
 
@@ -127,8 +124,7 @@ class Stage
      *
      * @return Stage
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
 
         return $this;
@@ -139,8 +135,7 @@ class Stage
      *
      * @return string
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
@@ -151,8 +146,7 @@ class Stage
      *
      * @return Stage
      */
-    public function setTarif($tarif)
-    {
+    public function setTarif($tarif) {
         $this->tarif = $tarif;
 
         return $this;
@@ -163,8 +157,7 @@ class Stage
      *
      * @return string
      */
-    public function getTarif()
-    {
+    public function getTarif() {
         return $this->tarif;
     }
 
@@ -175,8 +168,7 @@ class Stage
      *
      * @return Stage
      */
-    public function setInfoCompl($infoCompl)
-    {
+    public function setInfoCompl($infoCompl) {
         $this->infoCompl = $infoCompl;
 
         return $this;
@@ -187,8 +179,7 @@ class Stage
      *
      * @return string
      */
-    public function getInfoCompl()
-    {
+    public function getInfoCompl() {
         return $this->infoCompl;
     }
 
@@ -199,8 +190,7 @@ class Stage
      *
      * @return Stage
      */
-    public function setDebut($debut)
-    {
+    public function setDebut($debut) {
         $this->debut = $debut;
 
         return $this;
@@ -211,9 +201,11 @@ class Stage
      *
      * @return \DateTime
      */
-    public function getDebut()
-    {
-        return $this->debut;
+    public function getDebut() {
+
+        $debut = new \DateTime($this->debut);
+
+        return $debut;
     }
 
     /**
@@ -223,8 +215,7 @@ class Stage
      *
      * @return Stage
      */
-    public function setFin($fin)
-    {
+    public function setFin($fin) {
         $this->fin = $fin;
 
         return $this;
@@ -235,8 +226,7 @@ class Stage
      *
      * @return \DateTime
      */
-    public function getFin()
-    {
+    public function getFin() {
         return $this->fin;
     }
 
@@ -247,8 +237,7 @@ class Stage
      *
      * @return Stage
      */
-    public function setAffichageDe($affichageDe)
-    {
+    public function setAffichageDe($affichageDe) {
         $this->affichageDe = $affichageDe;
 
         return $this;
@@ -259,8 +248,7 @@ class Stage
      *
      * @return \DateTime
      */
-    public function getAffichageDe()
-    {
+    public function getAffichageDe() {
         return $this->affichageDe;
     }
 
@@ -271,8 +259,7 @@ class Stage
      *
      * @return Stage
      */
-    public function setAffichageJusque($affichageJusque)
-    {
+    public function setAffichageJusque($affichageJusque) {
         $this->affichageJusque = $affichageJusque;
 
         return $this;
@@ -283,10 +270,10 @@ class Stage
      *
      * @return \DateTime
      */
-    public function getAffichageJusque()
-    {
+    public function getAffichageJusque() {
         return $this->affichageJusque;
     }
+
     function getUtilisateur() {
         return $this->utilisateur;
     }
@@ -296,11 +283,9 @@ class Stage
     }
 
     public function __toString() {
-        
+
         return $this->getNom();
-    
-        
+                   
     }
 
-     
 }
