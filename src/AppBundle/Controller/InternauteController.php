@@ -12,8 +12,6 @@ use AppBundle\Entity\Utilisateur;
 
 class InternauteController extends Controller {
 
-    
-    
     /**
      * Inscription des internautes dans une table temporaire et envoi d'un mail de confirmation
      * 
@@ -22,14 +20,14 @@ class InternauteController extends Controller {
      * 
      */
     public function preregister(Request $request) {
-        
+
         $newuser = new Preregister();
 
 
         $form = $this->createForm(PreregisterType::class, $newuser);
 
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             $newuser->setToken();
@@ -62,10 +60,8 @@ class InternauteController extends Controller {
 
         return $this->render('public/internautes/prenew.html.twig', [
                     'userForm' => $form->createView()]);
-        
-        
     }
-    
+
     /**
      * Vérification du token et de l'id, ouverture du formulaire complet
      * avec les données préenregistrées
@@ -76,31 +72,72 @@ class InternauteController extends Controller {
      */
     public function newAction(Request $request, $token = null, $id = null) {
 
-        //récupération de l'utilisateur
-        $newuser = $this->getDoctrine()->getManager()->getRepository('AppBundle:Preregister')->findOneById($id);
-
-        //vérification token
-        if ($token === $newuser->getToken()) {
-
-            $user = new Utilisateur;
-            $nom = $newuser->getNom();
-            $user->setUsername($nom);
-            $mail = $newuser->getMail();
-            $user->setEmail($mail);
-            $form = $this->createForm(UtilisateurType::class, $user);
+            //récupération de l'utilisateur
+            $newuser = $this->getDoctrine()->getManager()->getRepository('AppBundle:Preregister')->findOneById($id);
 
 
 
-            return $this->render('/public/internautes/new.html.twig', array(
-                        'userForm' => $form->createView()));
-        } else {
-            return $this->redirectToRoute('new_internaute', array(
-                        "msg_error" => 'Votre inscription est invalidée pignouf !'
-            ));
-        }
-    
-    
+            //vérification token
+            if ($token === $newuser->getToken()) {
+
+                $user = new Utilisateur();
+                $nom = $newuser->getNom();
+                $user->setUsername($nom);
+                $mail = $newuser->getMail();
+                $user->setEmail($mail);
+                $user->setTypeUser('internaute');
+                $form = $this->createForm(UtilisateurType::class, $user);
+
+                $form->handleRequest($request);
+
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($user);
+                    $em->flush();
+
+                    $this->addFlash('success', "Vous êtes à présent enregistré en tant qu'internaute");
+
+                    return $this->redirectToRoute('accueil');
+                }
+
+                return $this->render('/public/internautes/new.html.twig', array(
+                            'userForm' => $form->createView()));
+            } else {
+                return $this->redirectToRoute('new_internaute', array(
+                            "msg_error" => 'Votre inscription est invalidée pignouf !'
+                ));
+            }
+        
     }
-    
+
+    /**
+     * 
+     * @Route("/internaute/update/{id}", name="internaute_update")
+     */
+    public function updateAction(Request $request, $id = null) {
+
+        $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:Utilisateur')->findOneById($id);
+
+        $form = $this->createForm(UtilisateurType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $user->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash('success', 'update effectué avec succès');
+
+
+            return $this->redirectToRoute('accueil');
+        }
+
+        return $this->render('public/internautes/update.html.twig', [
+                    'userForm' => $form->createView()]);
+    }
 
 }

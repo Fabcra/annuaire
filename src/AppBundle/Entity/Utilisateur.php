@@ -233,6 +233,63 @@ class Utilisateur implements UserInterface, \Serializable {
     public function getId() {
         return $this->id;
     }
+    
+    
+    /**
+     * Set Username
+     *
+     * @param string $username
+     *
+     * @return Utilisateur
+     */
+    public function setUsername($username) {
+        $this->username = $username;
+
+        return $this;
+    }
+
+//   SECURITY
+    
+    /**
+     * Get Username
+     *
+     * @return string
+     */
+    public function getUsername() {
+        return $this->username;
+    }
+    
+        public function getRoles() {
+        return array('ROLE_USER');
+    }
+
+    public function eraseCredentials() {
+        
+    }
+
+    public function serialize() {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+        ));
+    }
+
+    public function unserialize($serialized) {
+        list(
+                $this->id,
+                $this->username,
+                $this->password,
+                ) = unserialize($serialized);
+    }
+
+    public function getSalt() {
+
+        return null;
+    }
+
+//    ENDSECURITY
+    
 
     /**
      * 
@@ -260,7 +317,7 @@ class Utilisateur implements UserInterface, \Serializable {
     /**
      * Set motdepasse
      *
-     * @param string $motdepasse
+     * @param string $password 
      *
      * @return Utilisateur
      */
@@ -617,28 +674,6 @@ class Utilisateur implements UserInterface, \Serializable {
     }
 
     /**
-     * Set Username
-     *
-     * @param string $username
-     *
-     * @return Utilisateur
-     */
-    public function setUsername($username) {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Get Username
-     *
-     * @return string
-     */
-    public function getUsername() {
-        return $this->username;
-    }
-
-    /**
      * Add image
      *
      * @param \AppBundle\Entity\Images $image
@@ -850,34 +885,7 @@ class Utilisateur implements UserInterface, \Serializable {
         return $this->commentaires;
     }
 
-    public function getRoles() {
-        return array('ROLE_USER');
-    }
 
-    public function eraseCredentials() {
-        
-    }
-
-    public function serialize() {
-        return serialize(array(
-            $this->id,
-            $this->username,
-            $this->password,
-        ));
-    }
-
-    public function unserialize($serialized) {
-        list(
-                $this->id,
-                $this->username,
-                $this->password,
-                ) = unserialize($serialized);
-    }
-
-    public function getSalt() {
-
-        return null;
-    }
 
     public function getSlug() {
         return $this->slug;

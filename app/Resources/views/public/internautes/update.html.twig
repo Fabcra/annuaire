@@ -4,12 +4,10 @@
     <div class="row">
         <div class="col-sm-4 col-sm-offset-4">
             <div class="page-title">
-                <h1>Register</h1>
+                <h1>Update</h1>
             </div>
 
             {{form_start(userForm)}}
-            
-            
 
             <div class="form-group">
                 {{form_row(userForm.username)}}
@@ -49,30 +47,12 @@
             <div class="form-group">
                 {{form_row(userForm.numtel)}}
             </div><!-- /.form-group -->
-            <div class="form-group">
-                {{form_row(userForm.numtva)}}
-            </div><!-- /.form-group -->
-            <div class="form-group">
-                {{form_row(userForm.site)}}
-            </div><!-- /.form-group -->
-
-            <div class="form-group">
-                {{form_row(userForm.categories)}}
-            </div><!-- /.form-group -->
-            <div class="form-group">
-                {{form_row(userForm.images)}}
-            </div><!-- /.form-group -->
-            
-            <div class="form-group">
-                {{form_row(userForm.newsletter)}}
-            </div><!-- /.form-group -->
-
 
             {{ form_row(userForm._token)}}
 
             <button type="submit" class="btn btn-primary pull-right">Register</button>
 
-            {{form_end(userForm)}}
+            {{form_end(userForm,{'render_rest':false})}}
             {#        </form>#}
         </div><!-- /.col-sm-4 -->
     </div><!-- /.row -->

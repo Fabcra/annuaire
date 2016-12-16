@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -128,7 +129,7 @@ class PrestataireController extends Controller {
      * @Route("/prestataires/new/{token}/{id}", name="confirm_prestataire")
      * 
      */
-    public function confirmAction(Request $request, $token = null, $id = null) {
+    public function newAction(Request $request, $token = null, $id = null) {
 
         //récupération de l'utilisateur
         $newuser = $this->getDoctrine()->getManager()->getRepository('AppBundle:Preregister')->findOneById($id);
@@ -136,18 +137,39 @@ class PrestataireController extends Controller {
         //vérification token
         if ($token === $newuser->getToken()) {
 
-            $user = new Utilisateur;
+            $user = new Utilisateur();
             $nom = $newuser->getNom();
             $user->setUsername($nom);
             $mail = $newuser->getMail();
             $user->setEmail($mail);
+            $user->setTypeUser('prestataire');
+            $user->setInscription(new DateTime('now'));
+            $user->setNbessais(0);
+            $user->setBanni(FALSE);
+            $user->setInscriptionconf(TRUE);
+            $user->setNewsletter(FALSE);
+
             $form = $this->createForm(UtilisateurType::class, $user);
 
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
+
+
+//                $file = $user->getImages();
+//                
+//                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+//                
+//                $file->move(
+//                        $this->getParameter('images'),
+//                        $fileName
+//                        );
+//                
+//            $user->setImages($fileName);
+
+
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($newuser);
+                $em->persist($user);
                 $em->flush();
 
                 $this->addFlash('success', 'Vous êtes à présent enregistré en tant que prestataire de service');
@@ -164,5 +186,34 @@ class PrestataireController extends Controller {
         }
     }
 
-    
+    /**
+     * 
+     * @Route("/prestataire/update/{id}", name="prestataire_update")
+     */
+    public function updateAction(Request $request, $id = null) {
+
+        $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:Utilisateur')->findOneById($id);
+
+        $form = $this->createForm(UtilisateurType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $user->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash('success', 'update effectué avec succès');
+
+
+            return $this->redirectToRoute('accueil');
+        }
+
+        return $this->render('public/prestataires/update.html.twig', [
+                    'userForm' => $form->createView()]);
+    }
+
 }

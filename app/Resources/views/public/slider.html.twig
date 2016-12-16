@@ -11,7 +11,9 @@
                 <ul>
                     <li class="hidden-xs test">
                         <div class="special register">
+                            {% if app.user == null %}
                             <a href='{{path('new_internaute')}}'>Sign Up Now</a>
+                            {% endif %}
                         </div><!-- /.special-->
                     </li>
                     

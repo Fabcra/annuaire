@@ -22,7 +22,6 @@ class DefaultController extends Controller
         
         
         
-        
         return $this->render('public/vignettes.html.twig',['utilisateur'=>$utilisateurs,'categorie'=>$categorie]);
     }   
     

@@ -64,4 +64,8 @@
 
 
 
+.form-group .checkbox input[type=checkbox]{
 
+    display:inline-block !important;
+
+}

@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class UtilisateurType extends AbstractType
 {
@@ -25,7 +26,10 @@ class UtilisateurType extends AbstractType
                 ->add('numtel')
                 ->add('numtva')
                 ->add('site')
-                ->add('categories');
+                ->add('images')
+                ->add('categories')
+                ->add('newsletter');
+                
         
     }
     
