@@ -1,18 +1,18 @@
 {% extends "layout/layout.html.twig" %}
 
 {% block content %} 
-<div class="cards-simple-wrapper largeur centrage" >
-
-    
+    <div class="cards-simple-wrapper largeur centrage" >
 
 
-{% for u in categorie.utilisateurs %}
 
+
+        {% for u in categorie.utilisateurs %}
+            {% if u.typeuser == "prestataire" %}    
                 <div class="col-sm-6 col-md-3">
-                    <div class="card-simple" data-background-image={% for c in u.images%}{{asset(c.url)}}{%endfor%} >
+                    <div class="card-simple" data-background-image=# >
                         <div class="card-simple-background">
                             <div class="card-simple-content">
-                                <h2><a href="{{path('show_prestataire', {slug:u.username})}}">{{u.username}} {{ u.typeUser}}</a></h2>
+                                <h2><a href="{{path('show_prestataire', {slug:u.username})}}">{{u.username}}</a></h2>
                                 <div class="card-simple-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -27,11 +27,13 @@
                                 </div><!-- /.card-simple-actions -->
                             </div><!-- /.card-simple-content -->
                             <div class="card-simple-label">{{u.localite}}</div>
-                            
+
 
                         </div><!-- /.card-simple-background -->
                     </div><!-- /.card-simple -->
                 </div><!-- /.col-* -->
-               {%endfor%} 
+
+            {% endif %}
+        {%endfor%} 
     </div><!-- /.cards-simple-wrapper -->
-    {% endblock %}
+{% endblock %}

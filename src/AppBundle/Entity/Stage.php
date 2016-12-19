@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Stage
@@ -52,16 +53,16 @@ class Stage {
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="debut", type="datetime")
+     * @ORM\Column(name="debute", type="datetime")
      */
-    private $debut;
+    private $hdebut;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="fin", type="datetime")
      */
-    private $fin;
+    private $hfin;
 
     /**
      * @var \DateTime
@@ -84,6 +85,12 @@ class Stage {
      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="stages")
      */
     private $utilisateur;
+    
+    /**
+     * @Gedmo\Slug(fields={"nom"})
+     * @ORM\column(length=128, nullable=true)
+     */
+    private $slug;
     
     
     /**
@@ -183,31 +190,7 @@ class Stage {
         return $this->infoCompl;
     }
 
-    /**
-     * Set debut
-     *
-     * @param \DateTime $debut
-     *
-     * @return Stage
-     */
-    public function setDebut($debut) {
-        $this->debut = $debut;
-
-        return $this;
-    }
-
-    /**
-     * Get debut
-     *
-     * @return \DateTime
-     */
-    public function getDebut() {
-
-        $debut = new \DateTime($this->debut);
-
-        return $debut;
-    }
-
+    
     /**
      * Set fin
      *
@@ -288,4 +271,79 @@ class Stage {
                    
     }
 
+
+    
+    /**
+     * Set hdebut
+     *
+     * @param \DateTime $hdebut
+     *
+     * @return Stage
+     */
+    public function setHdebut($hdebut)
+    {
+        $this->hdebut = $hdebut;
+
+        return $this;
+    }
+
+    /**
+     * Get hdebut
+     *
+     * @return \DateTime
+     */
+    public function getHdebut()
+    {
+        return $this->hdebut;
+    }
+
+    /**
+     * Set hfin
+     *
+     * @param \DateTime $hfin
+     *
+     * @return Stage
+     */
+    public function setHfin($hfin)
+    {
+        $this->hfin = $hfin;
+
+        return $this;
+    }
+
+    /**
+     * Get hfin
+     *
+     * @return \DateTime
+     */
+    public function getHfin()
+    {
+        return $this->hfin;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Stage
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+    
+    
 }

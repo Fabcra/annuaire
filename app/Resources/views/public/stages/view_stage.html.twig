@@ -1,0 +1,29 @@
+{% extends "layout/layout.html.twig" %}
+
+{% block content %}
+
+    <div class="cards-simple-wrapper largeur centrage">
+          <div class="page-title">
+              <h1>{{stage.nom}}</h1>
+              
+              <div class="post-content">
+                  
+                  <p>{{stage.description}}</p>
+                  <p>{{stage.tarif}}</p>
+                  <p>{{stage.infoCompl}}</p>
+                  <p>{{stage.hdebut|date('d-m-Y')}}</p>
+                  <p>{{stage.hfin|date('d-m-Y')}}</p>
+                  
+                  
+              </div>
+                  
+          </div><!-- /.page-title -->
+
+
+       
+        
+    </div>
+
+
+    {% endblock %}
+

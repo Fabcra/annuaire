@@ -4,8 +4,8 @@ AppBundle\Entity\Stage:
         description : <sentence()>
         tarif : <numberBetween($min=100, $max=200)> euros
         infoCompl : <sentence()>
-        debut : <dateTimeThisYear($min = 'now')>
-        fin : <dateTimeThisYear($min = 'now')>
+        hdebut : <dateTimeThisYear($min = 'now')>
+        hfin : <dateTimeThisYear($min = 'now')>
         affichageDe : <dateTimeThisYear($min = 'now')>
         affichageJusque : <dateTimeThisYear($min = 'now')>
                               

@@ -200,7 +200,6 @@ class PrestataireController extends Controller {
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $user->getData();
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);

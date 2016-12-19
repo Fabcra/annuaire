@@ -1,0 +1,34 @@
+{% extends "layout/layout.html.twig" %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+            <div class="page-title">
+                <h1>Enregistrement d'un stage</h1>
+            </div>
+
+            {{form_start(stageForm)}}
+
+
+
+            <div class="form-group">
+                {{form_row(stageForm.nom)}}
+            </div><!-- /.form-group -->
+            <div class="form-group">
+                {{form_row(stageForm.description)}}
+            </div><!-- /.form-group -->
+            
+            
+            
+            {{ form_row(stageForm._token)}}
+
+            <button type="submit" class="btn btn-primary pull-right">Register</button>
+
+            {{form_end(stageForm)}}
+            {#        </form>#}
+        </div><!-- /.col-sm-4 -->
+    </div><!-- /.row -->
+
+
+{% endblock %}
