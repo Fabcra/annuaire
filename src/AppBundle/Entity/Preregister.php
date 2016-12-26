@@ -5,15 +5,14 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  * preregister
  *
  * @ORM\Table(name="preregister")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\preregisterRepository")
  */
-class Preregister
-{
+class Preregister {
+
     /**
      * @var int
      *
@@ -32,8 +31,6 @@ class Preregister
      */
     private $nom;
 
-  
-
     /**
      * @var string
      *
@@ -42,7 +39,6 @@ class Preregister
      */
     private $mail;
 
-    
     /**
      *
      * @var string
@@ -50,18 +46,20 @@ class Preregister
      * @ORM\Column(name="token", type="string", length=255)
      */
     private $token;
-    
-    
-    
-    
-    
+
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="typeUser", type="string", length=255)
+     */
+    private $typeUser;
+
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -72,8 +70,7 @@ class Preregister
      *
      * @return preregister
      */
-    public function setNom($nom)
-    {
+    public function setNom($nom) {
         $this->nom = $nom;
 
         return $this;
@@ -84,12 +81,9 @@ class Preregister
      *
      * @return string
      */
-    public function getNom()
-    {
+    public function getNom() {
         return $this->nom;
     }
-
-   
 
     /**
      * Set mail
@@ -98,8 +92,7 @@ class Preregister
      *
      * @return preregister
      */
-    public function setMail($mail)
-    {
+    public function setMail($mail) {
         $this->mail = $mail;
 
         return $this;
@@ -110,20 +103,27 @@ class Preregister
      *
      * @return string
      */
-    public function getMail()
-    {
+    public function getMail() {
         return $this->mail;
     }
-    
-    
+
     function getToken() {
         return $this->token;
     }
 
     function setToken() {
-        
+
         $this->token = sha1(uniqid(mt_rand(), true));
     }
+    
+    function getTypeUser() {
+        return $this->typeUser;
+    }
+
+    function setTypeUser($typeUser) {
+        $this->typeUser = $typeUser;
+    }
+
 
 
 }
