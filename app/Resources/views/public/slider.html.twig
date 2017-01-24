@@ -1,4 +1,4 @@
-<div style="background-image: url({{asset('assets/img/tmp/slider-large-3.jpg')}})">
+<div style="background-color: #393939" class="padding">
 
     <div class="centrage largeur">
 
@@ -8,11 +8,11 @@
 
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
-                <ul>
-                    <li class="hidden-xs test">
+                <ul class="liststylenone">
+                    <li class="hidden-xs">
                         <div class="special register">
                             {% if app.user == null %}
-                            <a href='{{path('new_record')}}'>Sign Up Now</a>
+                            <a href='{{path('new_record',{'typeuser':'internaute'})}}'>S'enregistrer</a>
                             {% endif %}
                         </div><!-- /.special-->
                     </li>
@@ -37,20 +37,13 @@
                             <div class="hero-slider-content">
                                 <h1>Buvez de l'eau</h1>
 
-                                <div class="hero-slider-rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div><!-- /.card-simple-rating -->
                             </div><!-- /.hero-slider-content -->
 
-                            <div class="hero-slider-actions">
+                          {#  <div class="hero-slider-actions">
                                 <a href="#"><i class="fa fa-heart-o"></i></a>
                                 <a href="listing-detail.html"><i class="fa fa-search"></i></a>
                                 <a href="#"><i class="fa fa-bookmark-o"></i></a>
-                            </div><!-- /.hero-slider-actions -->
+                            </div><!-- /.hero-slider-actions -->#}
                         </div><!-- /.carousel-caption -->
                     </div><!-- /.item -->
 
@@ -114,14 +107,7 @@
                     <i class="fa fa-long-arrow-right"></i>
                 </a>
             </div>
-        </div><!-- /.hero-slider -->
-        {#<div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for event, hotel, restaurant, job ... ">
-            <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">Search</button>
-            </span>
-        </div><!-- /.input-group -->#}
-
+        </div>
 
     </div>
 </div>

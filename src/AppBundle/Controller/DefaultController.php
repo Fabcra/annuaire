@@ -1,5 +1,7 @@
 <?php
 
+// AFFICHAGE DE L'ECRAN D'ACCUEIL
+
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Categorie;
@@ -8,7 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
-{
+{   
+    
+    //liste des vignettes de 8 prestataires de service
     /**
      * @Route("/", name="accueil")
      */

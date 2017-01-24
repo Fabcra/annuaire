@@ -1,7 +1,12 @@
 .centrage{
     margin : 0 auto;
-    padding-bottom: 0;
+    padding-bottom: 20px;
 
+}
+
+.liststylenone{
+    
+    list-style-type: none;
 }
 
 .largeur{
@@ -28,6 +33,12 @@
 
 }
 
+.padding{
+   
+    padding-top : 15px;
+   
+}
+
 .register{
     top : 220px;
     right : 400px;
@@ -42,9 +53,7 @@
     bottom : 120px;
 }
 
-.test{
-    margin-top : 0;
-}
+
 
 .search{
     /*border: 1px solid #fff;*/
@@ -68,4 +77,8 @@
 
     display:inline-block !important;
 
+}
+
+.bottom{
+    margin-bottom : 15px;
 }

@@ -62,7 +62,7 @@ class Categorie {
      * @var string
      *
      * @ORM\Column(name="image", type="string")
-     * @ORM\OnetoOne(targetEntity="AppBundle\Entity\Image")
+     * @ORM\OnetoOne(targetEntity="AppBundle\Entity\Image", inversedBy="categorie");
      */
     private $image;
     

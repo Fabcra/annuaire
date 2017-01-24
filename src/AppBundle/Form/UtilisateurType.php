@@ -5,14 +5,15 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
-class UtilisateurType extends AbstractType
-{
+class UtilisateurType extends AbstractType {
+
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('username')
                 ->add('email')
@@ -25,30 +26,29 @@ class UtilisateurType extends AbstractType
                 ->add('numtel')
                 ->add('numtva')
                 ->add('site')
-                ->add('images')
                 ->add('categories')
-                ->add('newsletter');
+                ->add('typeuser')
+                ->add('newsletter')
+                ->add('logo', ImageType::class)
                 
-        
+        ;
     }
-    
+
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
-    {
+    public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Utilisateur'
+            
         ));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
-    {
+    public function getBlockPrefix() {
         return 'appbundle_utilisateur';
     }
-
 
 }

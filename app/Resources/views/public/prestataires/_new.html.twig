@@ -6,10 +6,7 @@
             <div class="page-title">
                 <h1>Register</h1>
             </div>
-
             {{form_start(userForm)}}
-            
-            
 
             <div class="form-group">
                 {{form_row(userForm.username)}}
@@ -48,6 +45,7 @@
             </div><!-- /.form-group -->
             <div class="form-group">
                 {{form_row(userForm.numtel)}}
+
             </div><!-- /.form-group -->
             <div class="form-group">
                 {{form_row(userForm.numtva)}}
@@ -62,18 +60,18 @@
             <div class="form-group">
                 {{form_row(userForm.images)}}
             </div><!-- /.form-group -->
-            
+
             <div class="form-group">
                 {{form_row(userForm.newsletter)}}
             </div><!-- /.form-group -->
-
 
             {{ form_row(userForm._token)}}
 
             <button type="submit" class="btn btn-primary pull-right">Register</button>
 
             {{form_end(userForm)}}
-            {#        </form>#}
+
+
         </div><!-- /.col-sm-4 -->
     </div><!-- /.row -->
 {% endblock %}

@@ -1,32 +1,222 @@
 {% extends "layout/layout.html.twig" %}
 
 {% block content %}
+    <div class="cards-simple-wrapper centrage" style="background-color: #FFF">
+        <div class="main-inner">
+            <div class="content">
+                <div class="mt-80 mb80">
+                    <div class="detail-banner" style="background-image: url(assets/img/tmp/detail-banner-1.jpg);">
+                        <div class="container">
+                            <div class="detail-banner-left">
+                                <div class="detail-banner-info">
+                                    {% for u in presta.categories %} <div class="detail-label"><a href="{{path('liste_prestataires_categorie', {'slug':u.nomCategorie})}}">{{ u.nomCategorie }}</a></div>{% endfor %}
+                                    <div class="detail-verified">Verified</div>
+                                </div><!-- /.detail-banner-info -->
 
-    <div class="cards-simple-wrapper largeur centrage">
-        <div class="page-title">
-            <h1>{{presta.username}}</h1>
-        </div><!-- /.page-title -->
+                                <h2 class="detail-title">
+                                    {{presta.username}}
+                                </h2>
 
-        <div class="posts post-detail">
+                                <div class="detail-banner-address">
+                                    <i class="fa fa-map-o"></i> {{presta.adressenum}}, {{presta.adresse}} {{presta.codepostal}} {{presta.localite}} {{presta.commune}}
+                                </div><!-- /.detail-banner-address -->
+
+                                <div class="detail-banner-rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-half-o"></i>
+                                </div><!-- /.detail-banner-rating -->
+
+                                <div class="detail-banner-btn bookmark">
+                                    <i class="fa fa-bookmark-o"></i> <span data-toggle="Bookmarked">Bookmark</span>
+                                </div><!-- /.detail-claim -->
+
+                                <div class="detail-banner-btn heart">
+                                    <i class="fa fa-heart-o"></i> <span data-toggle="I Love It">Give Heart</span>
+                                </div><!-- /.detail-claim -->
+
+                            </div><!-- /.detail-banner-left -->
+                        </div><!-- /.container -->
+                    </div><!-- /.detail-banner -->
+
+                </div>
+
+                <div class="container">
+                    <div class="row detail-content">
+                        <div class="col-sm-7">
+                            <div class="detail-gallery">
+                                <div class="detail-gallery-preview">
+                                    <a href="#">
+                                        <img src="{{asset("assets/img/tmp/gallery-1.jpg")}}">
+                                    </a>
+                                </div>
+
+                                <ul class="detail-gallery-index">
+                                    <li class="detail-gallery-list-item active">
+                                        <a data-target="assets/img/tmp/gallery-1.jpg">
+                                            <img src="{{asset("assets/img/tmp/gallery-1.jpg")}}" alt="...">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div><!-- /.detail-gallery -->
+                              
+                            {% for s in presta.stages %}
+                                <div class="pricings">
+                                        <div class="col-sm-4">
+                                            <div class="pricing">
+                                                <div class="pricing-title"> {{ 'Stages' }}</div><!-- /.pricing-title -->
+                                                <div class="pricing-title"> {{ s.nom }}</div><!-- /.pricing-title -->
+                                                <div class="pricing-subtitle"> {{ s.description }}</div><!-- /.pricing-subtitle -->
+                                                <div class="pricing-price"><span class="pricing-currency">Eur</span>{{ s.tarif }}</div><!-- /.pricing-price -->
+                                                <a href="{{path('show_stage', {slug:s.nom})}}" class="btn-primary">Get Started</a>
+                                                <hr>
+                                                <ul class="pricing-list">
+                                                    <li><span>Date de début</span><strong> {{ s.hdebut|date('d-m-Y')}}</strong></li>
+                                                    <li><span>Date de fin</span><strong>   {{ s.hfin|date('d-m-Y') }}</strong></li>
+                                                </ul><!-- /.pricing-list -->
+                                                <hr>
+                                                <a href="{{path('list_stages', {slug:s.nom})}}" class="pricing-action">Liste des stages</a>
+                                            </div><!-- /.pricing -->
+                                        </div><!-- /.col-* -->
+                                </div><!-- /.pricings -->
+                            {% endfor %}
+
+                        </div><!-- /.col-sm-7 -->
+
+
+                        <div class="col-sm-5">
+
+
+
+                            <h2>A propos de <span class="text-secondary">{{ presta.username }}</span></h2>
+                            <div class="background-white p20">
+                                <div class="detail-vcard">
+                                    <div class="detail-logo">
+                                        <img src="assets/img/tmp/pragmaticmates-logo.png">
+                                    </div><!-- /.detail-logo -->
+
+                                    <div class="detail-contact">
+                                        <div class="detail-contact-email">
+                                            <i class="fa fa-envelope-o"></i> <a href="mailto:#">{{presta.email}}</a>
+                                        </div>
+                                        <div class="detail-contact-phone">
+                                            <i class="fa fa-mobile-phone"></i> <a href="tel:#">{{presta.numtel}}</a>
+                                        </div>
+                                        <div class="detail-contact-website">
+                                            <i class="fa fa-globe"></i> <a href="#">{{presta.site}}</a>
+                                        </div>
+                                        <div class="detail-contact-address">
+                                            <i class="fa fa-map-o"></i>
+                                            {{presta.adressenum}} {{presta.adresse}}<br>
+                                            {{presta.codepostal}} {{presta.localite}} {{presta.commune}}
+                                        </div>
+                                    </div><!-- /.detail-contact -->
+                                </div><!-- /.detail-vcard -->
+
+                                <div class="detail-follow">
+                                    <h5>Follow Us:</h5>
+                                    <div class="follow-wrapper">
+                                        <a class="follow-btn facebook" href="#"><i class="fa fa-facebook"></i></a>
+                                        <a class="follow-btn youtube" href="#"><i class="fa fa-youtube"></i></a>
+                                        <a class="follow-btn twitter" href="#"><i class="fa fa-twitter"></i></a>
+                                        <a class="follow-btn tripadvisor" href="#"><i class="fa fa-tripadvisor"></i></a>
+                                        <a class="follow-btn google-plus" href="#"><i class="fa fa-google-plus"></i></a>
+                                    </div><!-- /.follow-wrapper -->
+                                </div><!-- /.detail-follow -->
+                            </div>
+
+
+                            <div class="detail-payments">
+                                <h3>Accepted Payments</h3>
+
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-paypal"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-cc-stripe"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+                                </ul>
+                            </div>
+                        </div><!-- /.col-sm-5 -->
 
 
 
 
-            <div class="post-content">
-                <p>{{presta.adresse}} {{presta.adressenum}}</p>
-                <p>{{presta.email}}</p>
-                <p>{{presta.adresse}} {{presta.adressenum}}</p>
-                <p>{{presta.codePostal}} {{presta.localite}}</p>
-                <p>{{presta.commune}}</p>
-               
-                    
-                <h3>Catégories de services</h3>
-                {% for u in presta.categories %}
-                    <p>{{u.nomCategorie}}</p>
-                {% endfor %}
 
-            </div>
-        </div>
-    </div>      
+                        {#    _______ first design#}
 
-{% endblock %}
+                        {# <div class="cards-simple-wrapper centrage" style="background-color: #FFF">
+                             <div class="main-inner">
+                                 <div class="container">
+                                     <div class="content">
+                                         <div class="page-title">
+                                             <h1>{{presta.username}}</h1>
+                                         </div><!-- /.page-title -->
+                     
+                                         <div class="post-content">
+                     
+                     
+                                             <div class="posts post-detail">
+                     #}
+                        {#                            <img src="{{asset('assets/img/tmp/blog-1.jpg')}}" alt={{"A Clockwork Origin"}}>#}
+
+                        {#  <div class="post-meta clearfix">
+
+                              {% for u in presta.categories %} <div class="post-meta-categories"><i class="fa fa-tags"></i> <a href={{path('liste_prestataires_categorie', {'slug':u.nomCategorie})}}>{{u.nomCategorie}}</a></div>{% endfor %}<!-- /.post-meta-categories -->
+                              {#                                <div class="post-meta-comments"><i class="fa fa-comments"></i> <a href="blog-detail.html">3 comments</a></div><!-- /.post-meta-comments -->#}
+                        {#                            </div><!-- /.post-meta -->#}
+
+                        {#                            <div class="post-content">#}
+
+                        {# {% if presta.stages == null %}
+                             <div class="page-header">
+
+
+                                 <h1>Stages</h1>
+                                 <p>Our company offers best pricing options for field agents and companies. If you are interested <br>in special plan don't hesitate and contact our <a href="#">sales support</a>.</p>
+                             </div><!-- /.page-header -->
+                         {% endif %}
+                         {% for s in presta.stages %}
+                             <div class="pricings">
+                                 <div class="row">
+                                     <div class="col-sm-4">
+                                         <div class="pricing">
+                                             <div class="pricing-title"> {{ s.nom }}</div><!-- /.pricing-title -->
+                                             <div class="pricing-subtitle"> {{ s.description }}</div><!-- /.pricing-subtitle -->
+                                             <div class="pricing-price"><span class="pricing-currency">Eur</span>{{ s.tarif }}</div><!-- /.pricing-price -->
+                                             <a href="#" class="btn-primary">Get Started</a>
+                                             <hr>
+                                             <ul class="pricing-list">
+                                                 <li><span>Date de début</span><strong> {{ s.hdebut|date('d-m-Y')}}</strong></li>
+                                                 <li><span>Date de fin</span><strong>   {{ s.hfin|date('d-m-Y') }}</strong></li>
+                                             </ul><!-- /.pricing-list -->
+                                             <hr>
+                                             <a href="#" class="pricing-action">Liste des stages</a>
+                                         </div><!-- /.pricing -->
+                                     </div><!-- /.col-* -->
+                                 </div><!-- /.row -->
+                             </div><!-- /.pricings -->
+                         {% endfor %}#}
+
+
+
+
+
+
+
+
+
+                        {# </div><!-- /.post-content -->
+
+                     </div>
+                 </div>
+
+             </div>
+         </div>
+     </div>
+ </div>
+#}
+
+                    {% endblock %}

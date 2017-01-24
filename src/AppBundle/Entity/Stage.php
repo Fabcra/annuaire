@@ -83,6 +83,9 @@ class Stage {
      * @var type 
      * 
      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="stages")
+     * 
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     * 
      */
     private $utilisateur;
     
@@ -261,13 +264,14 @@ class Stage {
         return $this->utilisateur;
     }
 
-    function setUtilisateur(type $utilisateur) {
+    function setUtilisateur($utilisateur) {
         $this->utilisateur = $utilisateur;
     }
 
     public function __toString() {
 
         return $this->getNom();
+                  
                    
     }
 
@@ -344,6 +348,7 @@ class Stage {
     {
         return $this->slug;
     }
+    
     
     
 }

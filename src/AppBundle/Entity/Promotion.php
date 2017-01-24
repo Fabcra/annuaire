@@ -79,6 +79,8 @@ class Promotion {
     
     /**
      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="promotions")
+     * 
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $utilisateur;
 

@@ -1,5 +1,7 @@
 <?php
 
+//GESTION DES ENREGISTREMENTS PRESTATAIRES ET INTERNAUTES
+
 namespace AppBundle\Controller;
 
 use DateTime;
@@ -14,15 +16,16 @@ use AppBundle\Entity\Utilisateur;
 class RecordController extends Controller {
 
     /**
-     * Inscription des prestataires dans une table temporaire et envoi d'un mail de confirmation
+     * Inscription des utilisateurs dans une table temporaire et envoi d'un mail de confirmation
      * 
-     * @Route("/enregistrement", name="new_record")
+     * @Route("/enregistrement/{typeuser}", name="new_record")
      * 
      */
-    public function preregister(Request $request, $typeuser='prestataire') {
+    public function preregister(Request $request, $typeuser) {
 
         $newuser = new Preregister();
 
+        $newuser->setTypeUser($typeuser);
 
         $form = $this->createForm(PreregisterType::class, $newuser);
 
@@ -41,7 +44,7 @@ class RecordController extends Controller {
             $nom = $newuser->getNom();
             $mail = $newuser->getMail();
             $token = $newuser->getToken();
-            $typeuser=$newuser->getTypeUser();
+            $typeuser = $newuser->getTypeUser();
 
 
 
@@ -71,10 +74,13 @@ class RecordController extends Controller {
      * @Route("/confirmation/{token}/{id}/{typeuser}", name="confirmation")
      * 
      */
-    public function newAction(Request $request, $token = null, $id = null) {
+    public function newAction(Request $request, $token = null, $id = null, $typeuser = null) {
 
         //récupération de l'utilisateur
-        $newuser = $this->getDoctrine()->getManager()->getRepository('AppBundle:Preregister')->findOneById($id);
+        $newuser = $this->getDoctrine()
+                        ->getManager()
+                        ->getRepository('AppBundle:Preregister')
+                        ->findOneById($id);
 
         //vérification token
         if ($token === $newuser->getToken()) {
@@ -84,14 +90,8 @@ class RecordController extends Controller {
             $user->setUsername($nom);
             $mail = $newuser->getMail();
             $user->setEmail($mail);
-            $typeuser = $newuser->getTypeUser();
-            $user->setTypeUser($typeuser);
-//            $user->setTypeUser('prestataire');
-            $user->setInscription(new DateTime('now'));
-            $user->setNbessais(0);
-            $user->setBanni(FALSE);
-            $user->setInscriptionconf(TRUE);
-            $user->setNewsletter(FALSE);
+            $typeuser = $request->get('typeuser');
+
 
             $form = $this->createForm(UtilisateurType::class, $user);
 
@@ -100,29 +100,29 @@ class RecordController extends Controller {
             if ($form->isSubmitted() && $form->isValid()) {
 
 
-//                $file = $user->getImages();
-//                
-//                $fileName = md5(uniqid()).'.'.$file->guessExtension();
-//                
-//                $file->move(
-//                        $this->getParameter('images'),
-//                        $fileName
-//                        );
-//                
-//            $user->setImages($fileName);
-
-
                 $em = $this->getDoctrine()->getManager();
+
+
+                $user->setTypeUser($typeuser);
+                $user->setInscription(new DateTime('now'));
+                $user->setNbessais(0);
+                $user->setBanni(FALSE);
+                $user->setInscriptionconf(TRUE);
+                $user->setNewsletter(FALSE);
                 $em->persist($user);
                 $em->flush();
-
-                $this->addFlash('success', 'Vous êtes à présent enregistré en tant que prestataire de service');
-
+                if ($typeuser === "prestataire") {
+                    $this->addFlash('success', 'Vous êtes à présent enregistré en tant que prestataire de service');
+                } elseif ($typeuser === "internaute") {
+                    $this->addFlash("success", "Vous êtes à présent enregistré en tant qu'internaute");
+                }
                 return $this->redirectToRoute('accueil');
             }
 
-            return $this->render('/public/prestataires/new.html.twig', array(
-                        'userForm' => $form->createView()));
+            return $this->render('/records/new.html.twig', array(
+                        'userForm' => $form->createView(),
+                        'typeuser' => $typeuser
+            ));
         } else {
             return $this->redirectToRoute('new_prestataire', array(
                         "msg_error" => 'Votre inscription est invalidée pignouf !'

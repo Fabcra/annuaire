@@ -1,28 +1,16 @@
 {% extends "layout/layout.html.twig" %}
 
 {% block content %}
-
-<div style="background-color: #fff">
+    <div style="background-color: #fff">
         <div class="main-inner">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-4 col-lg-3">
-                        <div>
-                            <div class="widget">
-                                <div class="user-photo">
-                                    <a href="#">
-                                        <img src="../../../../upload/images/{{app.user.logo.imageName}}" alt="User Photo">
-                                    </a>
-                                </div><!-- /.user-photo -->
-                            </div><!-- /.widget -->
-                        </div><!-- /.sidebar -->
-                    </div><!-- /.col-* -->
-
                     <div class="col-sm-8 col-lg-9">
                         <div class="content">
                             <div class="page-title">
-                                <h1>Modification profil</h1>
+                                <h1>Enregistrement profil</h1>
                             </div><!-- /.page-title -->
+
 
                             <div class="background-white p20 mb30">
                                 <h3 class="page-title">
@@ -33,23 +21,32 @@
                                     <div class="form-group col-sm-6">
                                         {{form_row(userForm.username)}}
                                     </div><!-- /.form-group -->
-                                    
                                     <div class="form-group col-sm-6">
                                         {{form_row(userForm.email)}}
                                     </div><!-- /.form-group -->
-
                                     <div class="form-group col-sm-6">
                                         {{form_row(userForm.numtel)}}
                                     </div><!-- /.form-group -->
+                                    {% if typeuser == 'prestataire'%}
+                                        <div class="form-group col-sm-6">
+                                            {{form_row(userForm.site)}}
+                                        </div><!-- /.form-group -->
+                                        <div class="form-group col-sm-6">
+                                            {{form_row(userForm.numtva)}}
+                                        </div><!-- /.form-group -->
+                                        <div class="form-group col-sm-6">
+                                            {{form_row(userForm.categories)}}
+                                        </div><!-- /.form-group -->
+                                        {% endif %}
+                                        <div class="form-group col-sm-6">
+                                            {{form_row(userForm.logo)}}
+                                        </div><!-- /.form-group -->
+                                       
                                     
-                                    <div class="form-group col-sm-6">
-                                        {{form_row(userForm.logo)}}
-                                    </div><!-- /.form-group -->
-                                    
+
                                     <div class="form-group col-sm-6">
                                         {{form_row(userForm.password)}}
                                     </div><!-- /.form-group -->
-
 
 
                                 </div><!-- /.row -->
@@ -81,13 +78,13 @@
                                     <div class="form-group col-sm-6">
                                         {{form_row(userForm.localite)}}
                                     </div><!-- /.form-group -->
-                                    
+
                                     <div class="form-group col-sm-6">
-                                       <button type="submit" class="btn btn-primary btn-xs pull-right">Register</button>
+                                        <button type="submit" class="btn btn-primary btn-xs pull-right">Register</button>
                                     </div><!-- /.form-group -->
-                                    
-                                     {{ form_row(userForm._token)}}
-                                   {{form_end(userForm,{'render_rest':false})}}
+
+                                    {{ form_row(userForm._token)}}
+                                    {{form_end(userForm,{'render_rest':false})}}
                                 </div><!-- /.row -->
                             </div>
                         </div><!-- /.content -->

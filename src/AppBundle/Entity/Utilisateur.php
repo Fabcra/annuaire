@@ -5,12 +5,15 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Utilisateur
  *
  * @ORM\Table(name="utilisateur")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UtilisateurRepository")
+ * @Vich\Uploadable
  */
 class Utilisateur implements UserInterface, \Serializable {
 
@@ -20,6 +23,7 @@ class Utilisateur implements UserInterface, \Serializable {
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * 
      */
     private $id;
 
@@ -134,7 +138,7 @@ class Utilisateur implements UserInterface, \Serializable {
      * @var string
      *
      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Localite")
-     * @ORM\JoinColumn(onDelete="CASCADE", name="localite", referencedColumnName="id")
+     * @ORM\JoinColumn(name="localite", referencedColumnName="id")
      * 
      */
     private $localite;
@@ -147,6 +151,7 @@ class Utilisateur implements UserInterface, \Serializable {
      */
     private $commune;
 
+   
     /**
      * @var string
      *
@@ -154,6 +159,26 @@ class Utilisateur implements UserInterface, \Serializable {
      * @ORM\JoinColumn(nullable=true) 
      */
     private $images;
+
+    /**
+     *
+     * @var string
+     * 
+     * @ORM\OnetoOne(targetEntity="AppBundle\Entity\Image", cascade={"persist", "remove"})
+     * 
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     * 
+     */
+    private $avatar;
+
+    /**
+     * @var string
+     * 
+     * @ORM\OnetoOne(targetEntity="AppBundle\Entity\Image", cascade={"persist", "remove"})
+     * 
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     */
+    private $logo;
 
     /**
      * @var string
@@ -176,6 +201,7 @@ class Utilisateur implements UserInterface, \Serializable {
      * @var string
      *
      * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Stage", mappedBy="utilisateur")
+     * 
      */
     private $stages;
 
@@ -183,6 +209,8 @@ class Utilisateur implements UserInterface, \Serializable {
      * @var string
      *
      * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Promotion", mappedBy="utilisateur")
+     * 
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $promotions;
 
@@ -190,6 +218,8 @@ class Utilisateur implements UserInterface, \Serializable {
      * @var int
      *
      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Position", inversedBy="utilisateurs")
+     * 
+     * 
      */
     private $position;
 
@@ -210,13 +240,13 @@ class Utilisateur implements UserInterface, \Serializable {
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
-
+    
+     
     /**
      * Constructor
      */
     public function __construct() {
         $this->categorie = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
         $this->stages = new \Doctrine\Common\Collections\ArrayCollection();
         $this->promotions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->abus = new \Doctrine\Common\Collections\ArrayCollection();
@@ -233,8 +263,7 @@ class Utilisateur implements UserInterface, \Serializable {
     public function getId() {
         return $this->id;
     }
-    
-    
+
     /**
      * Set Username
      *
@@ -249,7 +278,7 @@ class Utilisateur implements UserInterface, \Serializable {
     }
 
 //   SECURITY
-    
+
     /**
      * Get Username
      *
@@ -258,8 +287,8 @@ class Utilisateur implements UserInterface, \Serializable {
     public function getUsername() {
         return $this->username;
     }
-    
-        public function getRoles() {
+
+    public function getRoles() {
         return array('ROLE_USER');
     }
 
@@ -289,7 +318,6 @@ class Utilisateur implements UserInterface, \Serializable {
     }
 
 //    ENDSECURITY
-    
 
     /**
      * 
@@ -622,28 +650,6 @@ class Utilisateur implements UserInterface, \Serializable {
         return $this->commune;
     }
 
-    /**
-     * Set image
-     *
-     * @param \AppBundle\Entity\Image $image
-     *
-     * @return Utilisateur
-     */
-    public function setImages(array $images = null) {
-        $this->images = $images;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return ArrayCollection
-     */
-    public function getImages() {
-        return $this->images;
-    }
-
     public function getFirstImage() {
         if (isset($this->images[0])) {
             return $this->images[0];
@@ -671,28 +677,6 @@ class Utilisateur implements UserInterface, \Serializable {
      */
     public function getPromotion() {
         return $this->promotions;
-    }
-
-    /**
-     * Add image
-     *
-     * @param \AppBundle\Entity\Images $image
-     *
-     * @return Utilisateur
-     */
-    public function addImage(\AppBundle\Entity\Image $image) {
-        $this->images[] = $image;
-
-        return $this;
-    }
-
-    /**
-     * Remove image
-     *
-     * @param \AppBundle\Entity\Images $image
-     */
-    public function removeImage(\AppBundle\Entity\Image $image) {
-        $this->images->removeElement($image);
     }
 
     /**
@@ -885,8 +869,6 @@ class Utilisateur implements UserInterface, \Serializable {
         return $this->commentaires;
     }
 
-
-
     public function getSlug() {
         return $this->slug;
     }
@@ -925,4 +907,80 @@ class Utilisateur implements UserInterface, \Serializable {
         return $this->isActive;
     }
 
+    /**
+     * Set avatar
+     *
+     * @param \AppBundle\Entity\Image $avatar
+     *
+     * @return Utilisateur
+     */
+    public function setAvatar(\AppBundle\Entity\Image $avatar = null) {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * Get avatar
+     *
+     * @return \AppBundle\Entity\Image
+     */
+    public function getAvatar() {
+        return $this->avatar;
+    }
+
+    /**
+     * Add image
+     *
+     * @param \AppBundle\Entity\Image $image
+     *
+     * @return Utilisateur
+     */
+    public function addImage(\AppBundle\Entity\Image $image) {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \AppBundle\Entity\Image $image
+     */
+    public function removeImage(\AppBundle\Entity\Image $image) {
+        $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages() {
+        return $this->images;
+    }
+
+    /**
+     * Set logo
+     *
+     * @param \AppBundle\Entity\Image $logo
+     *
+     * @return Utilisateur
+     */
+    public function setLogo(\AppBundle\Entity\Image $logo = null) {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * Get logo
+     *
+     * @return \AppBundle\Entity\Image
+     */
+    public function getLogo() {
+        return $this->logo;
+    }
+
+     
 }

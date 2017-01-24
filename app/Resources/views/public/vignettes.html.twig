@@ -2,22 +2,23 @@
 
 {% block content %}
     {% include 'public/slider.html.twig' %}
-    
-    <div class="page-header">
-        <h1>Les meilleurs centres de bien-être</h1>
-        <p>Retrouver ici la liste des centres de bien-être sélectionnés <br>par les clients et classés par localité.</p>
-    </div><!-- /.page-header -->
+    <div class="header header-transparent" style="background-color: #8C8989">
+        <div class="page-header">
+            <h1>Les meilleurs centres de bien-être</h1>
+            <p>Retrouver ici la liste des centres de bien-être sélectionnés <br>par les clients et classés par localité.</p>
+        </div><!-- /.page-header -->
 
-    <div class="cards-simple-wrapper largeur centrage" >
+        <div class="largeur centrage">
 
+            {% dump(utilisateur) %}
 
-        
             {% for u in utilisateur|slice(0,8) %}
+                
                 <div class="col-sm-6 col-md-3">
-                    <div class="card-simple" data-background-image= >
+                    <div class="card-simple" data-background-image="{{u.logo}}" >
                         <div class="card-simple-background">
                             <div class="card-simple-content">
-                                <h2><a href="{{path('show_prestataire', {slug:u.username})}}">{{u.username}}</a></h2>
+                                <h2><a href="{{path('show_prestataire', {slug:u.username})}}"> {{u.username}}</a></h2>
                                 <div class="card-simple-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -37,5 +38,6 @@
                     </div><!-- /.card-simple -->
                 </div><!-- /.col-* -->
             {% endfor %}
-    </div><!-- /.cards-simple-wrapper -->
+        </div><!-- /.cards-simple-wrapper -->
+    </div>
 {% endblock %}

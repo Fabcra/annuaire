@@ -16,8 +16,7 @@ class PreregisterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('nom', TextType::class, array('required'=>false))
-                ->add('mail', TextType::class, array('required'=>false))
-                ->add('typeuser', TextType::class, array('required'=>false));
+                ->add('mail', TextType::class, array('required'=>false));
     }
     
     /**

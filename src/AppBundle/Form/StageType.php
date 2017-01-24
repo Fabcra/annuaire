@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,12 +18,35 @@ class StageType extends AbstractType {
                 ->add('description')
                 ->add('tarif')
                 ->add('infoCompl')
-                ->add('hdebut')
-                ->add('hfin')
-                ->add('affichageDe')
-                ->add('affichageJusque')
-                ->add('slug')
-                ->add('utilisateur');
+                ->add('hdebut', DateType::class, [
+                    'widget'=>'single_text',
+                    'attr'=>[
+                        'class'=>'js-datepicker',
+                    ],
+                    'html5'=>false,
+                ])
+                ->add('hfin', DateType::class, [
+                    'widget'=>'single_text',
+                    'attr'=>[
+                        'class'=>'js-datepicker'
+                    ],
+                    'html5'=>false,
+                ])
+                
+                ->add('affichageDe', DateType::class, [
+                    'widget'=>'single_text',
+                    'attr'=>[
+                        'class'=>'js-datepicker'
+                    ],
+                    'html5'=>false,
+                ])
+                ->add('affichageJusque', DateType::class, [
+                    'widget'=>'single_text',
+                    'attr'=>[
+                        'class'=>'js-datepicker'
+                    ],
+                    'html5'=>false,
+                ]);
     }
 
     /**
