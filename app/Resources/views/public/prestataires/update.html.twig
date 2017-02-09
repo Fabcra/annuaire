@@ -1,10 +1,10 @@
 {% extends "layout/layout.html.twig" %}
 
 {% block content %}
-    
-  
-{% if app.user.id == id %}
-    <div style="background-color: #fff">
+
+
+    {% if app.user.id == id %}
+        <div style="background-color: #fff">
         <div class="main-inner">
             <div class="container">
                 <div class="row">
@@ -13,7 +13,7 @@
                             <div class="widget">
                                 <div class="user-photo">
                                     <a href="#">
-                                        <img src="../../../../upload/images/{{app.user.logo.imageName}}" alt="User Photo">
+                                        <img src="{{app.user.logo.url}}" alt="User Photo">
                                     </a>
                                 </div><!-- /.user-photo -->
                             </div><!-- /.widget -->
@@ -57,10 +57,6 @@
                                     <div class="form-group col-sm-6">
                                         {{form_row(userForm.password)}}
                                     </div><!-- /.form-group -->
-                                    
-
-
-
                                 </div><!-- /.row -->
                             </div>
                             <div class="background-white p20 mb30">
@@ -104,7 +100,7 @@
                 </div><!-- /.row -->
             </div><!-- /.container -->
         </div><!-- /.main-inner -->
-    </div><!-- /.main -->
+</div><!-- /.main -->
     {% endif %}
 {% endblock %}
 

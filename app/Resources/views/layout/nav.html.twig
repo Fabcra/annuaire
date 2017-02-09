@@ -28,6 +28,7 @@
 
                                             {% if app.user.typeuser == "prestataire" %}
                                                 <li><a href="{{ path('prestataire_update', {'id': app.user.id}) }}">Update</a></li>
+                                                <li><a href="{{ path('galerie_ajout', {'id': app.user.id}) }}">Galerie</a></li>
                                                 {% endif %}
 
                                             <li><a href="{{ path('logout')}}">logout</a></li>
@@ -35,7 +36,7 @@
                                     {% endif %}
 
                                     {% if app.user == null %}
-                                    <li><label for="login-form-email">E-mail</label></li>
+                                    <li><label for="login-form-email">Login</label></li>
                                     <li><input type="" name="_username" id="login-form-email" class="log"></li>
 
                                     <li><label for="login-form-password">Password</label></li>
@@ -82,9 +83,7 @@
 
                             <li >
                                 <a href="#">Contact <i class="fa fa-chevron-down"></i></a>
-                                <ul class="sub-menu">
-                                    <li><a href="contact-1.html">Contact v1</a></li>
-                                </ul>
+                                
                             </li>
 
                             <li >

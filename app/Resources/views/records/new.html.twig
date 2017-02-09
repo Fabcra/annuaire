@@ -27,6 +27,14 @@
                                     <div class="form-group col-sm-6">
                                         {{form_row(userForm.numtel)}}
                                     </div><!-- /.form-group -->
+                                    
+                                    
+                                    {% if typeuser =='internaute' %}
+                                    <div class="form-group col-sm-6">
+                                        {{form_row(userForm.avatar)}}
+                                    </div><!-- /.form-group -->
+                                    {% endif %}
+
                                     {% if typeuser == 'prestataire'%}
                                         <div class="form-group col-sm-6">
                                             {{form_row(userForm.site)}}
@@ -37,12 +45,12 @@
                                         <div class="form-group col-sm-6">
                                             {{form_row(userForm.categories)}}
                                         </div><!-- /.form-group -->
-                                        {% endif %}
+
                                         <div class="form-group col-sm-6">
                                             {{form_row(userForm.logo)}}
                                         </div><!-- /.form-group -->
-                                       
-                                    
+                                    {% endif %}
+
 
                                     <div class="form-group col-sm-6">
                                         {{form_row(userForm.password)}}

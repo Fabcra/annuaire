@@ -1,0 +1,31 @@
+{% extends "layout/layout.html.twig" %}
+
+{% block content %}
+{% if app.user.id == id %}
+    <div style="background-color: #fff">
+        <div class="main-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-lg-9">
+                        <div class="content">
+                            <div class="page-title">
+                                <h1>Galerie</h1>
+                            </div><!-- /.page-title -->
+
+                            <div class="background-white p20 mb30">
+                                <h3 class="page-title">
+                                   Ajout d'images
+                                </h3>
+                                {{ form(userForm)}}
+                                </div><!-- /.row -->
+                            </div>
+                        </div><!-- /.content -->
+                    </div><!-- /.col-* -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </div><!-- /.main-inner -->
+    </div><!-- /.main -->
+  {% endif %}
+    
+  {% endblock %}
+

@@ -11,6 +11,7 @@ class AppFixtures extends AbstractLoader {
      */
     public function getFixtures() {
         return [
+            
             __DIR__ . '/Codepostal.yml',
             __DIR__ . '/Localite.yml',
             __DIR__ . '/Commune.yml',
@@ -43,5 +44,7 @@ class AppFixtures extends AbstractLoader {
         );
         return $categories[array_rand($categories)];
     }
+    
+   
 
 }

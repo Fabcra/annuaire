@@ -12,7 +12,7 @@ class StageController extends Controller {
 
     /**
      * 
-     * @Route("/prestataires/liste_stages", name="list_stages")
+     * @Route("/stages/liste", name="list_stages")
      *  
      */
     public function listAction() {
@@ -26,7 +26,7 @@ class StageController extends Controller {
 
     /**
      * 
-     * @Route("/prestataires/stage/{slug}", name="show_stage")
+     * @Route("/stage/{slug}", name="show_stage")
      */
     public function showAction($slug) {
 
@@ -70,6 +70,19 @@ class StageController extends Controller {
         }
         return $this->render('public/stages/new.html.twig', [
                     'stageForm' => $form->createView()]);
+    }
+    
+    
+    /**
+     * 
+     * @Route("/liste_stages/{slug}", name="list_stages_presta")
+     */
+    public function liststages($slug) {
+        
+        $doctrine = $this->getDoctrine();
+        $repo = $doctrine->getRepository('AppBundle:Utilisateur');
+        $presta = $repo->findBySlug(['slug'=>$slug]);
+        return $this->render('public/stages/list_by_presta.html.twig', ['stage'=>$presta[0]]);
     }
 
     /**

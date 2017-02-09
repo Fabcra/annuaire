@@ -21,4 +21,3 @@ AppBundle\Entity\Utilisateur:
         categories : '<numberBetween(1,5)>x @categorie-*'
         logo (unique) : '@img-*'
         avatar (unique) : '@img-*'
-        images : '<numberBetween(1,5)>x @img-*'

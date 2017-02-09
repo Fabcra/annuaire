@@ -1,15 +1,13 @@
 <?php
 
-
-
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ImageType extends AbstractType {
-
+class GalerieType extends AbstractType {
+    
     /**
      * {@inheritdoc}
      */
@@ -26,4 +24,7 @@ class ImageType extends AbstractType {
           
         ));
     }
-}   
+    
+    
+}
+

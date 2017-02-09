@@ -5,8 +5,6 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vich\UploaderBundle\Form\Type\VichImageType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class UtilisateurType extends AbstractType {
 
@@ -29,11 +27,14 @@ class UtilisateurType extends AbstractType {
                 ->add('categories')
                 ->add('typeuser')
                 ->add('newsletter')
-                ->add('logo', ImageType::class)
                 
+                ->add('logo', ImageType::class)
+                ->add('avatar', ImageType::class)
+               
         ;
     }
-
+  
+ 
     /**
      * {@inheritdoc}
      */

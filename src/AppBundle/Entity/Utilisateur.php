@@ -5,15 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Utilisateur
  *
  * @ORM\Table(name="utilisateur")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UtilisateurRepository")
- * @Vich\Uploadable
  */
 class Utilisateur implements UserInterface, \Serializable {
 
@@ -30,7 +27,7 @@ class Utilisateur implements UserInterface, \Serializable {
     /**
      * @var string
      * 
-     * @ORM\Column(name="username", type="string", length=255)
+     * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
     private $username;
 
@@ -155,10 +152,11 @@ class Utilisateur implements UserInterface, \Serializable {
     /**
      * @var string
      *
-     * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Image", mappedBy="utilisateur")
+     * @ORM\OnetoMany(targetEntity="Image", mappedBy="utilisateur", cascade={"persist"})
+     * 
      * @ORM\JoinColumn(nullable=true) 
      */
-    private $images;
+    private $imagesgalerie;
 
     /**
      *
@@ -253,6 +251,7 @@ class Utilisateur implements UserInterface, \Serializable {
         $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
         $this->isActive = true;
         $this->inscription = new \DateTime();
+        $this->imagesgalerie = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -929,37 +928,7 @@ class Utilisateur implements UserInterface, \Serializable {
         return $this->avatar;
     }
 
-    /**
-     * Add image
-     *
-     * @param \AppBundle\Entity\Image $image
-     *
-     * @return Utilisateur
-     */
-    public function addImage(\AppBundle\Entity\Image $image) {
-        $this->images[] = $image;
-
-        return $this;
-    }
-
-    /**
-     * Remove image
-     *
-     * @param \AppBundle\Entity\Image $image
-     */
-    public function removeImage(\AppBundle\Entity\Image $image) {
-        $this->images->removeElement($image);
-    }
-
-    /**
-     * Get images
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getImages() {
-        return $this->images;
-    }
-
+    
     /**
      * Set logo
      *
@@ -982,5 +951,44 @@ class Utilisateur implements UserInterface, \Serializable {
         return $this->logo;
     }
 
-     
+   
+
+    /**
+     * Add imagesgalerie
+     *
+     * @param \AppBundle\Entity\Image $imagesgalerie
+     *
+     * @return Utilisateur
+     */
+    public function addImagesgalerie(\AppBundle\Entity\Image $imagesgalerie)
+    {
+        $this->imagesgalerie[] = $imagesgalerie;
+
+        return $this;
+    }
+
+    /**
+     * Remove imagesgalerie
+     *
+     * @param \AppBundle\Entity\Image $imagesgalerie
+     */
+    public function removeImagesgalerie(\AppBundle\Entity\Image $imagesgalerie)
+    {
+        $this->imagesgalerie->removeElement($imagesgalerie);
+    }
+
+    /**
+     * Get imagesgalerie
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImagesgalerie()
+    {
+        return $this->imagesgalerie;
+        
+    }
+    
+   
+    
+    
 }

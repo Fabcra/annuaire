@@ -99,10 +99,18 @@ class RecordController extends Controller {
 
             if ($form->isSubmitted() && $form->isValid()) {
 
-
+               
+                
                 $em = $this->getDoctrine()->getManager();
-
-
+                
+                if ($typeuser === "prestataire"){
+                    $user->setAvatar(NULL);
+                }
+                if ($typeuser === "internaute"){
+                    $user->setLogo(NULL);
+                }
+                
+                
                 $user->setTypeUser($typeuser);
                 $user->setInscription(new DateTime('now'));
                 $user->setNbessais(0);

@@ -13,7 +13,7 @@ class InternauteController extends Controller {
    
     /**
      * 
-     * @Route("/update/{id}", name="internaute_update")
+     * @Route("/internaute/update/{id}", name="internaute_update")
      */
     public function updateAction(Request $request, $id = null) {
 

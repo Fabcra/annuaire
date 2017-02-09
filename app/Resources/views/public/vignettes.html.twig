@@ -10,7 +10,6 @@
 
         <div class="largeur centrage">
 
-            {% dump(utilisateur) %}
 
             {% for u in utilisateur|slice(0,8) %}
                 
@@ -19,17 +18,17 @@
                         <div class="card-simple-background">
                             <div class="card-simple-content">
                                 <h2><a href="{{path('show_prestataire', {slug:u.username})}}"> {{u.username}}</a></h2>
-                                <div class="card-simple-rating">
+                                {#<div class="card-simple-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
-                                </div><!-- /.card-rating -->
+                                </div><!-- /.card-rating -->#}
                                 <div class="card-simple-actions">
-                                    <a href="#" class="fa fa-bookmark-o"></a>
-                                    <a href="#" class="fa fa-search"></a>
-                                    <a href="#" class="fa fa-heart-o"></a>
+{#                                    <a href="#" class="fa fa-bookmark-o"></a>#}
+                                    <a href="{{path('show_prestataire', {slug:u.username})}}" class="fa fa-search"></a>
+{#                                    <a href="#" class="fa fa-heart-o"></a>#}
                                 </div><!-- /.card-simple-actions -->
                             </div><!-- /.card-simple-content -->
                             <div class="card-simple-label">{{ u.localite.localite }}</div>

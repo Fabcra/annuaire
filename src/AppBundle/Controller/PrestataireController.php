@@ -9,13 +9,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Form\UtilisateurType;
 use AppBundle\Entity\Utilisateur;
+use AppBundle\Entity\Image;
+use AppBundle\Form\ImageType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class PrestataireController extends Controller {
+    
+    
+    
     //affiche une liste de prestataires de serviceS selon les critères encodés ou sélectionnés 
     //en utilisant un querybuilder dans la fonction search de l'utilisateurRepository
 
     /**
-     * @Route("/recherche", name="recherche_prestataires")
+     * @Route("/rechercher", name="recherche_prestataires")
      */
     public function listAction(Request $request) {
 
@@ -40,7 +46,7 @@ class PrestataireController extends Controller {
 
     /**
      * 
-     * @Route("detail-prestataire/{slug}", name="show_prestataire")
+     * @Route("prestataire/{slug}", name="show_prestataire")
      */
     public function showAction($slug) {
         $doctrine = $this->getDoctrine();
@@ -60,7 +66,7 @@ class PrestataireController extends Controller {
 
     /**
      * 
-     * @Route("/liste/{slug}", name="liste_prestataires_categorie")
+     * @Route("/liste-prestataires/{slug}", name="liste_prestataires_categorie")
      * */
     public function listbycategorie($slug) {
 
@@ -76,22 +82,9 @@ class PrestataireController extends Controller {
 
         return $this->render('public/prestataires/prestataires_by_categorie.html.twig', ['categorie' => $categ[0], 'prestataire' => $utilisateur]);
     }
-
-    //liste des prestataires selon la catégorie de service sélectionnée dans la liste des services
-
-    /**
-     * @Route("services/{slug}", name="show_categorie")
-     */
-    public function secondlistAction($slug) {
-        $doctrine = $this->getDoctrine();
-        $repo = $doctrine->getRepository('AppBundle:Categorie');
-
-
-        $nomCateg = $repo->findOneBy(['slug' => $slug]);
-        $categorie = $repo->findAll();
-
-        return $this->render('public/categories/public_categorie.html.twig', ['cat' => $nomCateg, 'categorie' => $categorie]);
-    }
+    
+    
+    //update de la fiche prestataire
 
     /**
      * 
@@ -101,7 +94,7 @@ class PrestataireController extends Controller {
 
         $id = $request->get('id');
         
-        
+
         $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:Utilisateur')->findOneById($id);
 
         $form = $this->createForm(UtilisateurType::class, $user);
@@ -109,9 +102,8 @@ class PrestataireController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            $user->setTypeUser('prestataire');
 
+            $user->setTypeUser('prestataire');
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -123,26 +115,7 @@ class PrestataireController extends Controller {
         }
 
         return $this->render('public/prestataires/update.html.twig', [
-                    'userForm' => $form->createView(), 'id'=>$id]);
-    }
-
-    /**
-     * 
-     * @Route("/liste_stages/{slug}", name="list_stages_presta")
-     */
-    public function liststages($slug) {
-
-        
-        $doctrine = $this->getDoctrine();
-
-        $repo = $doctrine->getRepository('AppBundle:Utilisateur');
-
-
-        $presta = $repo->findBySlug(['slug'=>$slug]);
-
-
-
-        return $this->render('public/stages/list_by_presta.html.twig', ['stage'=>$presta[0]]);
+                    'userForm' => $form->createView(), 'id' => $id]);
     }
 
 }
