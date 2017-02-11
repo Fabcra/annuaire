@@ -5,11 +5,8 @@
         <div class="main-inner">
             <div class="content">
                 <div class="mt-80 mb80">
-                        {% if presta.imagesgalerie is not empty %}
-                        <div class="detail-banner" style= "background-image: url({{presta.imagesgalerie[0].url}}) " >
-                        {% else %}
-                        <div class="detail-banner" style= "background-image: url(assets/img/tmp/detail-banner-1.jpg) " >
-                        {% endif %}
+                        
+                        <div class="detail-banner" style= "background-image: url({{presta.logo}}) " >
                         
                         <div class="container">
                             <div class="detail-banner-left">
@@ -41,8 +38,8 @@
                                         <a href="{{presta.imagesgalerie[0].url}}">
                                             <img src="{{presta.imagesgalerie[0].url}}">
                                         {% else %}
-                                        <a href="{{asset("assets/img/tmp/gallery-1.jpg")}}">
-                                            <img src="{{asset("assets/img/tmp/gallery-1.jpg")}}">    
+                                        <a href="{{presta.logo}}">
+                                            <img src="{{presta.logo}}">    
                                         {% endif %}
                                     </a>
                                 </div>

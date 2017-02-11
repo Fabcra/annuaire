@@ -1,5 +1,5 @@
 AppBundle\Entity\Image:
     img-{1..50}:
-         url : <imageUrl($width = 640, $height = 480)>
+         url : <imageUrl($width = 1140, $height = 450)>
          ordre : 0
          

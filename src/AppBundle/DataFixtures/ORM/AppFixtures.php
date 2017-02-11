@@ -42,6 +42,7 @@ class AppFixtures extends AbstractLoader {
             'fitness ',
             'spa ',
         );
+        
         return $categories[array_rand($categories)];
     }
     
