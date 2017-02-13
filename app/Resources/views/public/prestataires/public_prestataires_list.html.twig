@@ -1,21 +1,19 @@
 {% extends "layout/layout.html.twig" %}
 {% block content %}
-    <div class="cards-row">
+    <div class="cards-row" >
         {% for a in prestataires %}
-            <div class="card-row">
+            <div class="card-row largeur centrage padding">
                 <div class="card-row-inner">
+                    <div class="card-row-image" data-background-image="{{a.logo}}">
 
-
-                    </div><!-- /.card-row-image -->
+                    </div>
 
                     <div class="card-row-body">
 
                         <h2 class="card-row-title"><a href="{{path('show_prestataire',{'slug':a.username})}}">{{a.username}}</a></h2>
                         <div class="card-row-content">
-{#                            {% for c in a.categories %}#}
-                                <p>{{a.adresse}} {{a.adressenum}}</p>
-                                <p>{{a.codePostal}} {{a.Localite}} {{a.Commune}}</p>
-{#                            {%endfor%}#}
+                            <p>{{a.adresse}} {{a.adressenum}}</p>
+                            <p>{{a.codePostal}} {{a.Localite}} {{a.Commune}}</p>
 
                         </div>
                     </div><!-- /.card-row-body -->
@@ -34,19 +32,21 @@
                             <dd>Location</dd><dt>{{ a.localite }}</dt>
 
 
-                           {# <dd>Rating</dd>
-                            <dt>
-                            <div class="card-row-rating">
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                            </div><!-- /.card-row-rating -->
-                            
-                            </dt>#}
+                            {# <dd>Rating</dd>
+                             <dt>
+                             <div class="card-row-rating">
+                                 <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                             </div><!-- /.card-row-rating -->
+                             
+                             </dt>#}
                         </dl>
                     </div><!-- /.card-row-properties -->
                 </div><!-- /.card-row-inner -->
             </div><!-- /.card-row -->
+            
+        </div>
 
         {% endfor %}
 
-    </div><!-- /.cards-row -->
-{% endblock %}
+
+    {% endblock %}

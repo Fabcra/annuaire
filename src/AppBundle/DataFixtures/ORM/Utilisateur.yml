@@ -1,7 +1,7 @@
 AppBundle\Entity\Utilisateur:
     utilisateur-{1..20}:
         username: <firstName($gender = null|'male'|'female')>
-        password: password
+        password: $2y$12$89USNLEr8zsZLH5dkelHBu3hOiThs0QSayStKpYF2lMj9dEmCzY.q
         email : <email()>
         adresse : <streetName()>
         adressenum : <buildingNumber()>

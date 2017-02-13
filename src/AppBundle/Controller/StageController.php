@@ -23,26 +23,11 @@ class StageController extends Controller {
         $stage = $repo->findAll();
         return $this->render('public/stages/liste_stage.html.twig', ['stage' => $stage]);
     }
-
-    /**
-     * 
-     * @Route("/stage/{slug}", name="show_stage")
-     */
-    public function showAction($slug) {
-
-        $doctrine = $this->getDoctrine();
-        $repo = $doctrine->getRepository('AppBundle:Stage');
-        $repouser = $doctrine->getRepository('AppBundle:Utilisateur');
-
-        $nomStage = $repo->findOneBy(['slug' => $slug]);
-        $prestataire = $repouser->findAll();
-
-        return $this->render('public/stages/view_stage.html.twig', ['stage' => $nomStage, 'prestataire' => $prestataire]);
-    }
-
-    /**
+    
+     /**
      * 
      * Insertion d'un nouveau stage
+     * 
      * @Route("/stage/new", name="new_stage")
      * 
      * 
@@ -50,6 +35,7 @@ class StageController extends Controller {
     public function newAction(Request $request) {
 
         $newstage = new Stage();
+        
         $prestataire = $this->getUser();
 
 
@@ -71,7 +57,23 @@ class StageController extends Controller {
         return $this->render('public/stages/new.html.twig', [
                     'stageForm' => $form->createView()]);
     }
-    
+
+    /**
+     * 
+     * @Route("/stage/{slug}", name="show_stage")
+     */
+    public function showAction($slug) {
+
+        $doctrine = $this->getDoctrine();
+        $repo = $doctrine->getRepository('AppBundle:Stage');
+        $repouser = $doctrine->getRepository('AppBundle:Utilisateur');
+
+        $nomStage = $repo->findOneBy(['slug' => $slug]);
+        $prestataire = $repouser->findAll();
+
+        return $this->render('public/stages/view_stage.html.twig', ['stage' => $nomStage, 'prestataire' => $prestataire]);
+    }
+
     
     /**
      * 

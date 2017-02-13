@@ -7,24 +7,24 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-8 col-lg-9">
-                            <div class="content">
-                                <div class="page-title">
-                                    <h1>{{stage.nom}}</h1>
-                                </div><!-- /.page-title -->
+                            
+                                <div class="content">
+                                    <div class="page-title">
+                                        <h1>{{stage.nom}}</h1>
+                                    </div><!-- /.page-title -->
 
-                                <div class="posts post-detail">
+                                    <div class="posts post-detail">
 
 
-                                    <div class="post-meta clearfix">
-                                        <div class="post-meta-date">{{stage.hdebut|date('d-m-Y')}}</div><!-- /.post-meta-date -->
-                                        <div class="post-meta-categories">{{stage.tarif}} eur</div>
-                                        <div class="post-meta-categories"><a href="{{path('show_prestataire',{'slug':stage.utilisateur.username})}}">{{stage.utilisateur.username}}</a></div>
-                                    </div><!-- /.post-meta -->
+                                        <div class="post-meta clearfix">
+                                            <div class="post-meta-date">{{stage.hdebut|date('d-m-Y')}}</div><!-- /.post-meta-date -->
+                                            <div class="post-meta-categories">{{stage.tarif}} eur</div>
+                                            <div class="post-meta-categories"><a href="{{path('show_prestataire',{'slug':stage.utilisateur.username})}}">{{stage.utilisateur.username}}</a></div>
+                                        </div><!-- /.post-meta -->
 
-                                    <div class="post-content">
-                                        <p class='drop-cap'>{{stage.description}}</p><p>{{stage.infoCompl}}</p>
-                                    </div><!-- /.post-content -->
-
+                                        <div class="post-content">
+                                            <p class='drop-cap'>{{stage.description}}</p><p>{{stage.infoCompl}}</p>
+                                        </div><!-- /.post-content -->
 
 
 

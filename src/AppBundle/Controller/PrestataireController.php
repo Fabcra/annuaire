@@ -14,9 +14,6 @@ use AppBundle\Form\ImageType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class PrestataireController extends Controller {
-    
-    
-    
     //affiche une liste de prestataires de serviceS selon les critères encodés ou sélectionnés 
     //en utilisant un querybuilder dans la fonction search de l'utilisateurRepository
 
@@ -82,8 +79,7 @@ class PrestataireController extends Controller {
 
         return $this->render('public/prestataires/prestataires_by_categorie.html.twig', ['categorie' => $categ[0], 'prestataire' => $utilisateur]);
     }
-    
-    
+
     //update de la fiche prestataire
 
     /**
@@ -93,7 +89,7 @@ class PrestataireController extends Controller {
     public function updateAction(Request $request, $id = null) {
 
         $id = $request->get('id');
-        
+
 
         $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:Utilisateur')->findOneById($id);
 
@@ -102,6 +98,12 @@ class PrestataireController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $plainPassword = $user->getPassword();
+            $encoder = $this->container->get('security.password_encoder');
+            $encoded = $encoder->encodePassword($user, $plainPassword);
+
+            $user->setPassword($encoded);
 
             $user->setTypeUser('prestataire');
             $em = $this->getDoctrine()->getManager();

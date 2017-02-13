@@ -1,5 +1,7 @@
 <?php
+
 // MODIFICATION DU PROFIL INTERNAUTE (PASSWORD INCLU)
+
 namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -10,7 +12,6 @@ use AppBundle\Entity\Utilisateur;
 
 class InternauteController extends Controller {
 
-   
     /**
      * 
      * @Route("/internaute/update/{id}", name="internaute_update")
@@ -24,7 +25,13 @@ class InternauteController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
+            $plainPassword = $user->getPassword();
+            $encoder = $this->container->get('security.password_encoder');
+            $encoded = $encoder->encodePassword($user, $plainPassword);
+
+            $user->setPassword($encoded);
+
             $user->setTypeUser('internaute');
 
             $em = $this->getDoctrine()->getManager();

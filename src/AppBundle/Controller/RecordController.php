@@ -78,9 +78,9 @@ class RecordController extends Controller {
 
         //récupération de l'utilisateur
         $newuser = $this->getDoctrine()
-                        ->getManager()
-                        ->getRepository('AppBundle:Preregister')
-                        ->findOneById($id);
+                ->getManager()
+                ->getRepository('AppBundle:Preregister')
+                ->findOneById($id);
 
         //vérification token
         if ($token === $newuser->getToken()) {
@@ -93,24 +93,30 @@ class RecordController extends Controller {
             $typeuser = $request->get('typeuser');
 
 
+
             $form = $this->createForm(UtilisateurType::class, $user);
 
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
 
-               
-                
+                $plainPassword = $user->getPassword();
+                $encoder = $this->container->get('security.password_encoder');
+                $encoded = $encoder->encodePassword($user, $plainPassword);
+
+                $user->setPassword($encoded);
+
+
                 $em = $this->getDoctrine()->getManager();
-                
-                if ($typeuser === "prestataire"){
+
+                if ($typeuser === "prestataire") {
                     $user->setAvatar(NULL);
                 }
-                if ($typeuser === "internaute"){
+                if ($typeuser === "internaute") {
                     $user->setLogo(NULL);
                 }
-                
-                
+
+
                 $user->setTypeUser($typeuser);
                 $user->setInscription(new DateTime('now'));
                 $user->setNbessais(0);
