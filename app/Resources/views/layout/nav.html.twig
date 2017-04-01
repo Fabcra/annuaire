@@ -65,8 +65,8 @@
                                 <a href="#">Stages<i class="fa fa-chevron-down"></i></a>
 
                                 <ul class="sub-menu">
-                                        {% if app.user != null %} 
-                                            {% if app.user.typeuser =="prestataire" %}
+                                    {% if app.user != null %} 
+                                        {% if app.user.typeuser =="prestataire" %}
                                             <li><a href="{{path('new_stage')}}">Insérer</a></li>
                                             {% endif %}
                                         {% endif %}
@@ -84,7 +84,18 @@
 
 
                             <li >
-                                <a href="#">Contact <i class="fa fa-chevron-down"></i></a>
+                                <a href="#">Promotions <i class="fa fa-chevron-down"></i></a>
+                                <ul class="sub-menu">
+                                    <li><a href="{{path('liste_promotions')}}">Liste</a></li>
+                                    {% if app.user != null %}
+                                        {% if app.user.typeuser == 'prestataire' %}
+                                            <li><a href="{{path('new_promo')}}">Insérer</a></li>
+                                            <li><a href="{{path('list_promo_presta', {'slug':app.user.username})}}">Modification</a></li>
+                                        {% endif %}
+                                    {% endif %}
+
+                                </ul>
+
 
                             </li>
 

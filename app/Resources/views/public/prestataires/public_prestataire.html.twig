@@ -5,9 +5,9 @@
         <div class="main-inner">
             <div class="content">
                 <div class="mt-80 mb80">
-                        
-                        <div class="detail-banner" style= "background-image: url({{presta.logo}}) " >
-                        
+
+                    <div class="detail-banner" style= "background-image: url({{presta.logo}}) " >
+
                         <div class="container">
                             <div class="detail-banner-left">
                                 <div class="detail-banner-info">
@@ -34,14 +34,14 @@
                         <div class="col-sm-7">
                             <div class="detail-gallery">
                                 <div class="detail-gallery-preview">
-                                        {% if presta.imagesgalerie is not empty %}
+                                    {% if presta.imagesgalerie is not empty %}
                                         <a href="{{presta.imagesgalerie[0].url}}">
                                             <img src="{{presta.imagesgalerie[0].url}}">
                                         {% else %}
-                                        <a href="{{presta.logo}}">
-                                            <img src="{{presta.logo}}">    
-                                        {% endif %}
-                                    </a>
+                                            <a href="{{presta.logo}}">
+                                                <img src="{{presta.logo}}">    
+                                            {% endif %}
+                                        </a>
                                 </div>
                                 <ul class="detail-gallery-index">
                                     {%for i in presta.imagesgalerie %}
@@ -53,6 +53,15 @@
                                     {% endfor %}
                                 </ul>
                             </div><!-- /.detail-gallery -->
+
+                            {#                            à adapter avec des données réelles pour que ça fonctionne#}
+
+
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2531!2d5!3d50!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c0f7596a277287%3A0xdc4add0c00726707!2s
+                                    {{presta.adresse}}
+                                    !5e0!3m2!1sfr!2sbe!4v1488573829817" 
+                                    width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+
 
 
                             {% for s in presta.stages %}
@@ -108,21 +117,62 @@
                                     </div><!-- /.detail-contact -->
                                 </div><!-- /.detail-vcard -->
                             </div>
-
-
+                            <div class="fb-share-button" data-href="{{presta.site}}"
+                                 data-layout="button_count" 
+                                 data-size="small" data-mobile-iframe="true"><a 
+                                    class="fb-xfbml-parse-ignore" 
+                                    target="_blank" 
+                                    href="https://www.facebook.com/sharer/sharer.php?u={{presta.site}}%2F&amp;src=sdkpreparse">Partager</a></div>
                             <div class="detail-payments">
                                 <h3>Accepted Payments</h3>
 
                                 <ul>
-                                    <li><a href="#"><i class="fa fa-paypal"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-cc-stripe"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+                                    <li><i class="fa fa-paypal"></i></li>
+                                    <li><i class="fa fa-cc-amex"></i></li>
+                                    <li><i class="fa fa-cc-mastercard"></i></li>
+                                    <li><i class="fa fa-cc-stripe"></i></li>
+                                    <li><i class="fa fa-cc-visa"></i></li>
                                 </ul>
                             </div>
                         </div><!-- /.col-sm-5 -->
+
                     </div>
+
+                    <h3>N'hésitez pas à nous contacter ! </h3>
+
+                    <div class="contact-form-wrapper clearfix background-white p30">
+                        {{form_start(mailForm)}}
+                        <div class="row">
+
+                            <div class="col-sm-4">
+                                <div class="form-group">
+
+                                    {{form_row(mailForm.nom)}}
+                                </div><!-- /.form-group -->
+                            </div><!-- /.col-* -->
+
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="contact-form-subject">Subject</label>
+                                    <input type="text" name="subject" id="contact-form-subject" class="form-control">
+                                </div><!-- /.form-group -->
+                            </div><!-- /.col-* -->
+
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    {{form_row(mailForm.mail)}}
+                                </div><!-- /.form-group -->
+                            </div><!-- /.col-* -->
+                        </div><!-- /.row -->
+
+                        <div class="form-group">
+                            {{form_row(mailForm.message)}}
+                        </div><!-- /.form-group -->
+
+                        <button class="btn btn-primary pull-right">Post Message</button>
+
+                        {{ form_end(mailForm) }}
+                    </div><!-- /.contact-form-wrapper -->
                 </div>
             </div>
         </div>

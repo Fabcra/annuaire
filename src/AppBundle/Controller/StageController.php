@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\StageType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class StageController extends Controller {
 
@@ -23,19 +24,20 @@ class StageController extends Controller {
         $stage = $repo->findAll();
         return $this->render('public/stages/liste_stage.html.twig', ['stage' => $stage]);
     }
-    
-     /**
+
+    /**
      * 
      * Insertion d'un nouveau stage
-     * 
+     * @Security("is_granted('ROLE_USER')")
      * @Route("/stage/new", name="new_stage")
      * 
      * 
      */
     public function newAction(Request $request) {
 
+
         $newstage = new Stage();
-        
+
         $prestataire = $this->getUser();
 
 
@@ -50,9 +52,12 @@ class StageController extends Controller {
             $em->persist($newstage);
             $em->flush();
 
-            $this->addFlash('success', 'Bravo, vous avez inséré un nouveau stage');
+ 
+        $this->addFlash('success', 'Bravo, vous avez inséré un nouveau stage');
 
-            return $this->redirectToRoute('accueil');
+
+        return $this->redirectToRoute('accueil');
+
         }
         return $this->render('public/stages/new.html.twig', [
                     'stageForm' => $form->createView()]);
@@ -74,21 +79,20 @@ class StageController extends Controller {
         return $this->render('public/stages/view_stage.html.twig', ['stage' => $nomStage, 'prestataire' => $prestataire]);
     }
 
-    
     /**
      * 
      * @Route("/liste_stages/{slug}", name="list_stages_presta")
      */
     public function liststages($slug) {
-        
+
         $doctrine = $this->getDoctrine();
         $repo = $doctrine->getRepository('AppBundle:Utilisateur');
-        $presta = $repo->findBySlug(['slug'=>$slug]);
-        return $this->render('public/stages/list_by_presta.html.twig', ['stage'=>$presta[0]]);
+        $presta = $repo->findBySlug(['slug' => $slug]);
+        return $this->render('public/stages/list_by_presta.html.twig', ['stage' => $presta[0]]);
     }
 
     /**
-     * 
+     * @Security("is_granted('ROLE_USER')")
      * @Route("/stage/update/{id}", name="stage_update")
      * 
      */
@@ -116,7 +120,26 @@ class StageController extends Controller {
         return $this->render('public/stages/update.html.twig', [
                     'stageForm' => $form->createView(), 'id' => $id]);
     }
-
     
+    /**
+     * 
+     * 
+     * @param type $id
+     * @return type
+     * @Route("/stage/delete/{id}", name="stage_delete")
+     * 
+     */
+    public function deleteAction ($id=null){
+        
+        $stage = $this->getDoctrine()->getManager()->getRepository('AppBundle:Stage')->findOneById($id);
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($stage);
+        $em->flush();
+        
+        return $this->redirectToRoute('list_stages_presta',array('slug'=>$this->getUser()->getSlug()));       
+    }
+    
+  
 
 }

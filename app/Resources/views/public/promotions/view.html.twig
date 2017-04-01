@@ -1,0 +1,48 @@
+{% extends "layout/layout.html.twig" %}
+
+{% block content %}
+    <div class="cards-simple-wrapper">
+        <div class="main maxlarg">
+            <div class="main-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 col-lg-9">
+                            
+                                <div class="content">
+                                    <div class="page-title">
+                                        <h1>Promotion - {{promo.nom}}</h1>
+                                    </div><!-- /.page-title -->
+
+                                    <div class="posts post-detail">
+
+
+                                        <div class="post-meta clearfix">
+                                            <div class="post-meta-date">du {{promo.debut|date('d-m-Y')}}</div><!-- /.post-meta-date -->
+                                            <div class="post-meta-date">au {{promo.fin|date('d-m-Y')}}</div><!-- /.post-meta-date -->
+                                            <div class="post-meta-categories">Service offert : {{promo.categorie.nomCategorie}}</div>
+                                            <div class="post-meta-categories"><a href=""></a></div>
+                                        </div><!-- /.post-meta -->
+
+                                        <div class="post-content">
+                                            <p class='drop-cap'>{{promo.description}}</p><p></p>
+                                        </div><!-- /.post-content -->
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+    {% endblock %}
+

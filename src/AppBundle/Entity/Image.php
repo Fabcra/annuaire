@@ -33,7 +33,7 @@ class Image {
     /**
      * 
      * @var url 
-     * @ORM\Column(name="url", type="string", length=256, nullable=false)
+     * @ORM\Column(name="url", type="string", length=256, nullable=true)
      */
     private $url = "";
 

@@ -105,15 +105,24 @@ class RecordController extends Controller {
                 $encoded = $encoder->encodePassword($user, $plainPassword);
 
                 $user->setPassword($encoded);
-
+                
+                $file = $user->getAvatar();
+                
+                $fileName = $file;
+                
+                $file->move(
+                        $this->getParameter('images_directory'),
+                        $fileName
+                        );
+                
 
                 $em = $this->getDoctrine()->getManager();
 
                 if ($typeuser === "prestataire") {
-                    $user->setAvatar(NULL);
+                    $user->setAvatar($fileName);
                 }
                 if ($typeuser === "internaute") {
-                    $user->setLogo(NULL);
+                    $user->setLogo($fileName);
                 }
 
 

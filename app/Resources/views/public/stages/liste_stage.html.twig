@@ -1,47 +1,45 @@
 {% extends "layout/layout.html.twig" %}
 {% block content %}
-    <div class="cards-simple-wrapper largeur centrage">
+        <div class="cards-simple-wrapper largeur centrage">
 
-        <div class="content">
-            {#<div class="page-title">
-                <h1>Liste de stages</h1>
-            </div><!-- /.page-title -->#}
-            <div class="page-header">
-                <h1>Stages</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent imperdiet sem ac ante fringilla mollis. Nam molestie rhoncus neque nec laoreet. Fusce vel blandit eros.</p>
-            </div><!-- /.page-header -->
-
-
-            <div class="pricings">
-
-                <div class="row">
-                    {% for s in stage %}
-                        <div class="col-sm-4">
-                            <div class="pricing" style="margin-bottom: 20px">
-                                <div class="pricing-title"><a href="{{path('show_stage', {slug:s.nom})}}">{{s.nom}}</a></div><!-- /.pricing-title -->
-                                <div class="pricing-subtitle">{{s.description|slice(0,20)}}</div><!-- /.pricing-subtitle -->
-                                <div class="pricing-price"><span class="pricing-currency">Eur</span>{{s.tarif}} <span class="pricing-period">/ jour</span></div><!-- /.pricing-price -->
-                                <a href="{{path('show_stage', {slug:s.nom})}}" class="btn-primary">Voir plus</a>
-                                <hr>
-                                <ul class="pricing-list">
-                                    <li><span>du </span><strong>{{s.hdebut|date('d-m-Y')}}</strong></li>
-                                    <li><span>au </span><strong>{{s.hfin|date('d-m-Y')}}</strong></li>
-                                    <li><span>Support</span><strong>Mail communication</strong></li>
-                                </ul><!-- /.pricing-list -->
-                                <hr>
-                                <a href="#" class="pricing-action">Full List of Features</a>
-                            </div><!-- /.pricing -->
-                        </div><!-- /.col-* -->
+            <div class="content">
+                {#<div class="page-title">
+                    <h1>Liste de stages</h1>
+                </div><!-- /.page-title -->#}
+                <div class="page-header">
+                    <h1>Stages</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent imperdiet sem ac ante fringilla mollis. Nam molestie rhoncus neque nec laoreet. Fusce vel blandit eros.</p>
+                </div><!-- /.page-header -->
 
 
-                    {% endfor %}
-                </div><!-- /.row -->
+                <div class="pricings">
 
-            </div><!-- /.pricings -->
+                    <div class="row">
+                        {% for s in stage %}
+                            <div class="col-sm-4">
+                                <div class="pricing" style="margin-bottom: 20px">
+                                    <div class="pricing-title"><a href="{{path('show_stage', {slug:s.nom})}}">{{s.nom}}</a></div><!-- /.pricing-title -->
+                                    <div class="pricing-subtitle">{{s.description|slice(0,20)}}</div><!-- /.pricing-subtitle -->
+                                    <div class="pricing-price"><span class="pricing-currency">Eur</span>{{s.tarif}} <span class="pricing-period">/ jour</span></div><!-- /.pricing-price -->
+                                    <a href="{{path('show_stage', {slug:s.nom})}}" class="btn-primary">Voir plus</a>
+                                    <hr>
+                                    <ul class="pricing-list">
+                                        <li><span>du </span><strong>{{s.hdebut|date('d-m-Y')}}</strong></li>
+                                        <li><span>au </span><strong>{{s.hfin|date('d-m-Y')}}</strong></li>
+                                        <li><span>Support</span><strong>Mail communication</strong></li>
+                                    </ul><!-- /.pricing-list -->
+                                    <hr>
+                                </div><!-- /.pricing -->
+                            </div><!-- /.col-* -->
+
+
+                        {% endfor %}
+                    </div><!-- /.row -->
+
+                </div><!-- /.pricings -->
 
 
 
-        </div><!-- /.content -->
-    </div>
-
+            </div><!-- /.content -->
+        </div>
 {% endblock %}

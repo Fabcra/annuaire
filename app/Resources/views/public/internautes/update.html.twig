@@ -31,23 +31,23 @@
                                 {{form_start(userForm)}}
                                 <div class="row">
                                     <div class="form-group col-sm-6">
-                                        {{form_row(userForm.username)}}
+                                        {{form_row(userForm.username, {'label' : 'Login'})}}
                                     </div><!-- /.form-group -->
                                     
                                     <div class="form-group col-sm-6">
-                                        {{form_row(userForm.email)}}
+                                        {{form_row(userForm.email, {'label' : 'E-mail'})}}
                                     </div><!-- /.form-group -->
 
                                     <div class="form-group col-sm-6">
-                                        {{form_row(userForm.numtel)}}
+                                        {{form_row(userForm.numtel, {'label' : 'Téléphone'})}}
                                     </div><!-- /.form-group -->
                                     
                                     <div class="form-group col-sm-6">
-                                        {{form_row(userForm.avatar)}}
+                                        {{form_row(userForm.avatar, {'label' : 'Avatar'})}}
                                     </div><!-- /.form-group -->
                                     
                                     <div class="form-group col-sm-6">
-                                        {{form_row(userForm.password)}}
+                                        {{form_row(userForm.password, {'label' : 'Mot de passe'})}}
                                     </div><!-- /.form-group -->
 
 
@@ -63,23 +63,23 @@
 
 
                                     <div class="form-group col-sm-6">
-                                        {{form_row(userForm.adresse)}}
+                                        {{form_row(userForm.adresse, {'label' : 'Rue'})}}
                                     </div><!-- /.form-group -->
 
                                     <div class="form-group col-sm-3">
-                                        {{form_row(userForm.adressenum)}}
+                                        {{form_row(userForm.adressenum, {'label' : 'Numéro'})}}
                                     </div><!-- /.form-group -->
 
                                     <div class="form-group col-sm-3">
-                                        {{form_row(userForm.codePostal)}}
+                                        {{form_row(userForm.codePostal, {'label' : 'Code postal'})}}
                                     </div><!-- /.form-group -->
 
                                     <div class="form-group col-sm-6">
-                                        {{form_row(userForm.commune)}}
+                                        {{form_row(userForm.commune, {'label' : 'Commune'})}}
                                     </div><!-- /.form-group -->
 
                                     <div class="form-group col-sm-6">
-                                        {{form_row(userForm.localite)}}
+                                        {{form_row(userForm.localite, {'label' : 'Localité'})}}
                                     </div><!-- /.form-group -->
                                     
                                     <div class="form-group col-sm-6">

@@ -1,0 +1,46 @@
+{% extends "layout/layout.html.twig" %}
+
+{% block content %} 
+
+    <div class="" style="background-color: #f3f6f8">
+        <div class="main-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-lg-9">
+                        <div class="content">
+                            <div class="page-title">
+                                <h1> Liste de vos promotions</h1>
+                            </div><!-- /.page-title -->
+
+                            <div class="posts posts-condensed">
+                                {% for p in promo.promotions%}
+                                   
+                                    <div class="post">
+                                        <div class="post-date">{{p.debut|date('d-m-y')}}</div><!-- /.post-date -->
+                                        <div class="post-date">{{p.fin|date('d-m-y')}}</div><!-- /.post-date -->
+
+                                        <div class="post-content">
+                                            <h2><a href="blog-detail.html">{{p.nom}}</a></h2>
+                                            <p>{{p.description}}</p>
+                                            <a href="{{p.documentPDF}}">{{p.documentPDF}}</a>
+                                        </div><!-- /.post-content -->
+
+                                        <div class="post-more">
+                                            <a href="{{ path('update_promo',{'id':p.id})}}">Modifier</a>
+                                            <a href="{{ path('promo_delete',{'id':p.id})}}">Supprimer</a>
+
+                                        </div><!-- /.post-date -->
+                                    </div><!-- /.post -->
+                                {%endfor%} 
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

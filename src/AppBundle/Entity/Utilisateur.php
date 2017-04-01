@@ -27,12 +27,15 @@ class Utilisateur implements UserInterface, \Serializable {
     /**
      * @var string
      * 
+     * 
+     * 
      * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
     private $username;
 
     /**
      * @var string
+     * 
      *
      * @ORM\Column(name="email", type="string", length=255)
      */
@@ -40,6 +43,7 @@ class Utilisateur implements UserInterface, \Serializable {
 
     /**
      * @var string
+     * 
      *
      * @ORM\Column(name="password", type="string", length=255)
      */
@@ -99,6 +103,7 @@ class Utilisateur implements UserInterface, \Serializable {
      * @var string
      *
      * @ORM\Column(name="site", type="string", length=255, nullable=true)
+     * 
      */
     private $site;
 
@@ -166,6 +171,7 @@ class Utilisateur implements UserInterface, \Serializable {
      * 
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      * 
+     * 
      */
     private $avatar;
 
@@ -175,6 +181,8 @@ class Utilisateur implements UserInterface, \Serializable {
      * @ORM\OnetoOne(targetEntity="AppBundle\Entity\Image", cascade={"persist", "remove"})
      * 
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     * 
+     * 
      */
     private $logo;
 
@@ -183,6 +191,7 @@ class Utilisateur implements UserInterface, \Serializable {
      *
      * 
      * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Abus", mappedBy="utilisateur")
+     * 
      */
     private $abus;
 

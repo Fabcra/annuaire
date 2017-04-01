@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Promotion
@@ -38,7 +39,7 @@ class Promotion {
     /**
      * @var string
      *
-     * @ORM\Column(name="documentPDF", type="string")
+     * @ORM\Column(name="documentPDF", type="string", nullable=true)
      */
     private $documentPDF;
 
