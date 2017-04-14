@@ -9,11 +9,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Form\UtilisateurType;
 use AppBundle\Entity\Utilisateur;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class InternauteController extends Controller {
 
     /**
      * 
+     * @Security("is_granted('ROLE_USER')")
      * @Route("/internaute/update/{id}", name="internaute_update")
      */
     public function updateAction(Request $request, $id = null) {

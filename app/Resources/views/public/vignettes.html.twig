@@ -14,7 +14,7 @@
             {% for u in utilisateur|slice(0,8) %}
                 
                 <div class="col-sm-6 col-md-3">
-                    <div class="card-simple" data-background-image="{{u.logo}}" >
+                    <div class="card-simple" data-background-image="../../web/uploads/images/{{u.logo}}" >
                         <div class="card-simple-background">
                             <div class="card-simple-content">
                                 <h2><a href="{{path('show_prestataire', {slug:u.username})}}"> {{u.username}}</a></h2>
@@ -31,7 +31,7 @@
 {#                                    <a href="#" class="fa fa-heart-o"></a>#}
                                 </div><!-- /.card-simple-actions -->
                             </div><!-- /.card-simple-content -->
-                            <div class="card-simple-label">{{ u.localite.localite }}</div>
+                            <div class="card-simple-label">{{ u.localite }}</div>
 
                         </div><!-- /.card-simple-background -->
                     </div><!-- /.card-simple -->

@@ -52,14 +52,14 @@ class Utilisateur implements UserInterface, \Serializable {
     /**
      * @var string
      *
-     * @ORM\Column(name="adresse", type="string", length=255)
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
      */
     private $adresse;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="adressenum", type="string", length=255)
+     * @ORM\Column(name="adressenum", type="string", length=255, nullable=true)
      */
     private $adressenum;
 
@@ -132,6 +132,7 @@ class Utilisateur implements UserInterface, \Serializable {
      * @var string
      *
      * @ORM\ManytoOne(targetEntity="AppBundle\Entity\CodePostal") 
+     * 
      * 
      */
     private $codePostal;

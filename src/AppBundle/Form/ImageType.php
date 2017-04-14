@@ -16,19 +16,17 @@ class ImageType extends AbstractType {
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        
-        
-//        $builder->add('url')
-        $builder
-               ->add('url',FileType::class)
+        //$builder->add('url')
+       $builder
+               ->add('url',FileType::class, array('data_class'=>null))
         ;
     }
     public function configureOptions(OptionsResolver $resolver){
+       
+        
+        
         $resolver->setDefaults(array(
-            
-//            'data_class' => \AppBundle\Entity\Image::class,
-            'data_class'=>Image::class,
-          
+            'data_class' => \AppBundle\Entity\Image::class,
         ));
     }
 }   

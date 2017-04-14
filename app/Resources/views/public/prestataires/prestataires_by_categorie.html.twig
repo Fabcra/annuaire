@@ -5,7 +5,7 @@
         {% for u in categorie.utilisateurs %}
             {% if u.typeuser == "prestataire" %}    
                 <div class="col-sm-6 col-md-3">
-                    <div class="card-simple" data-background-image={{u.logo}} >
+                    <div class="card-simple" data-background-image="../../../web/uploads/images/{{u.logo}}">
                         <div class="card-simple-background">
                             <div class="card-simple-content">
                                 <h2><a href="{{path('show_prestataire', {slug:u.username})}}">{{u.username}}</a></h2>

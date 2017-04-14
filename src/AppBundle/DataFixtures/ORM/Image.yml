@@ -1,5 +1,6 @@
 AppBundle\Entity\Image:
     img-{1..50}:
-         url : <imageUrl($width = 1140, $height = 450)>
+#         url : <imageUrl($width = 1140, $height = 450)>
+         url: slider-1.jpg
          ordre : 0
          

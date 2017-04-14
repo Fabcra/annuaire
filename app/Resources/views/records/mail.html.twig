@@ -1,3 +1,4 @@
 <h1>Confirmation d'inscription</h1>
 <p>Bonjour {{ newuser.nom }}!<br>Bienvue dans Annuaire Bien-être, Veuillez confirmer et complèter votre inscription en cliquant sur le lien suivant : </p>
-<a href="http://localhost:8888{{ path('confirmation',{'id':newuser.id,'token':newuser.token,'typeuser':newuser.typeuser}) }}">Cliquez ici ! </a>
+<a href="http://localhost:8888{{path('confirmation',{'id':newuser.id,'token':newuser.token,'typeuser':newuser.typeuser})}}">Cliquez ici ! </a>
+{#<a href="http://localhost:8888{{path('accueil')}}">Cliquez ici ! </a>#}

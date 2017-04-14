@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div style="background-color: #fff">
+    <div style="background-color: #fff">
         <div class="main-inner">
             <div class="container">
                 <div class="row">
@@ -10,9 +10,13 @@
                         <div>
                             <div class="widget">
                                 <div class="user-photo">
-                                    <a href="#">
-                                        <img src="{{app.user.avatar}}" alt="User Photo">
-                                    </a>
+                                        {% if (app.user.avatar) %}
+                                        <img src="../../../../web/uploads/images/{{app.user.avatar.url}}" alt="User Photo">
+                                        {% else %}
+                                        <img src="../../../../web/uploads/images/slider-1.jpg" alt="User Photo">
+                                        {%endif%}
+                                        <a href="{{path("new_image",{'slug':app.user.slug})}}"><span class="user-photo-action">Modifier l'image</span></a>
+
                                 </div><!-- /.user-photo -->
                             </div><!-- /.widget -->
                         </div><!-- /.sidebar -->
@@ -33,7 +37,7 @@
                                     <div class="form-group col-sm-6">
                                         {{form_row(userForm.username, {'label' : 'Login'})}}
                                     </div><!-- /.form-group -->
-                                    
+
                                     <div class="form-group col-sm-6">
                                         {{form_row(userForm.email, {'label' : 'E-mail'})}}
                                     </div><!-- /.form-group -->
@@ -41,13 +45,9 @@
                                     <div class="form-group col-sm-6">
                                         {{form_row(userForm.numtel, {'label' : 'Téléphone'})}}
                                     </div><!-- /.form-group -->
-                                    
+
                                     <div class="form-group col-sm-6">
-                                        {{form_row(userForm.avatar, {'label' : 'Avatar'})}}
-                                    </div><!-- /.form-group -->
-                                    
-                                    <div class="form-group col-sm-6">
-                                        {{form_row(userForm.password, {'label' : 'Mot de passe'})}}
+                                        {{form_row(userForm.password, {'label' : 'Mot de passe' })}}
                                     </div><!-- /.form-group -->
 
 
@@ -81,13 +81,13 @@
                                     <div class="form-group col-sm-6">
                                         {{form_row(userForm.localite, {'label' : 'Localité'})}}
                                     </div><!-- /.form-group -->
-                                    
+
                                     <div class="form-group col-sm-6">
-                                       <button type="submit" class="btn btn-primary btn-xs pull-right">Register</button>
+                                        <button type="submit" class="btn btn-primary btn-xs pull-right">Register</button>
                                     </div><!-- /.form-group -->
-                                    
-                                     {{ form_row(userForm._token)}}
-                                   {{form_end(userForm,{'render_rest':false})}}
+
+                                    {{ form_row(userForm._token)}}
+                                    {{form_end(userForm,{'render_rest':false})}}
                                 </div><!-- /.row -->
                             </div>
                         </div><!-- /.content -->

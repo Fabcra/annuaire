@@ -60,6 +60,9 @@ class RecordController extends Controller {
             $this->get('mailer')->send($message);
 
             return $this->redirectToRoute('accueil');
+            
+            
+            
         }
 
         return $this->render('records/prenew.html.twig', [
@@ -69,7 +72,6 @@ class RecordController extends Controller {
     /**
      * Vérification du token et de l'id, ouverture du formulaire complet
      * avec les données préenregistrées
-     * 
      * 
      * @Route("/confirmation/{token}/{id}/{typeuser}", name="confirmation")
      * 
@@ -105,26 +107,8 @@ class RecordController extends Controller {
                 $encoded = $encoder->encodePassword($user, $plainPassword);
 
                 $user->setPassword($encoded);
-                
-                $file = $user->getAvatar();
-                
-                $fileName = $file;
-                
-                $file->move(
-                        $this->getParameter('images_directory'),
-                        $fileName
-                        );
-                
 
                 $em = $this->getDoctrine()->getManager();
-
-                if ($typeuser === "prestataire") {
-                    $user->setAvatar($fileName);
-                }
-                if ($typeuser === "internaute") {
-                    $user->setLogo($fileName);
-                }
-
 
                 $user->setTypeUser($typeuser);
                 $user->setInscription(new DateTime('now'));
@@ -139,7 +123,8 @@ class RecordController extends Controller {
                 } elseif ($typeuser === "internaute") {
                     $this->addFlash("success", "Vous êtes à présent enregistré en tant qu'internaute");
                 }
-                return $this->redirectToRoute('accueil');
+                
+                return $this->redirectToRoute('new_image', array('slug'=>$user->getSlug()));
             }
 
             return $this->render('/records/new.html.twig', array(

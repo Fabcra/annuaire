@@ -40,7 +40,6 @@ class PrestataireController extends Controller {
         return $this->render('public/prestataires/public_prestataires_list.html.twig', ['prestataires' => $prestataires, 'categorie' => $categ]);
     }
 
-    // affiche la fiche du prestataire de service sélectionné après une recherche dans le module
 
     /**
      * 

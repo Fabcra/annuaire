@@ -37,12 +37,12 @@ class Image {
      */
     private $url = "";
 
-    /**
-     * @var url
-     *
-     * @ORM\ManyToOne(targetEntity="Utilisateur", inversedBy="imagesgalerie", cascade="persist")
-     * 
-     */
+   /**
+    *
+    * @var type 
+    * 
+    * @ORM\ManyToOne(targetEntity="Utilisateur", inversedBy="imagesgalerie", cascade="persist")
+    */
     private $utilisateur;
 
     /**

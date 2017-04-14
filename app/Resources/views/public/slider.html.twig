@@ -31,11 +31,11 @@
                 
                 <div class="carousel-inner" role="listbox">
                     {% for u in utilisateur %}
-                    <div class="item">
+                    <div class="item slider_higher">
                         
                        
-                           <div class="item-bg" style="background-image: url({{u.logo}})"></div>
-                         <img src={{asset(u.logo)}} alt="">
+                           <div class="item-bg" style="background-image: url(../../web/uploads/images/{{u.logo}})"></div>
+                         <img src="../../web/uploads/images/{{u.logo}}" alt="{{u.username}}">
                         
                         <div class="carousel-caption">
 

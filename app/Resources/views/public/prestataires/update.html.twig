@@ -1,10 +1,7 @@
 {% extends "layout/layout.html.twig" %}
 
 {% block content %}
-
-
-    {% if app.user.id == id %}
-        <div style="background-color: #fff">
+    <div style="background-color: #fff">
         <div class="main-inner">
             <div class="container">
                 <div class="row">
@@ -13,7 +10,9 @@
                             <div class="widget">
                                 <div class="user-photo">
                                     <a href="#">
-                                        <img src="{{app.user.logo.url}}" alt="User Photo">
+                                    
+                                            <img src="../../../../web/uploads/images/{{app.user.logo.url}}" alt="User Photo">
+                                        <a href="{{path("new_image",{'slug':app.user.slug})}}"><span class="user-photo-action">Modifier l'image</span></a>
                                     </a>
                                 </div><!-- /.user-photo -->
                             </div><!-- /.widget -->
@@ -51,9 +50,9 @@
                                     <div class="form-group col-sm-6">
                                         {{form_row(userForm.categories, {'label' : 'Catégories'})}}
                                     </div><!-- /.form-group -->
-                                    <div class="form-group col-sm-6">
-                                        {{form_row(userForm.logo, {'label' : 'Logo'})}}
-                                    </div><!-- /.form-group -->
+                                    {# <div class="form-group col-sm-6">
+                                         {{form_row(userForm.logo, {'label' : 'Logo'})}}
+                                     </div><!-- /.form-group -->#}
                                     <div class="form-group col-sm-6">
                                         {{form_row(userForm.password, {'label' : 'Mot de passe'})}}
                                     </div><!-- /.form-group -->
@@ -86,13 +85,13 @@
                                     <div class="form-group col-sm-6">
                                         {{form_row(userForm.localite, {'label' : 'Localité'})}}
                                     </div><!-- /.form-group -->
-                                    
+
                                     <div class="form-group col-sm-6">
-                                       <button type="submit" class="btn btn-primary btn-xs pull-right">Register</button>
+                                        <button type="submit" class="btn btn-primary btn-xs pull-right">Register</button>
                                     </div><!-- /.form-group -->
-                                    
-                                     {{ form_row(userForm._token)}}
-                                   {{form_end(userForm,{'render_rest':false})}}
+
+                                    {{ form_row(userForm._token)}}
+                                    {{form_end(userForm,{'render_rest':false})}}
                                 </div><!-- /.row -->
                             </div>
                         </div><!-- /.content -->
@@ -100,8 +99,7 @@
                 </div><!-- /.row -->
             </div><!-- /.container -->
         </div><!-- /.main-inner -->
-</div><!-- /.main -->
-    {% endif %}
+    </div><!-- /.main -->
 {% endblock %}
 
 
