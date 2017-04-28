@@ -8,17 +8,17 @@
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
                 <ul class="liststylenone">
-                    
+
                     <li class="hidden-xs">
-                        
+
                         <div class="special register">
                             {% if app.user == null %}
-                            <a href='{{path('new_record',{'typeuser':'internaute'})}}'>S'enregistrer</a>
+                                <a href='{{path('new_record',{'typeuser':'internaute'})}}'>S'enregistrer</a>
                             {% endif %}
                         </div><!-- /.special-->
-                        
+
                     </li>
-                    
+
 
                     <li class="hidden-xs">
                         <div class="search register">
@@ -28,33 +28,35 @@
 
                 </ul>
 
-                
+
                 <div class="carousel-inner" role="listbox">
                     {% for u in utilisateur %}
-                    <div class="item slider_higher">
-                        
-                       
-                           <div class="item-bg" style="background-image: url(../../web/uploads/images/{{u.logo}})"></div>
-                         <img src="../../web/uploads/images/{{u.logo}}" alt="{{u.username}}">
-                        
-                        <div class="carousel-caption">
+                        {% if u.banni == false %}
+                            <div class="item slider_higher">
 
-                            <div class="hero-slider-content">
-                                <h1>{{u.username}}</h1>
 
-                            </div><!-- /.hero-slider-content -->
-                       
-                          <div class="hero-slider-actions">
-{#                                <a href="#"><i class="fa fa-heart-o"></i></a>#}
-                                <a href="{{path('show_prestataire', {slug:u.username})}}"><i class="fa fa-search"></i></a>
-{#                                <a href="#"><i class="fa fa-bookmark-o"></i></a>#}
-                            </div><!-- /.hero-slider-actions -->
-                        </div><!-- /.carousel-caption -->
-                        
-                    </div><!-- /.item -->
-                  {% endfor %}
+                                <div class="item-bg" style="background-image: url(../../web/uploads/images/{{u.logo}})"></div>
+                                <img src="../../web/uploads/images/{{u.logo}}" alt="{{u.username}}">
 
-                  <div class="item active">
+                                <div class="carousel-caption">
+
+                                    <div class="hero-slider-content">
+                                        <h1>{{u.username}}</h1>
+
+                                    </div><!-- /.hero-slider-content -->
+
+                                    <div class="hero-slider-actions">
+                                        {#                                <a href="#"><i class="fa fa-heart-o"></i></a>#}
+                                        <a href="{{path('show_prestataire', {slug:u.username})}}"><i class="fa fa-search"></i></a>
+                                            {#                                <a href="#"><i class="fa fa-bookmark-o"></i></a>#}
+                                    </div><!-- /.hero-slider-actions -->
+                                </div><!-- /.carousel-caption -->
+
+                            </div><!-- /.item -->
+                        {% endif%}
+                    {% endfor %}
+
+                    <div class="item active">
                         <div class="item-bg" style="background-image: url({{asset('assets/img/tmp/slider-1.jpg')}})"></div>
                         <img src="{{asset('assets/img/tmp/slider-1.jpg')}}" alt="">
 
@@ -62,15 +64,15 @@
                             <div class="hero-slider-content">
                                 <h1>Bienvenue sur Annuaire Bien Etre</h1>
 
-                               
+
                             </div><!-- /.hero-slider-content -->
 
-                           
+
                         </div><!-- /.carousel-caption -->
                     </div><!-- /.item -->
 
                 </div><!-- /.carousel-inner -->
-                
+
                 <!-- Controls -->
                 <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
                     <i class="fa fa-long-arrow-left"></i>
@@ -79,10 +81,10 @@
                 <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
                     <i class="fa fa-long-arrow-right"></i>
                 </a>
-                
+
             </div>
 
         </div>
-        
+
     </div>
 </div>

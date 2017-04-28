@@ -1,6 +1,7 @@
 {% extends "layout/layout.html.twig" %}
 
 {% block content %}
+    
     {% include 'public/slider.html.twig' %}
     <div class="header header-transparent" style="background-color: #8C8989">
         <div class="page-header">
@@ -9,26 +10,18 @@
         </div><!-- /.page-header -->
 
         <div class="largeur centrage">
-
+            
 
             {% for u in utilisateur|slice(0,8) %}
-                
+                {% if u.banni==false %}
                 <div class="col-sm-6 col-md-3">
                     <div class="card-simple" data-background-image="../../web/uploads/images/{{u.logo}}" >
                         <div class="card-simple-background">
                             <div class="card-simple-content">
                                 <h2><a href="{{path('show_prestataire', {slug:u.username})}}"> {{u.username}}</a></h2>
-                                {#<div class="card-simple-rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div><!-- /.card-rating -->#}
+                                
                                 <div class="card-simple-actions">
-{#                                    <a href="#" class="fa fa-bookmark-o"></a>#}
                                     <a href="{{path('show_prestataire', {slug:u.username})}}" class="fa fa-search"></a>
-{#                                    <a href="#" class="fa fa-heart-o"></a>#}
                                 </div><!-- /.card-simple-actions -->
                             </div><!-- /.card-simple-content -->
                             <div class="card-simple-label">{{ u.localite }}</div>
@@ -36,6 +29,7 @@
                         </div><!-- /.card-simple-background -->
                     </div><!-- /.card-simple -->
                 </div><!-- /.col-* -->
+                {% endif %}
             {% endfor %}
         </div><!-- /.cards-simple-wrapper -->
     </div>

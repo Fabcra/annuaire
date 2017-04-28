@@ -8,6 +8,8 @@ AppBundle\Entity\Promotion:
         affichageDe : <dateTimeThisYear($min = 'now')>
         affichageJusque : <dateTimeThisYear($min = 'now')>
         utilisateur: '@utilisateur-*'
+        categorie: '@categorie-*'
+       
         
                               
                      

@@ -35,16 +35,7 @@ class AppFixtures extends AbstractLoader {
         return $usertypes[array_rand($usertypes)];
     }
 
-    public function categorie() {
-        $categories = array(
-            'massages',
-            'thalasso',
-            'fitness',
-            'spa',
-        );
         
-        return $categories[array_rand($categories)];
-    }
     
    
 

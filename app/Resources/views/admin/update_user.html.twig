@@ -1,0 +1,87 @@
+{% extends "admin/admin.html.twig" %}
+
+{% block admin %}
+    <div class="col-sm-8 col-lg-9">
+        <div class="content">
+            <div class="page-title">
+                <h1>MODIFICATION UTILISATEUR</h1>
+            </div><!-- /.page-title -->
+
+            <div class="background-white p20 mb30">
+                <h3 class="page-title">
+                    Informations Utilisateur
+
+                </h3>
+                <div class="row">
+                    {{form_start(userForm)}}
+
+                    <div class="form-group col-sm-6">
+                        {{form_row(userForm.username, {'label' : 'Login'})}}
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group col-sm-6">
+                        {{form_row(userForm.typeuser, {'label' : 'Type utilisateur'})}}
+                    </div>
+                    <div class="form-group col-sm-6">
+                        {{form_row(userForm.site, {'label' : 'Site Web'})}}
+                    </div>
+                    <div class="form-group col-sm-6">
+                        {{form_row(userForm.numtva, {'label' : 'Numero de tva'})}}
+                    </div>
+                    <div class="form-group col-sm-6">
+                        {{form_row(userForm.categories, {'label' : 'Categories de service'})}}
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        {{form_row(userForm.email, {'label' : 'E-mail'})}}
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group col-sm-6">
+                        {{form_row(userForm.numtel, {'label' : 'Téléphone'})}}
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group col-sm-6">
+                        {{form_row(userForm.roles, {'label' : 'role'})}}
+                    </div>
+
+
+                </div><!-- /.row -->
+            </div>
+
+
+
+            <div class="background-white p20 mb30">
+                <h3 class="page-title">
+                    Adresse
+                </h3>
+
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        {{form_row(userForm.adresse, {'label' : 'Rue'})}}
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group col-sm-3">
+                        {{form_row(userForm.adressenum, {'label' : 'Numéro'})}}
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group col-sm-3">
+                        {{form_row(userForm.codePostal, {'label' : 'Code postal'})}}
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group col-sm-6">
+                        {{form_row(userForm.commune, {'label' : 'Commune'})}}
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group col-sm-6">
+                        {{form_row(userForm.localite, {'label' : 'Localité'})}}
+                    </div><!-- /.form-group -->
+
+                    <button type="submit" class="btn btn-primary btn-xs pull-right">Save</button>
+                </div><!-- /.row -->
+                {{ form_row(userForm._token)}}
+                {{form_end(userForm,{'render_rest':false})}}
+            </div>
+        </div><!-- /.content -->
+    </div><!-- /.col-* -->
+
+{% endblock %}

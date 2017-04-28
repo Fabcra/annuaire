@@ -1,6 +1,28 @@
 AppBundle\Entity\Categorie:
-    categorie-{1..4}:
-        nomCategorie: <categorie()>
+        
+    categorie-1:
+        nomCategorie: fitness
+        description : <realText($maxNbChars = 200, $indexSize=2)>
+        enAvant : false
+        valide : true
+        image : "@img-*"
+    
+    categorie-2:
+        nomCategorie: massage
+        description : <realText($maxNbChars = 200, $indexSize=2)>
+        enAvant : false
+        valide : true
+        image : "@img-*"
+        
+    categorie-3:
+        nomCategorie: thalasso
+        description : <realText($maxNbChars = 200, $indexSize=2)>
+        enAvant : false
+        valide : true
+        image : "@img-*"
+        
+    categorie-4:
+        nomCategorie: spa
         description : <realText($maxNbChars = 200, $indexSize=2)>
         enAvant : false
         valide : true

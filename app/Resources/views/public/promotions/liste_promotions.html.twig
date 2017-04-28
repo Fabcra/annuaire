@@ -1,37 +1,39 @@
 {% extends "layout/layout.html.twig" %}
+
 {% block content %}
     <div class="cards-simple-wrapper largeur centrage marg">
         <div cass="content">
-            
-             <div class="page-header">
-                    <h1>Promotions</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent imperdiet sem ac ante fringilla mollis. Nam molestie rhoncus neque nec laoreet. Fusce vel blandit eros.</p>
-                </div><!-- /.page-header -->
+
+            <div class="page-header">
+                <h1>Promotions</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent imperdiet sem ac ante fringilla mollis. Nam molestie rhoncus neque nec laoreet. Fusce vel blandit eros.</p>
+            </div><!-- /.page-header -->
             <div class="row">
                 {% for p in promotion %}
-                    <div class="col-sm-6">
-                        <div class="events">
-                            <div class="event">
-                                <div class="event-date">
-                                    <span class="day">{{p.debut|date('d')}}</span>
-                                    <span class="month">{{p.debut|date('m')}}</span>
-                                </div><!-- /.event-date -->
+                    {% if p.utilisateur.banni == false %}
+                        <div class="col-sm-6">
+                            <div class="events">
+                                <div class="event">
+                                    <div class="event-date">
+                                        <span class="day">{{p.debut|date('d')}}</span>
+                                        <span class="month">{{p.debut|date('m')}}</span>
+                                    </div><!-- /.event-date -->
 
-                                <div class="event-content">
-                                    <h2>{{p.nom}}</h2>
-                                    <p>Nulla ac lectus posuere, rhoncus dui sed, finibus tellus. Proin enim mi.</p>
-                                    <a href="{{p.documentPDF}}">{{p.documentPDF}}</a>
-                                    <div class="event-time"><i class="fa fa-clock-o"></i> 8:00PM - 11:00PM</div><!-- /.event-time -->
-                                    <hr>
-                                </div><!-- /.event-content -->
-                            </div><!-- /.event -->
+                                    <div class="event-content">
+                                        <h2>{{p.nom}}</h2>
+                                        <p>Nulla ac lectus posuere, rhoncus dui sed, finibus tellus. Proin enim mi.</p>
+                                        <a href="../../../web/uploads/pdf/{{p.documentPDF}}">{{p.documentPDF}}</a>
+                                        <div class="event-time"><i class="fa fa-clock-o"></i> 8:00PM - 11:00PM</div><!-- /.event-time -->
+                                        <hr>
+                                    </div><!-- /.event-content -->
+                                </div><!-- /.event -->
 
 
 
-                        </div><!-- /.events -->
+                            </div><!-- /.events -->
 
-                    </div><!-- /.col-* -->
-
+                        </div><!-- /.col-* -->
+                    {%endif%}
                 {% endfor %}
             </div>
         </div>

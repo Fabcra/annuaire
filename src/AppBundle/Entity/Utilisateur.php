@@ -249,6 +249,12 @@ class Utilisateur implements UserInterface, \Serializable {
      */
     private $isActive;
     
+    
+    /**
+     * @ORM\Column(type="json_array")
+     */
+    private $roles=[];
+    
      
     /**
      * Constructor
@@ -298,7 +304,12 @@ class Utilisateur implements UserInterface, \Serializable {
     }
 
     public function getRoles() {
-        return array('ROLE_USER');
+        
+        $roles=$this->roles;
+        if(!in_array('ROLE_USER', $roles)){
+            $roles[]='ROLE_USER';
+        }
+        return $roles;
     }
 
     public function eraseCredentials() {
@@ -998,7 +1009,9 @@ class Utilisateur implements UserInterface, \Serializable {
         
     }
     
-   
-    
+    function setRoles($roles) {
+        $this->roles = $roles;
+    }
+
     
 }

@@ -1,5 +1,6 @@
 {% extends "layout/layout.html.twig" %}
 
+{% if app.user == id %}
 {% block content %}
 
     <div style="background-color: #fff">
@@ -98,4 +99,4 @@
     </div><!-- /.main -->
 {% endblock %}
 
-
+{% endif %}

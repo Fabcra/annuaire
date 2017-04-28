@@ -1,5 +1,6 @@
 {% extends "layout/layout.html.twig" %}
 {% block content %}
+
         <div class="cards-simple-wrapper largeur centrage">
 
             <div class="content">
@@ -16,30 +17,28 @@
 
                     <div class="row">
                         {% for s in stage %}
-                            <div class="col-sm-4">
-                                <div class="pricing" style="margin-bottom: 20px">
-                                    <div class="pricing-title"><a href="{{path('show_stage', {slug:s.nom})}}">{{s.nom}}</a></div><!-- /.pricing-title -->
-                                    <div class="pricing-subtitle">{{s.description|slice(0,20)}}</div><!-- /.pricing-subtitle -->
-                                    <div class="pricing-price"><span class="pricing-currency">Eur</span>{{s.tarif}} <span class="pricing-period">/ jour</span></div><!-- /.pricing-price -->
-                                    <a href="{{path('show_stage', {slug:s.nom})}}" class="btn-primary">Voir plus</a>
-                                    <hr>
-                                    <ul class="pricing-list">
-                                        <li><span>du </span><strong>{{s.hdebut|date('d-m-Y')}}</strong></li>
-                                        <li><span>au </span><strong>{{s.hfin|date('d-m-Y')}}</strong></li>
-                                        <li><span>Support</span><strong>Mail communication</strong></li>
-                                    </ul><!-- /.pricing-list -->
-                                    <hr>
-                                </div><!-- /.pricing -->
-                            </div><!-- /.col-* -->
-
-
+                            {% if s.utilisateur.banni == false %}
+                                <div class="col-sm-4">
+                                    <div class="pricing" style="margin-bottom: 20px">
+                                        <div class="pricing-title"><a href="{{path('show_stage', {slug:s.nom})}}">{{s.nom}}</a></div><!-- /.pricing-title -->
+                                        <div class="pricing-subtitle">{{s.description|slice(0,20)}}</div><!-- /.pricing-subtitle -->
+                                        <div class="pricing-price"><span class="pricing-currency">Eur</span>{{s.tarif}} <span class="pricing-period">/ jour</span></div><!-- /.pricing-price -->
+                                        <a href="{{path('show_stage', {slug:s.nom})}}" class="btn-primary">Voir plus</a>
+                                        <hr>
+                                        <ul class="pricing-list">
+                                            <li><span>du </span><strong>{{s.hdebut|date('d-m-Y')}}</strong></li>
+                                            <li><span>au </span><strong>{{s.hfin|date('d-m-Y')}}</strong></li>
+                                            <li><span>Support</span><strong>Mail communication</strong></li>
+                                        </ul><!-- /.pricing-list -->
+                                        <hr>
+                                    </div><!-- /.pricing -->
+                                </div><!-- /.col-* -->
+                            {% endif %}
                         {% endfor %}
                     </div><!-- /.row -->
 
                 </div><!-- /.pricings -->
-
-
-
             </div><!-- /.content -->
         </div>
+
 {% endblock %}

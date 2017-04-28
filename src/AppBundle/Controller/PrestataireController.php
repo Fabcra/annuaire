@@ -36,10 +36,8 @@ class PrestataireController extends Controller {
 
         $categ = $repocateg->findAll();
 
-
         return $this->render('public/prestataires/public_prestataires_list.html.twig', ['prestataires' => $prestataires, 'categorie' => $categ]);
     }
-
 
     /**
      * 
@@ -58,8 +56,11 @@ class PrestataireController extends Controller {
         
         
         
-        // envoi message
+        $banni = $nomPresta->getBanni();
         
+
+        // envoi message
+
         $newmail = new Message();
 
 
@@ -75,12 +76,12 @@ class PrestataireController extends Controller {
             $em->flush();
 
             $this->addFlash('success', 'Votre message a bien été envoyé');
-            
+
             $nom = $newmail->getNom();
             $mail = $newmail->getMail();
             $messageclient = $newmail->getMessage();
-            
-            
+
+
             $message = \Swift_Message::newInstance()
                     ->setSubject('Message d\'utilisateur')
                     ->setFrom($mail)
@@ -94,11 +95,13 @@ class PrestataireController extends Controller {
 
             return $this->redirectToRoute('accueil');
         }
-
-//        return $this->render('public/prestataires/contact.html.twig', [
-//                    'mailForm' => $form->createView()]);
-
-        return $this->render('public/prestataires/public_prestataire.html.twig', ['presta' => $nomPresta, 'categorie' => $categ, 'stage' => $stage, 'mailForm' => $form->createView()]);
+        
+        if ($banni == false){
+            return $this->render('public/prestataires/public_prestataire.html.twig', ['presta' => $nomPresta, 'categorie' => $categ, 'stage' => $stage, 'mailForm' => $form->createView()]);
+        }
+        else{
+            return $this->redirectToRoute('accueil');
+        }
     }
 
     // liste des prestataires selon la catégorie sélectionnée initialement dans la navigation
@@ -106,7 +109,7 @@ class PrestataireController extends Controller {
     /**
      * 
      * @Route("/liste-prestataires/{slug}", name="liste_prestataires_categorie")
-     **/
+     * */
     public function listbycategorie($slug) {
 
         $doctrine = $this->getDoctrine();
@@ -163,5 +166,4 @@ class PrestataireController extends Controller {
                     'userForm' => $form->createView(), 'id' => $id]);
     }
 
-    
 }

@@ -2,6 +2,7 @@ AppBundle\Entity\Utilisateur:
     utilisateur-{1..20}:
         username: <firstName($gender = null|'male'|'female')>
         password: $2y$12$89USNLEr8zsZLH5dkelHBu3hOiThs0QSayStKpYF2lMj9dEmCzY.q
+        roles: ['ROLE_ADMIN']
         email : <email()>
         adresse : <streetName()>
         adressenum : <buildingNumber()>
@@ -13,7 +14,7 @@ AppBundle\Entity\Utilisateur:
         nbessais: 0
         banni: false
         inscriptionconf : true
-        site: <url()>
+        site: <url()>y
         numtel : <phoneNumber()>
         numtva : 000
         newsletter : true
@@ -21,3 +22,5 @@ AppBundle\Entity\Utilisateur:
         categories : '<numberBetween(1,5)>x @categorie-*'
         logo (unique) : '@img-*'
         avatar (unique) : '@img-*'
+       
+        

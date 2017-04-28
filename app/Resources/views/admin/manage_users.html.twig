@@ -1,0 +1,64 @@
+{% extends "admin/admin.html.twig" %}
+
+{% block admin %}
+    <div class="col-sm-12 col-lg-5">
+        <h3>Prestataires</h3>
+
+        <div class="users">
+            {% for p in prestataire %}
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td class="hidden-xs visible-sm visible-md visible-lg">
+                                <h2><a href="{{path('admin_user_update',{'user_id':p.id})}}">{{p.username}}</a></h2>
+                                    {% if p.banni == true %}
+                                    <h3 style="color:red;">BANNI</h3>
+
+                                {% else %}
+                                    <h3 style="color:green;">ACTIF</h3>    
+                                {% endif %}
+                            </td>
+                            <td class="right">
+                                <a href="{{path('active_user',{'user_id':p.id})}}" class="btn btn-xs btn-primary">Activer</a>
+                                <a href="{{path('ban_user',{'user_id':p.id})}}" class="btn btn-xs btn-danger">Bannir</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            {% endfor %}
+        </div><!-- /.users -->
+
+    </div><!-- /.col-* -->
+
+    <div class="col-sm-12 col-lg-7">
+        <h3>Internautes</h3>
+
+        <div class="background-white p30 mb50">
+
+            <div class="users">
+                {% for i in internaute %}
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td class="hidden-xs visible-sm visible-md visible-lg">
+                                    <h2><a href="{{path('admin_user_update',{'user_id':i.id})}}">{{i.username}}</a></h2>
+                                        {% if i.banni == true %}
+                                        <h3 style="color:red;">BANNI</h3>
+                                    {% else %}
+                                        <h3 style="color:green;">ACTIF</h3>
+                                    {% endif %}
+                                </td>
+                                <td class="right">
+                                    <a href="{{path('active_user',{'user_id':i.id})}}" class="btn btn-xs btn-primary">Activer</a>
+                                    <a href="{{path('ban_user',{'user_id':i.id})}}" class="btn btn-xs btn-danger">Bannir</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                {% endfor %}
+            </div><!-- /.users -->
+
+
+        </div><!-- /.cards-system -->
+    </div>
+{% endblock %}

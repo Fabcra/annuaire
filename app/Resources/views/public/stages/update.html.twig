@@ -1,73 +1,75 @@
 {% extends "layout/layout.html.twig" %}
 
+
 {% block stylesheets %}
-    
     {{ parent() }}
-    
+
     <link rel="stylesheet" href="{{asset('//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css')}}">
-   
+
 {% endblock %}
 
 {% block javascripts %}
-    
+
     {{ parent() }}
-    
+
     <script src="{{asset('//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js')}}"></script>
-    
+
     <script>
-        jQuery(document).ready(function(){
+        jQuery(document).ready(function () {
             $('.js-datepicker').datepicker({
                 format: 'yyyy-mm-dd'
             });
         });
     </script>
 
- {% endblock %}
-    
+{% endblock %}
+
 
 {% block content %}
-    <div style="background-color: #fff">
-        <div class="main-inner">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-8 col-lg-9">
-                        <div class="content">
-                            <div class="page-title">
-                                <h1>Nouveau Stage</h1>
-                            </div><!-- /.page-title -->
+    {% if app.user.id == user_id %}
+        <div style="background-color: #fff">
+            <div class="main-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 col-lg-9">
+                            <div class="content">
+                                <div class="page-title">
+                                    <h1>Modification Stage</h1>
+                                </div><!-- /.page-title -->
 
-                            <div class="background-white p20 mb30">
-                                {{form_start(stageForm)}}
-                                <div class="row">
-                                    <div class="form-group col-sm-6">
-                                        {{form_row(stageForm.nom)}}
-                                    </div><!-- /.form-group -->
-                                    <div class="form-group col-sm-6">
-                                        {{form_row(stageForm.description)}}
-                                    </div><!-- /.form-group -->
-                                    <div class="form-group col-sm-6">
-                                        {{form_row(stageForm.tarif)}}
-                                    </div><!-- /.form-group -->
-                                    <div class="form-group col-sm-6">
-                                        {{form_row(stageForm.infoCompl)}}
-                                    </div><!-- /.form-group -->
-                                    <div class="form-group col-sm-6">
-                                        {{form_row(stageForm.hdebut)}}
-                                    </div><!-- /.form-group -->
-                                    <div class="form-group col-sm-6">
-                                        {{form_row(stageForm.hfin)}}
-                                    </div><!-- /.form-group -->
-                                    <div class="form-group col-sm-6">
-                                        {{form_row(stageForm.affichageDe)}}
-                                    </div><!-- /.form-group -->
-                                    <div class="form-group col-sm-6">
-                                        {{form_row(stageForm.affichageJusque)}}
-                                    </div><!-- /.form-group -->
-                                    {{ form_row(stageForm._token)}}
+                                <div class="background-white p20 mb30">
+                                    {{form_start(stageForm)}}
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            {{form_row(stageForm.nom, {'label' : 'Nom'})}}
+                                        </div><!-- /.form-group -->
+                                        <div class="form-group col-sm-6">
+                                            {{form_row(stageForm.description, {'label' : 'Description'})}}
+                                        </div><!-- /.form-group -->
+                                        <div class="form-group col-sm-6">
+                                            {{form_row(stageForm.tarif, {'label' : 'Tarif'})}}
+                                        </div><!-- /.form-group -->
+                                        <div class="form-group col-sm-6">
+                                            {{form_row(stageForm.infoCompl, {'label' : 'Info complète'})}}
+                                        </div><!-- /.form-group -->
+                                        <div class="form-group col-sm-6">
+                                            {{form_row(stageForm.hdebut, {'label' : 'Du'})}}
+                                        </div><!-- /.form-group -->
+                                        <div class="form-group col-sm-6">
+                                            {{form_row(stageForm.hfin, {'label' : 'Au'})}}
+                                        </div><!-- /.form-group -->
+                                        <div class="form-group col-sm-6">
+                                            {{form_row(stageForm.affichageDe, {'label' : 'Affichage du'})}}
+                                        </div><!-- /.form-group -->
+                                        <div class="form-group col-sm-6">
+                                            {{form_row(stageForm.affichageJusque, {'label' : 'Affichage au'})}}
+                                        </div><!-- /.form-group -->
+                                        {{ form_row(stageForm._token)}}
 
-                                    <button type="submit" class="btn btn-primary pull-right">Register</button>
+                                        <button type="submit" class="btn btn-primary pull-right">Register</button>
 
-                                    {{form_end(stageForm, {'render_rest':false})}}
+                                        {{form_end(stageForm, {'render_rest':false})}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +77,7 @@
                 </div>
             </div>
         </div>
-    </div>
 
-
+    {% endif %}
 {% endblock %}
+

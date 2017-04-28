@@ -1,0 +1,63 @@
+{% extends "layout/layout.html.twig" %}
+
+{% block content %}
+
+    <div class="main">
+        <div class="outer-admin">
+            <div class="wrapper-admin">
+                <div class="sidebar-admin">
+                    <ul>
+                        <li class="active"><a href="#"><i class="fa fa-file"></i></a></li>
+                    </ul>
+                </div><!-- /.sidebar-admin-->
+
+                <div class="sidebar-secondary-admin">
+                    <ul>
+                        <li class="active">
+                            <a href="admin-dashboard.html">
+                                <span class="icon"><i class="fa fa-tachometer"></i></span>
+                                <span class="title">Dashboard</span>
+                                <span class="subtitle">Manage your website</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div><!-- /.sidebar-secondary-admin -->
+
+
+
+                <div class="content-admin">
+                    <div class="content-admin-wrapper">
+                        <div class="content-admin-main">
+                            <div class="content-admin-main-inner">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row">
+
+                                                {% block admin %}
+                                                    
+                                                    
+
+                                                {% endblock %}
+                                            </div><!-- /.col-* -->
+                                        </div><!-- /.row -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+{% endblock %}

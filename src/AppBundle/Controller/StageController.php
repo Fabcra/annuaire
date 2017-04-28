@@ -52,12 +52,11 @@ class StageController extends Controller {
             $em->persist($newstage);
             $em->flush();
 
- 
-        $this->addFlash('success', 'Bravo, vous avez inséré un nouveau stage');
+
+            $this->addFlash('success', 'Bravo, vous avez inséré un nouveau stage');
 
 
-        return $this->redirectToRoute('accueil');
-
+            return $this->redirectToRoute('accueil');
         }
         return $this->render('public/stages/new.html.twig', [
                     'stageForm' => $form->createView()]);
@@ -76,7 +75,14 @@ class StageController extends Controller {
         $nomStage = $repo->findOneBy(['slug' => $slug]);
         $prestataire = $repouser->findAll();
 
-        return $this->render('public/stages/view_stage.html.twig', ['stage' => $nomStage, 'prestataire' => $prestataire]);
+        $banni = $prestataire[0]->getBanni();
+
+        if ($banni == false) {
+
+            return $this->render('public/stages/view_stage.html.twig', ['stage' => $nomStage, 'prestataire' => $prestataire]);
+        } else {
+            return $this->redirectToRoute('accueil');
+        }
     }
 
     /**
@@ -100,6 +106,9 @@ class StageController extends Controller {
 
         $stage = $this->getDoctrine()->getManager()->getRepository('AppBundle:Stage')->findOneById($id);
 
+        $user_id = $stage->getUtilisateur()->getId();
+
+
         $form = $this->createForm(StageType::class, $stage);
 
         $form->handleRequest($request);
@@ -114,13 +123,15 @@ class StageController extends Controller {
             $this->addFlash('success', 'update effectué avec succès');
 
 
+
+
             return $this->redirectToRoute('accueil');
         }
 
         return $this->render('public/stages/update.html.twig', [
-                    'stageForm' => $form->createView(), 'id' => $id]);
+                    'stageForm' => $form->createView(), 'id' => $id, 'user_id' => $user_id]);
     }
-    
+
     /**
      * 
      * 
@@ -129,17 +140,15 @@ class StageController extends Controller {
      * @Route("/stage/delete/{id}", name="stage_delete")
      * 
      */
-    public function deleteAction ($id=null){
-        
+    public function deleteAction($id = null) {
+
         $stage = $this->getDoctrine()->getManager()->getRepository('AppBundle:Stage')->findOneById($id);
-        
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($stage);
         $em->flush();
-        
-        return $this->redirectToRoute('list_stages_presta',array('slug'=>$this->getUser()->getSlug()));       
+
+        return $this->redirectToRoute('list_stages_presta', array('slug' => $this->getUser()->getSlug()));
     }
-    
-  
 
 }
