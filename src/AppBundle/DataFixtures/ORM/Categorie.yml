@@ -3,7 +3,7 @@ AppBundle\Entity\Categorie:
     categorie-1:
         nomCategorie: fitness
         description : <realText($maxNbChars = 200, $indexSize=2)>
-        enAvant : false
+        enAvant : true
         valide : true
         image : "@img-*"
     
