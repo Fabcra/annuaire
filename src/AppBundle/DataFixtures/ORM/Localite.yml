@@ -1,4 +1,22 @@
 AppBundle\Entity\Localite:
-    loc-{1..10}:
-        Localite: <state()>
+    loc-1:
+        Localite: Alleur
+    loc-2:
+        Localite: Amay
+    loc-3:
+        Localite: Angleur
+    loc-4:
+        Localite: Blegny
+    loc-5:
+        Localite: Boncelles
+    loc-6:
+        Localite: Cheratte
+    loc-7:
+        Localite: Engis
+    loc-8:
+        Localite: Esneux
+    loc-9:
+        Localite: Eupen
+    loc-10:
+        Localite: Retinne
     

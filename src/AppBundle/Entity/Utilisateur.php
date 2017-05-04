@@ -154,7 +154,6 @@ class Utilisateur implements UserInterface, \Serializable {
      */
     private $commune;
 
-   
     /**
      * @var string
      *
@@ -248,14 +247,12 @@ class Utilisateur implements UserInterface, \Serializable {
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
-    
-    
+
     /**
      * @ORM\Column(type="json_array")
      */
-    private $roles=[];
-    
-     
+    private $roles = [];
+
     /**
      * Constructor
      */
@@ -304,10 +301,10 @@ class Utilisateur implements UserInterface, \Serializable {
     }
 
     public function getRoles() {
-        
-        $roles=$this->roles;
-        if(!in_array('ROLE_USER', $roles)){
-            $roles[]='ROLE_USER';
+
+        $roles = $this->roles;
+        if (!in_array('ROLE_USER', $roles)) {
+            $roles[] = 'ROLE_USER';
         }
         return $roles;
     }
@@ -746,7 +743,6 @@ class Utilisateur implements UserInterface, \Serializable {
     /**
      * Get categories
      *
-     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCategories() {
         return $this->categories;
@@ -949,7 +945,6 @@ class Utilisateur implements UserInterface, \Serializable {
         return $this->avatar;
     }
 
-    
     /**
      * Set logo
      *
@@ -972,8 +967,6 @@ class Utilisateur implements UserInterface, \Serializable {
         return $this->logo;
     }
 
-   
-
     /**
      * Add imagesgalerie
      *
@@ -981,8 +974,7 @@ class Utilisateur implements UserInterface, \Serializable {
      *
      * @return Utilisateur
      */
-    public function addImagesgalerie(\AppBundle\Entity\Image $imagesgalerie)
-    {
+    public function addImagesgalerie(\AppBundle\Entity\Image $imagesgalerie) {
         $this->imagesgalerie[] = $imagesgalerie;
 
         return $this;
@@ -993,8 +985,7 @@ class Utilisateur implements UserInterface, \Serializable {
      *
      * @param \AppBundle\Entity\Image $imagesgalerie
      */
-    public function removeImagesgalerie(\AppBundle\Entity\Image $imagesgalerie)
-    {
+    public function removeImagesgalerie(\AppBundle\Entity\Image $imagesgalerie) {
         $this->imagesgalerie->removeElement($imagesgalerie);
     }
 
@@ -1003,12 +994,10 @@ class Utilisateur implements UserInterface, \Serializable {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getImagesgalerie()
-    {
+    public function getImagesgalerie() {
         return $this->imagesgalerie;
-        
     }
-    
+
     function setRoles($roles) {
         $this->roles = $roles;
     }

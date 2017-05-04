@@ -1,40 +1,44 @@
 {% extends "layout/layout.html.twig" %}
 {% block content %}
     <div class="cards-row marg bottom margleft">
+
         {% for c in categorie %}
-            <div class="card-row">
-                <div class="card-row-inner">
+            {% if c.valide == true %}
+                <div class="card-row">
+                    <div class="card-row-inner">
 
-                    <div class="card-row-image" data-background-image=../../../web/uploads/images/{{(c.image)}}>
-                        <div class="card-row-label">
-
-
-                            <a href="{{path('liste_prestataires_categorie', {'slug':c.nomCategorie})}}">{{ c.nomCategorie }}</a>
+                        <div class="card-row-image" data-background-image=../../../web/uploads/images/{{(c.image)}}>
+                            <div class="card-row-label">
 
 
-                        </div><!-- /.card-row-label -->
+                                <a href="{{path('liste_prestataires_categorie', {'slug':c.nomCategorie})}}">{{ c.nomCategorie }}</a>
 
 
-                    </div><!-- /.card-row-image -->
-
-                    <div class="card-row-body">
-
-                        <h2 class="card-row-title"><a href="{{path('liste_prestataires_categorie', {'slug':c.nomCategorie})}}">{{c.nomCategorie}}</a></h2>
-                        <div class="card-row-content">
-
-                            <p>{{c.description}}</p>
+                            </div><!-- /.card-row-label -->
 
 
-                        </div>
-                    </div><!-- /.card-row-body -->
+                        </div><!-- /.card-row-image -->
 
-                      
-                   </div><!-- /.card-row-inner -->
-               </div><!-- /.card-row -->
+                        <div class="card-row-body">
 
-                {% endfor %}
+                            <h2 class="card-row-title"><a href="{{path('liste_prestataires_categorie', {'slug':c.nomCategorie})}}">{{c.nomCategorie}}</a></h2>
+                            <div class="card-row-content">
 
-            </div><!-- /.cards-row -->
-            
-            
-        {% endblock %}
+                                <p>{{c.description}}</p>
+
+
+                            </div>
+                        </div><!-- /.card-row-body -->
+
+
+                    </div><!-- /.card-row-inner -->
+                </div><!-- /.card-row -->
+
+            {% endif %}
+
+        {% endfor %}
+
+    </div><!-- /.cards-row -->
+
+
+{% endblock %}

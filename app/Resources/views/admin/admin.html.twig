@@ -7,17 +7,29 @@
             <div class="wrapper-admin">
                 <div class="sidebar-admin">
                     <ul>
-                        <li class="active"><a href="#"><i class="fa fa-file"></i></a></li>
+                        <li class=""><a href="{{path('admin')}}"><i class="fa fa-file"></i></a></li>
+                    </ul>
+                    <ul>
+                        <li class=""><a href="{{path('admin_liste_categorie')}}"><i class="fa fa-pencil"></i></a></li>
                     </ul>
                 </div><!-- /.sidebar-admin-->
 
                 <div class="sidebar-secondary-admin">
                     <ul>
-                        <li class="active">
-                            <a href="admin-dashboard.html">
+                        <li class="">
+                            <a href="{{path('admin')}}">
                                 <span class="icon"><i class="fa fa-tachometer"></i></span>
-                                <span class="title">Dashboard</span>
-                                <span class="subtitle">Manage your website</span>
+                                <span class="title">Utilisateurs</span>
+                                <span class="subtitle">Gestion des utilisateurs</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="">
+                            <a href="{{path('admin_liste_categorie')}}">
+                                <span class="icon"><i class="fa fa-i-cursor"></i></span>
+                                <span class="title">Catégories</span>
+                                <span class="subtitle">Gestion des catégories</span>
                             </a>
                         </li>
                     </ul>

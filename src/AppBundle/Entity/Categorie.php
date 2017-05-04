@@ -51,7 +51,6 @@ class Categorie {
     private $valide;
 
     /**
-     * @var string
      * 
      *
      * @ORM\ManytoMany(targetEntity="AppBundle\Entity\Utilisateur", mappedBy="categories")

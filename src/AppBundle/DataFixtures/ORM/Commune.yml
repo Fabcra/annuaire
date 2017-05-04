@@ -1,3 +1,21 @@
 AppBundle\Entity\Commune:
-    com-{1..10}:
-        commune: <city()>
+    com-1:
+        commune: Liège
+    com-2:
+        commune: Theux
+    com-3:
+        commune: Spa
+    com-4:
+        commune: Jalhay
+    com-5:
+        commune: Fléron
+    com-6:
+        commune: Nandrin
+    com-7:
+        commune: Clavier
+    com-8:
+        commune: Seraing
+    com-9:
+        commune: Flemalle
+    com-10:
+        commune: Stavelot

@@ -34,9 +34,6 @@ class AppFixtures extends AbstractLoader {
         );
         return $usertypes[array_rand($usertypes)];
     }
-
-        
     
-   
 
 }

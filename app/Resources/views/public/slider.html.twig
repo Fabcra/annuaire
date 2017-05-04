@@ -28,33 +28,43 @@
 
                 </ul>
 
-
                 <div class="carousel-inner" role="listbox">
+
                     {% for u in utilisateur %}
+
                         {% if u.banni == false %}
-                            <div class="item slider_higher">
+
+                            {% for c in u.categories %}
+                                {% if c.enAvant == true %}
+                                <div class="item slider_higher">
 
 
-                                <div class="item-bg" style="background-image: url(../../web/uploads/images/{{u.logo}})"></div>
-                                <img src="../../web/uploads/images/{{u.logo}}" alt="{{u.username}}">
+                                    <div class="item-bg" style="background-image: url(../../web/uploads/images/{{u.logo}})"></div>
+                                    <img src="../../web/uploads/images/{{u.logo}}" alt="{{u.username}}">
 
-                                <div class="carousel-caption">
+                                    <div class="carousel-caption">
 
-                                    <div class="hero-slider-content">
-                                        <h1>{{u.username}}</h1>
+                                        <div class="hero-slider-content">
+                                            <h1>{{u.username}}</h1>
 
-                                    </div><!-- /.hero-slider-content -->
+                                        </div><!-- /.hero-slider-content -->
 
-                                    <div class="hero-slider-actions">
-                                        {#                                <a href="#"><i class="fa fa-heart-o"></i></a>#}
-                                        <a href="{{path('show_prestataire', {slug:u.username})}}"><i class="fa fa-search"></i></a>
-                                            {#                                <a href="#"><i class="fa fa-bookmark-o"></i></a>#}
-                                    </div><!-- /.hero-slider-actions -->
-                                </div><!-- /.carousel-caption -->
+                                        <div class="hero-slider-actions">
+                                            {#                                <a href="#"><i class="fa fa-heart-o"></i></a>#}
+                                            <a href="{{path('show_prestataire', {slug:u.username})}}"><i class="fa fa-search"></i></a>
+                                                {#                                <a href="#"><i class="fa fa-bookmark-o"></i></a>#}
+                                        </div><!-- /.hero-slider-actions -->
+                                    </div><!-- /.carousel-caption -->
 
-                            </div><!-- /.item -->
-                        {% endif%}
+
+
+                                </div><!-- /.item -->
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
                     {% endfor %}
+
+
 
                     <div class="item active">
                         <div class="item-bg" style="background-image: url({{asset('assets/img/tmp/slider-1.jpg')}})"></div>

@@ -8,6 +8,9 @@ use AppBundle\Entity\Categorie;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Form\CategorieType;
+use AppBundle\Entity\Image;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class CategorieController extends Controller {
     //affichage liste des catégories de services et leur description
@@ -26,8 +29,7 @@ class CategorieController extends Controller {
 
         return $this->render('public/categories/list_categ.html.twig', ['categorie' => $categorie]);
     }
-    
-    
+
     // description d'une categorie de service 
     /**
      * @Route("categorie/{slug}", name="show_categorie")
@@ -43,4 +45,5 @@ class CategorieController extends Controller {
         return $this->render('public/categories/public_categorie.html.twig', ['cat' => $nomCateg, 'categorie' => $categorie]);
     }
 
+    
 }

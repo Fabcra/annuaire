@@ -19,6 +19,7 @@ class ImageType extends AbstractType {
         //$builder->add('url')
        $builder
                ->add('url',FileType::class, array('data_class'=>null))
+               ->add('id')
         ;
     }
     public function configureOptions(OptionsResolver $resolver){

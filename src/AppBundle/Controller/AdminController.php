@@ -8,7 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Form\UtilisateurType;
 use AppBundle\Entity\Utilisateur;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
+use AppBundle\Entity\Categorie;
+use AppBundle\Entity\Image;
+use AppBundle\Form\CategorieType;
+use AppBundle\Form\ImageType;
 
 /**
  * @Security("is_granted('ROLE_ADMIN')")
@@ -117,5 +120,112 @@ Class AdminController extends Controller {
         return $this->render('admin/update_user.html.twig', [
             'userForm' => $form->createView(), 'id' => $id]);
     }
+    
+    
+    /**
+     * 
+     * @Route("admin/categories/liste", name="admin_liste_categorie")
+     */
+    public function listCategAction(){
+        
+        
+        $doctrine = $this->getDoctrine();
+        $repo = $doctrine->getRepository('AppBundle:Categorie');
+
+        $categorie = $repo->findAll();
+
+
+
+        return $this->render('admin/categories/list_categ.html.twig', ['categorie' => $categorie]);
+    
+        
+    }
+    
+    /**
+     * 
+     * @Route("admin/categorie/new", name="new_categorie")
+     */
+    public function newCategoryAction(Request $request) {
+
+        $newcateg = new Categorie();
+
+        $image = new Image();
+
+        $prestataire = $this->getUser();
+
+        $form = $this->createForm(CategorieType::class, $newcateg);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $newcateg->setImage($image);
+
+            $newcateg->addUtilisateur($prestataire);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($newcateg);
+            $em->flush();
+
+            $this->addFlash('success', 'Vous avez inséré une nouvelle catégorie');
+
+            return $this->redirectToRoute('new_imgcateg', array('id' => $newcateg->getId()));
+        }
+
+        return $this->render('admin/categories/new.html.twig', [
+                    'categForm' => $form->createView()
+        ]);
+    }
+    
+    
+    
+    /**
+     * 
+     * @Route("admin/categorie/update/{id}", name="update_categorie")
+     */
+    public function updateCategoryAction(Request $request, $id = null) {
+
+        $id = $request->get('id');
+
+        $categorie = $this->getDoctrine()->getManager()->getRepository('AppBundle:Categorie')->findOneById($id);
+        $image = $categorie->getImage();
+        
+        $categories = $this->getDoctrine()->getRepository('AppBundle:Categorie')->findAll();
+        
+        $form = $this->createForm(CategorieType::class, $categorie);
+        $form->handleRequest($request);
+        
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $categorie->setImage($image);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($categorie);
+            $em->flush();
+
+            $this->addFlash('notice', 'update effectué avec succès');
+
+
+            return $this->redirectToRoute('accueil');
+        }
+        return $this->render('admin/categories/update.html.twig', [
+                    'categForm' => $form->createView(), 'id' => $id, 'categorie'=>$categorie, 'categories'=>$categories]);
+    }
+    
+    
+    /**
+     * 
+     * @Route("admin/categorie/delete/{id}", name="delete_categorie")
+     * 
+     */
+    public function deleteAction($id = null) {
+
+        $categorie = $this->getDoctrine()->getManager()->getRepository('AppBundle:Categorie')->findOneById($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($categorie);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_liste_categorie');
+    }
+
 
 }
