@@ -48,11 +48,19 @@ class PrestataireController extends Controller {
         $repo = $doctrine->getRepository('AppBundle:Utilisateur');
         $repocateg = $doctrine->getRepository('AppBundle:Categorie');
         $repostage = $doctrine->getRepository('AppBundle:Stage');
+        $repocom = $doctrine->getRepository('AppBundle:Commentaire');
+        
 
         $nomPresta = $repo->findOneBy(['slug' => $slug]);
         $categ = $repocateg->findAll();
         $stage = $repostage->findAll();
         $to = $nomPresta->getEmail();
+        
+        $com = $repocom->findAll();
+        
+        
+        
+        
         
         
         
@@ -70,18 +78,20 @@ class PrestataireController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($newmail);
             $em->flush();
 
             $this->addFlash('success', 'Votre message a bien été envoyé');
+            
+            
 
             $nom = $newmail->getNom();
             $mail = $newmail->getMail();
             $messageclient = $newmail->getMessage();
-
-
+            
             $message = \Swift_Message::newInstance()
                     ->setSubject('Message d\'utilisateur')
                     ->setFrom($mail)
@@ -97,7 +107,7 @@ class PrestataireController extends Controller {
         }
         
         if ($banni == false){
-            return $this->render('public/prestataires/public_prestataire.html.twig', ['presta' => $nomPresta, 'categorie' => $categ, 'stage' => $stage, 'mailForm' => $form->createView()]);
+            return $this->render('public/prestataires/public_prestataire.html.twig', ['presta' => $nomPresta, 'categorie' => $categ, 'stage' => $stage, 'commentaire'=>$com, 'mailForm' => $form->createView()]);
         }
         else{
             return $this->redirectToRoute('accueil');

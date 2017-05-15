@@ -22,7 +22,6 @@ class Commentaire
     private $id;
 
     /**
-     * @var int
      *
      * @ORM\Column(name="cote", type="integer")
      */
@@ -63,8 +62,13 @@ class Commentaire
       * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Abus", mappedBy="commentaires")
      */
     private $abus;
-
-
+    
+    /**
+     *
+     * @ORM\ManytoOne(targetEntity="AppBundle\Entity\Utilisateur")
+     * 
+     */
+    private $redacteur; 
 
     /**
      * Get id
@@ -267,4 +271,31 @@ class Commentaire
     {
         $this->abus->removeElement($abus);
     }
+
+    /**
+     * Set redacteur
+     *
+     * @param \AppBundle\Entity\Utilisateur $redacteur
+     *
+     * @return Commentaire
+     */
+    public function setRedacteur(\AppBundle\Entity\Utilisateur $redacteur = null)
+    {
+        $this->redacteur = $redacteur;
+
+        return $this;
+    }
+
+    /**
+     * Get redacteur
+     *
+     * @return \AppBundle\Entity\Utilisateur
+     */
+    public function getRedacteur()
+    {
+        return $this->redacteur;
+        
+    }
+    
+    
 }

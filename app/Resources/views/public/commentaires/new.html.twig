@@ -1,0 +1,69 @@
+{% extends "layout/layout.html.twig" %}
+{% block stylesheets %}
+
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{asset('//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css')}}">
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script src="{{asset('//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js')}}"></script>
+
+    <script>
+        jQuery(document).ready(function () {
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+    </script>
+
+{% endblock %}
+
+{% block content %}
+    
+     <div style="background-color: #fff">
+        <div class="main-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-lg-9">
+                        <div class="content">
+                            <div class="page-title">
+                                <h1>Ajouter un commentaire</h1>
+                            </div><!-- /.page-title -->
+
+                            <div class="background-white p20 mb30">
+                                {{form_start(commentaireForm)}}
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        {{form_row(commentaireForm.titre, {'label' : 'Titre'})}}
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        {{form_row(commentaireForm.contenu, {'label' : 'Commentaire'})}}
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        {{form_row(commentaireForm.encodage, {'label' : 'Date'})}}
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        {{form_row(commentaireForm.cote, {'label' : 'Evaluation'})}}
+                                    </div>
+                                    
+                                     {{ form_row(commentaireForm._token)}}
+
+                                    <button type="submit" class="btn btn-primary pull-right">Enregistrer</button>
+
+                                    {{form_end(commentaireForm, {'render_rest':false})}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+                                    
+
+{% endblock %}

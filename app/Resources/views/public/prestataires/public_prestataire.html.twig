@@ -2,180 +2,230 @@
 
 {% block content %}
 
-        <div class="cards-simple-wrapper centrage" style="background-color: #FFF">
-            <div class="main-inner">
-                <div class="content">
-                    <div class="mt-80 mb80">
-                        <div class="detail-banner" style= "background-image: url(../../../web/uploads/images/{{presta.logo}}) " >
-                            <div class="container">
-                                <div class="detail-banner-left">
-                                    <div class="detail-banner-info">
-                                        {% for u in presta.categories %} <div class="detail-label"><a href="{{path('liste_prestataires_categorie', {'slug':u.nomCategorie})}}">{{ u.nomCategorie }}</a></div>{% endfor %}
-                                        <div class="detail-verified">Verified</div>
-                                    </div><!-- /.detail-banner-info -->
+    <div class="cards-simple-wrapper centrage" style="background-color: #FFF">
+        <div class="main-inner">
+            <div class="content">
+                <div class="mt-80 mb80">
+                    <div class="detail-banner" style= "background-image: url(../../../web/uploads/images/{{presta.logo}}) " >
+                        <div class="container">
+                            <div class="detail-banner-left">
+                                <div class="detail-banner-info">
+                                    {% for u in presta.categories %} <div class="detail-label"><a href="{{path('liste_prestataires_categorie', {'slug':u.nomCategorie})}}">{{ u.nomCategorie }}</a></div>{% endfor %}
+                                    <div class="detail-verified">Verified</div>
+                                </div><!-- /.detail-banner-info -->
 
-                                    <h2 class="detail-title">
-                                        {{presta.username}}
-                                    </h2>
+                                <h2 class="detail-title">
+                                    {{presta.username}}
+                                </h2>
 
-                                    <div class="detail-banner-address">
-                                        <i class="fa fa-map-o"></i> {{presta.adressenum}}, {{presta.adresse}} {{presta.codepostal}} {{presta.localite}} {{presta.commune}}
-                                    </div><!-- /.detail-banner-address -->
+                                <div class="detail-banner-address">
+                                    <i class="fa fa-map-o"></i> {{presta.adressenum}}, {{presta.adresse}} {{presta.codepostal}} {{presta.localite}} {{presta.commune}}
+                                </div><!-- /.detail-banner-address -->
 
-                                </div><!-- /.detail-banner-left -->
-                            </div><!-- /.container -->
-                        </div><!-- /.detail-banner -->
+                            </div><!-- /.detail-banner-left -->
+                        </div><!-- /.container -->
+                    </div><!-- /.detail-banner -->
+
+                </div>
+
+                <div class="container">
+                    <div class="row detail-content">
+                        <div class="col-sm-7">
+                            <div class="detail-gallery">
+                                <div class="detail-gallery-preview">
+                                    {% if presta.imagesgalerie is not empty %}
+                                        <a href="../../../web/uploads/images/{{presta.imagesgalerie[0].url}}">
+                                            <img src="../../../web/uploads/images/{{presta.imagesgalerie[0].url}}">
+                                        {% else %}
+                                            <a href="../../../web/uploads/images/{{presta.logo}}">
+                                                <img src="../../../web/uploads/images/{{presta.logo}}">    
+                                            {% endif %}
+                                        </a>
+                                </div>
+                                <ul class="detail-gallery-index">
+                                    {%for i in presta.imagesgalerie %}
+                                        <li class="detail-gallery-list-item active">
+                                            <a data-target="../../../web/uploads/images/{{i.url}}">
+                                                <img src="../../../web/uploads/images/{{i.url}}" alt="galerie-images-{{presta.username}}">
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div><!-- /.detail-gallery -->
+
+                            {# créer ou modifier un utilisateur avec rue, numéro de porte et commune réelle pour que ça fonctionne parfaitment #}
+
+
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2531!2d5!3d50!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c0f7596a277287%3A0xdc4add0c00726707!2s
+                                    {{presta.adresse}}+{{presta.adressenum}}+{{presta.commune}}
+                                    !5e0!3m2!1sfr!2sbe!4v1488573829817" 
+                                    width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+
+
+                            {% for s in presta.stages %}
+                                <div class="pricings">
+                                    <div class="col-sm-4">
+                                        <div class="pricing">
+                                            <div class="pricing-title"> {{ 'Stages' }}</div><!-- /.pricing-title -->
+                                            <div class="pricing-title"> {{ s.nom }}</div><!-- /.pricing-title -->
+                                            <div class="pricing-subtitle"> {{ s.description }}</div><!-- /.pricing-subtitle -->
+                                            <div class="pricing-price"><span class="pricing-currency">Eur</span>{{ s.tarif }}</div><!-- /.pricing-price -->
+                                            <a href="{{path('show_stage', {slug:s.nom})}}" class="btn-primary">Get Started</a>
+                                            <hr>
+                                            <ul class="pricing-list">
+                                                <li><span>Date de début</span><strong> {{ s.hdebut|date('d-m-Y')}}</strong></li>
+                                                <li><span>Date de fin</span><strong>   {{ s.hfin|date('d-m-Y') }}</strong></li>
+                                            </ul><!-- /.pricing-list -->
+                                            <hr>
+                                            <a href="{{path('list_stages', {slug:s.nom})}}" class="pricing-action">Liste des stages</a>
+                                        </div><!-- /.pricing -->
+                                    </div><!-- /.col-* -->
+                                </div><!-- /.pricings -->
+                            {% endfor %}
+
+                        </div><!-- /.col-sm-7 -->
+
+
+                        <div class="col-sm-5">
+
+
+
+                            <h2>A propos de <span class="text-secondary">{{ presta.username }}</span></h2>
+                            <div class="background-white p20">
+                                <div class="detail-vcard">
+                                    <div class="detail-logo">
+                                        <img src="../../../web/uploads/images/{{ presta.logo }}">
+                                    </div><!-- /.detail-logo -->
+
+                                    <div class="detail-contact">
+                                        <div class="detail-contact-email">
+                                            <i class="fa fa-envelope-o"></i> <a href="mailto:#">{{presta.email}}</a>
+                                        </div>
+                                        <div class="detail-contact-phone">
+                                            <i class="fa fa-mobile-phone"></i> <a href="tel:#">{{presta.numtel}}</a>
+                                        </div>
+                                        <div class="detail-contact-website">
+                                            <i class="fa fa-globe"></i> <a href="#">{{presta.site}}</a>
+                                        </div>
+                                        <div class="detail-contact-address">
+                                            <i class="fa fa-map-o"></i>
+                                            {{presta.adressenum}} {{presta.adresse}}<br>
+                                            {{presta.codepostal}} {{presta.localite}} {{presta.commune}}
+                                        </div>
+                                    </div><!-- /.detail-contact -->
+                                </div><!-- /.detail-vcard -->
+                            </div>
+                            <div class="fb-share-button" data-href="{{presta.site}}"
+                                 data-layout="button_count" 
+                                 data-size="small" data-mobile-iframe="true"><a 
+                                    class="fb-xfbml-parse-ignore" 
+                                    target="_blank" 
+                                    href="https://www.facebook.com/sharer/sharer.php?u={{presta.site}}%2F&amp;src=sdkpreparse">Partager</a></div>
+                            <div class="detail-payments">
+                                <h3>Accepted Payments</h3>
+
+                                <ul>
+                                    <li><i class="fa fa-paypal"></i></li>
+                                    <li><i class="fa fa-cc-amex"></i></li>
+                                    <li><i class="fa fa-cc-mastercard"></i></li>
+                                    <li><i class="fa fa-cc-stripe"></i></li>
+                                    <li><i class="fa fa-cc-visa"></i></li>
+                                </ul>
+                            </div>
+                        </div><!-- /.col-sm-5 -->
 
                     </div>
 
-                    <div class="container">
-                        <div class="row detail-content">
-                            <div class="col-sm-7">
-                                <div class="detail-gallery">
-                                    <div class="detail-gallery-preview">
-                                        {% if presta.imagesgalerie is not empty %}
-                                            <a href="../../../web/uploads/images/{{presta.imagesgalerie[0].url}}">
-                                                <img src="../../../web/uploads/images/{{presta.imagesgalerie[0].url}}">
-                                            {% else %}
-                                                <a href="../../../web/uploads/images/{{presta.logo}}">
-                                                    <img src="../../../web/uploads/images/{{presta.logo}}">    
-                                                {% endif %}
-                                            </a>
-                                    </div>
-                                    <ul class="detail-gallery-index">
-                                        {%for i in presta.imagesgalerie %}
-                                            <li class="detail-gallery-list-item active">
-                                                <a data-target="../../../web/uploads/images/{{i.url}}">
-                                                    <img src="../../../web/uploads/images/{{i.url}}" alt="galerie-images-{{presta.username}}">
-                                                </a>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div><!-- /.detail-gallery -->
+                    <h3>N'hésitez pas à nous contacter ! </h3>
 
-                                {# créer ou modifier un utilisateur avec rue, numéro de porte et commune réelle pour que ça fonctionne parfaitment #}
+                    <div class="contact-form-wrapper clearfix background-white p30">
+                        {{form_start(mailForm)}}
+                        <div class="row">
 
+                            <div class="col-sm-4">
+                                <div class="form-group">
 
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2531!2d5!3d50!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c0f7596a277287%3A0xdc4add0c00726707!2s
-                                        {{presta.adresse}}+{{presta.adressenum}}+{{presta.commune}}
-                                        !5e0!3m2!1sfr!2sbe!4v1488573829817" 
-                                        width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                    {{form_row(mailForm.nom)}}
+                                </div><!-- /.form-group -->
+                            </div><!-- /.col-* -->
 
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="contact-form-subject">Subject</label>
+                                    <input type="text" name="subject" id="contact-form-subject" class="form-control">
+                                </div><!-- /.form-group -->
+                            </div><!-- /.col-* -->
 
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    {{form_row(mailForm.mail)}}
+                                </div><!-- /.form-group -->
+                            </div><!-- /.col-* -->
+                        </div><!-- /.row -->
 
-                                {% for s in presta.stages %}
-                                    <div class="pricings">
-                                        <div class="col-sm-4">
-                                            <div class="pricing">
-                                                <div class="pricing-title"> {{ 'Stages' }}</div><!-- /.pricing-title -->
-                                                <div class="pricing-title"> {{ s.nom }}</div><!-- /.pricing-title -->
-                                                <div class="pricing-subtitle"> {{ s.description }}</div><!-- /.pricing-subtitle -->
-                                                <div class="pricing-price"><span class="pricing-currency">Eur</span>{{ s.tarif }}</div><!-- /.pricing-price -->
-                                                <a href="{{path('show_stage', {slug:s.nom})}}" class="btn-primary">Get Started</a>
-                                                <hr>
-                                                <ul class="pricing-list">
-                                                    <li><span>Date de début</span><strong> {{ s.hdebut|date('d-m-Y')}}</strong></li>
-                                                    <li><span>Date de fin</span><strong>   {{ s.hfin|date('d-m-Y') }}</strong></li>
-                                                </ul><!-- /.pricing-list -->
-                                                <hr>
-                                                <a href="{{path('list_stages', {slug:s.nom})}}" class="pricing-action">Liste des stages</a>
-                                            </div><!-- /.pricing -->
-                                        </div><!-- /.col-* -->
-                                    </div><!-- /.pricings -->
-                                {% endfor %}
+                        <div class="form-group">
+                            {{form_row(mailForm.message)}}
+                        </div><!-- /.form-group -->
 
-                            </div><!-- /.col-sm-7 -->
+                        <button class="btn btn-primary pull-right">Post Message</button>
+
+                        {{ form_end(mailForm) }}
+                    </div><!-- /.contact-form-wrapper -->
+                    <div class="block background-white fullwidth">
+                        <div class="page-header">
+                            <h1>Appréciations et commentaires</h1>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            {% if app.user %}
+                                {% if app.user.username != presta.username %} <!-- le prestataire loggé ne peut s'auto-évaluer --->
 
 
-                            <div class="col-sm-5">
+                                    <a href="{{path('new_comment',{'id':presta.id})}}" class="btn btn-xs btn-primary">Ajouter</a>
+                                {% endif %}
+                            {% endif %}
+                        </div><!-- /.page-header -->
+
+                        <div class="row">
+                            <div>
 
 
+                                <div class="testimonial">
 
-                                <h2>A propos de <span class="text-secondary">{{ presta.username }}</span></h2>
-                                <div class="background-white p20">
-                                    <div class="detail-vcard">
-                                        <div class="detail-logo">
-                                            <img src="../../../web/uploads/images/{{ presta.logo }}">
-                                        </div><!-- /.detail-logo -->
+                                    <div class="testimonial-image">
+                                        <img src="assets/img/tmp/agent-1.jpg" alt="">
+                                    </div><!-- /.testimonial-image -->
+                                    {% for c in presta.commentaires %}
+                                        <div class="testimonial-inner">
+                                            {{c.encodage|date('d-m-Y')}}
+                                            <div class="testimonial-title">
 
-                                        <div class="detail-contact">
-                                            <div class="detail-contact-email">
-                                                <i class="fa fa-envelope-o"></i> <a href="mailto:#">{{presta.email}}</a>
-                                            </div>
-                                            <div class="detail-contact-phone">
-                                                <i class="fa fa-mobile-phone"></i> <a href="tel:#">{{presta.numtel}}</a>
-                                            </div>
-                                            <div class="detail-contact-website">
-                                                <i class="fa fa-globe"></i> <a href="#">{{presta.site}}</a>
-                                            </div>
-                                            <div class="detail-contact-address">
-                                                <i class="fa fa-map-o"></i>
-                                                {{presta.adressenum}} {{presta.adresse}}<br>
-                                                {{presta.codepostal}} {{presta.localite}} {{presta.commune}}
-                                            </div>
-                                        </div><!-- /.detail-contact -->
-                                    </div><!-- /.detail-vcard -->
-                                </div>
-                                <div class="fb-share-button" data-href="{{presta.site}}"
-                                     data-layout="button_count" 
-                                     data-size="small" data-mobile-iframe="true"><a 
-                                        class="fb-xfbml-parse-ignore" 
-                                        target="_blank" 
-                                        href="https://www.facebook.com/sharer/sharer.php?u={{presta.site}}%2F&amp;src=sdkpreparse">Partager</a></div>
-                                <div class="detail-payments">
-                                    <h3>Accepted Payments</h3>
+                                                <h2>{{c.titre}}</h2>
 
-                                    <ul>
-                                        <li><i class="fa fa-paypal"></i></li>
-                                        <li><i class="fa fa-cc-amex"></i></li>
-                                        <li><i class="fa fa-cc-mastercard"></i></li>
-                                        <li><i class="fa fa-cc-stripe"></i></li>
-                                        <li><i class="fa fa-cc-visa"></i></li>
-                                    </ul>
-                                </div>
-                            </div><!-- /.col-sm-5 -->
 
+                                                {% for i in 0..c.cote %}
+                                                    <div class="testimonial-rating">
+                                                        <i class="fa fa-star"></i>
+
+                                                    </div><!-- /.testimonial-rating -->
+                                                {% endfor %}
+                                            </div><!-- /.testimonial-title -->
+
+                                            {{ c.contenu }}
+
+
+                                            <div class="testimonial-sign">{{c.redacteur.username}}</div><!-- /.testimonial-sign -->
+
+                                        </div><!-- /.testimonial-inner -->
+                                    {% endfor %}
+                                </div><!-- /.testimonial -->
+
+                            </div>
                         </div>
-
-                        <h3>N'hésitez pas à nous contacter ! </h3>
-
-                        <div class="contact-form-wrapper clearfix background-white p30">
-                            {{form_start(mailForm)}}
-                            <div class="row">
-
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-
-                                        {{form_row(mailForm.nom)}}
-                                    </div><!-- /.form-group -->
-                                </div><!-- /.col-* -->
-
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label for="contact-form-subject">Subject</label>
-                                        <input type="text" name="subject" id="contact-form-subject" class="form-control">
-                                    </div><!-- /.form-group -->
-                                </div><!-- /.col-* -->
-
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        {{form_row(mailForm.mail)}}
-                                    </div><!-- /.form-group -->
-                                </div><!-- /.col-* -->
-                            </div><!-- /.row -->
-
-                            <div class="form-group">
-                                {{form_row(mailForm.message)}}
-                            </div><!-- /.form-group -->
-
-                            <button class="btn btn-primary pull-right">Post Message</button>
-
-                            {{ form_end(mailForm) }}
-                        </div><!-- /.contact-form-wrapper -->
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 
 {% endblock %}
