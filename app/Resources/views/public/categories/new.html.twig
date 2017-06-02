@@ -1,0 +1,39 @@
+{% extends "layout/layout.html.twig" %}
+{% block content %}
+    
+    <div class="col-sm-8 col-lg-9">
+        <div class="content">
+            <div class="page-title">
+                <h1>Creation catégorie</h1>
+            </div><!-- /.page-title -->
+
+            <div class="background-white p20 mb30">
+                
+                 <div class="row">
+                    {{form_start(categForm)}}
+
+                    <div class="form-group col-sm-6">
+                        {{form_row(categForm.nomCategorie, {'label' : 'Nom Catégorie'})}}
+                    </div><!-- /.form-group -->
+                    
+                    <div class="form-group col-sm-6">
+                        {{form_row(categForm.description, {'label' : 'Description'})}}
+                    </div><!-- /.form-group -->
+                    
+                    <div class="form-group col-sm-6">
+{#                        <a href="{{path("new_imgcateg",{'id':'$id'})}}">image</a>#}
+                    </div><!-- /.form-group -->
+                    
+                    
+                    
+                     <button type="submit" class="btn btn-primary btn-xs pull-right">Save</button>
+                
+                 </div>
+                    {{ form_row(categForm._token)}}
+                {{form_end(categForm,{'render_rest':false})}}
+            </div>
+        </div>
+    </div>
+                    
+
+{% endblock %}

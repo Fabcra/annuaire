@@ -125,6 +125,7 @@ class ImageController extends Controller {
 
         $categorie = $this->getDoctrine()->getManager()->getRepository('AppBundle:Categorie')->findOneBy(['id' => $id]);
 
+        
 
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
@@ -151,7 +152,7 @@ class ImageController extends Controller {
             $em->persist($categorie);
             $em->flush();
 
-            return $this->redirectToRoute("update_categorie", array('id'=>$categorie->getId()));
+            return $this->redirectToRoute("accueil");
         }
 
         return $this->render('public/prestataires/insertimage.html.twig', [
