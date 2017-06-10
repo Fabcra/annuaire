@@ -155,11 +155,6 @@ class PrestataireController extends Controller {
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $plainPassword = $user->getPassword();
-            $encoder = $this->container->get('security.password_encoder');
-            $encoded = $encoder->encodePassword($user, $plainPassword);
-
-            $user->setPassword($encoded);
 
             $user->setTypeUser('prestataire');
             $em = $this->getDoctrine()->getManager();

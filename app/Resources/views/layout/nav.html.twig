@@ -15,7 +15,7 @@
 
 
                         <form method="post" action="{{ path('login') }}">
-                            <ul class="fa header-nav-primary nav nav-pills collapse navbar-collapse marg">
+                            <ul class="fa header-nav-primary nav nav-pills collapse navbar-collapse marg margin-right">
                                 {% if app.user != null %}
                                     <li>{{app.user.username}}<i class="fa fa-chevron-down"></i>
                                         <ul class="sub-menu">
@@ -30,7 +30,7 @@
                                                 <li><a href="{{ path('prestataire_update', {'id': app.user.id}) }}">Update</a></li>
                                                 <li><a href="{{ path('galerie_ajout', {'id': app.user.id}) }}">Galerie</a></li>
                                                 {% endif %}
-
+                                            <li><a href="{{ path('update_password', {'id': app.user.id}) }}">Password update</a></li>
                                             <li><a href="{{ path('logout')}}">logout</a></li>
                                         </ul><li>
                                     {% endif %}
@@ -61,11 +61,11 @@
                                 <a href="#">Categories <i class="fa fa-chevron-down"></i></a>
                                 <ul class="sub-menu">
                                     <li><a href="{{path('list_categ')}}">Liste</a></li>
-                                    {% if app.user != null %}
-                                        {% if app.user.typeuser == 'prestataire' %}
+                                        {% if app.user != null %}
+                                            {% if app.user.typeuser == 'prestataire' %}
                                             <li><a href="{{path('ask_new_categorie')}}">Insérer</a></li>
+                                            {% endif %}
                                         {% endif %}
-                                    {% endif %}
                                 </ul>
                             </li>
 
@@ -95,12 +95,12 @@
                                 <a href="#">Promotions <i class="fa fa-chevron-down"></i></a>
                                 <ul class="sub-menu">
                                     <li><a href="{{path('liste_promotions')}}">Liste</a></li>
-                                    {% if app.user != null %}
-                                        {% if app.user.typeuser == 'prestataire' %}
+                                        {% if app.user != null %}
+                                            {% if app.user.typeuser == 'prestataire' %}
                                             <li><a href="{{path('new_promo')}}">Insérer</a></li>
                                             <li><a href="{{path('list_promo_presta', {'slug':app.user.username})}}">Modification</a></li>
+                                            {% endif %}
                                         {% endif %}
-                                    {% endif %}
 
                                 </ul>
 
@@ -108,11 +108,11 @@
                             </li>
 
                             <li >
-                                
+
                                 {% if is_granted('ROLE_ADMIN') %}
-                                <a href="{{path('admin')}}">Admin</a>
+                                    <a href="{{path('admin')}}">Admin</a>
                                 {% endif %}
-                                
+
 
                             </li>
 

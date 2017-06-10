@@ -12,6 +12,8 @@ use AppBundle\Form\UtilisateurType;
 use AppBundle\Form\PreregisterType;
 use AppBundle\Entity\Preregister;
 use AppBundle\Entity\Utilisateur;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use AppBundle\Form\PwdType;
 
 class RecordController extends Controller {
 
@@ -60,9 +62,6 @@ class RecordController extends Controller {
             $this->get('mailer')->send($message);
 
             return $this->redirectToRoute('accueil');
-            
-            
-            
         }
 
         return $this->render('records/prenew.html.twig', [
@@ -106,6 +105,7 @@ class RecordController extends Controller {
                 $encoder = $this->container->get('security.password_encoder');
                 $encoded = $encoder->encodePassword($user, $plainPassword);
 
+
                 $user->setPassword($encoded);
 
                 $em = $this->getDoctrine()->getManager();
@@ -123,8 +123,8 @@ class RecordController extends Controller {
                 } elseif ($typeuser === "internaute") {
                     $this->addFlash("success", "Vous êtes à présent enregistré en tant qu'internaute");
                 }
-                
-                return $this->redirectToRoute('new_image', array('slug'=>$user->getSlug()));
+
+                return $this->redirectToRoute('new_image', array('slug' => $user->getSlug()));
             }
 
             return $this->render('/records/new.html.twig', array(
@@ -136,6 +136,55 @@ class RecordController extends Controller {
                         "msg_error" => 'Votre inscription est invalidée pignouf !'
             ));
         }
+    }
+
+    /**
+     * 
+     * @Security("is_granted('ROLE_USER')")
+     * @Route("/update_password/{id}", name="update_password")
+     * 
+     */
+    public function PasswordController(Request $request, $id = null) {
+
+        $id = $request->get('id');
+
+        $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:Utilisateur')->findOneById($id);
+
+        $form = $this->createForm(PwdType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $encoder = $this->container->get('security.password_encoder');
+            
+            $plainPassword = $user->getPassword();
+            $encoded = $encoder->encodePassword($user, $plainPassword);
+            $confirmPwd = $user->getConfirmationpwd();
+
+
+            if ($plainPassword === $confirmPwd) {
+
+                $user->setPassword($encoded);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+
+                $this->addFlash('success', 'mot de passe modifié avec succès');
+
+
+                return $this->redirectToRoute('accueil');
+            } else {
+                $this->addFlash("success", "Les champs ne correspondent pas");
+            }
+        }
+
+
+
+        return $this->render('records/password.html.twig', [
+                    'userForm' => $form->createView(), 'id' => $id
+        ]);
     }
 
 }
