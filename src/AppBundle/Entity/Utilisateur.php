@@ -29,8 +29,6 @@ class Utilisateur implements UserInterface, \Serializable {
     /**
      * @var string
      * 
-     * 
-     * 
      * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
     private $username;
@@ -47,30 +45,12 @@ class Utilisateur implements UserInterface, \Serializable {
      * @var string
      * 
      *
-     * @ORM\Column(name="password", type="string", length=255)
-     * 
+     * @ORM\Column(name="password", type="string", length=255, nullable=true)
      * 
      */
     private $password;
     
-    /**
-     * 
-     * @SecurityAssert\UserPassword(
-     *     message = "Wrong value for your current password"
-     * )
-     * 
-     * @ORM\Column(name="oldpassword", type="string", length=255)
-     * 
-     */
-    protected $oldpassword;
     
-    /**
-     * @var string
-     * 
-     *
-     * @ORM\Column(name="confirmationpwd", type="string", length=255)
-     */
-    private $confirmationpwd;
 
     /**
      * @var string
@@ -398,7 +378,6 @@ class Utilisateur implements UserInterface, \Serializable {
     /**
      * Get motdepasse
      *
-     * @return string
      */
     public function getPassword() {
         return $this->password;
@@ -1026,54 +1005,4 @@ class Utilisateur implements UserInterface, \Serializable {
     }
 
     
-
-    /**
-     * Set confirmationpwd
-     *
-     * @param string $confirmationpwd
-     *
-     * @return Utilisateur
-     */
-    public function setConfirmationpwd($confirmationpwd)
-    {
-        $this->confirmationpwd = $confirmationpwd;
-
-        return $this;
-    }
-
-    /**
-     * Get confirmationpwd
-     *
-     * @return string
-     */
-    public function getConfirmationpwd()
-    {
-        return $this->confirmationpwd;
-    }
-
-  
-
-    /**
-     * Set oldpassword
-     *
-     * @param string $oldpassword
-     *
-     * @return Utilisateur
-     */
-    public function setOldpassword($oldpassword)
-    {
-        $this->oldpassword = $oldpassword;
-
-        return $this;
-    }
-
-    /**
-     * Get oldpassword
-     *
-     * @return string
-     */
-    public function getOldpassword()
-    {
-        return $this->oldpassword;
-    }
 }

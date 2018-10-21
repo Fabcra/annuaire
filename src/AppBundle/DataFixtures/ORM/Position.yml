@@ -1,4 +1,4 @@
 AppBundle\Entity\Position:
     Pos-{1..10}:
-        ordre : numberBetween($min=1, $max=10)
+        ordre : <numberBetween($min=1, $max=10)>
         nom_bloc: "@bloc-*"

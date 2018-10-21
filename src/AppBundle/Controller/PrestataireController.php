@@ -58,15 +58,8 @@ class PrestataireController extends Controller {
         
         $com = $repocom->findAll();
         
-        
-        
-        
-        
-        
-        
         $banni = $nomPresta->getBanni();
         
-
         // envoi message
 
         $newmail = new Message();

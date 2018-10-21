@@ -1,12 +1,12 @@
 AppBundle\Entity\Utilisateur:
     utilisateur-{1..20}:
         username: <firstName($gender = null|'male'|'female')>
-        password: $2y$12$89USNLEr8zsZLH5dkelHBu3hOiThs0QSayStKpYF2lMj9dEmCzY.q
+        password: $2y$10$kAqUV79zWM1zwB2oY8uLhOOogaVJRndZOw9t4iMyZfrp7l3Zrmzh2
         roles: ['ROLE_ADMIN']
         email : <email()>
         adresse : <streetName()>
         adressenum : <buildingNumber()>
-        codepostal : "@cp-*"
+        codepostal : '@cp-*'
         localite: '@loc-*'
         commune : "@com-*"
         type_user : <userType()>
@@ -14,7 +14,7 @@ AppBundle\Entity\Utilisateur:
         nbessais: 0
         banni: false
         inscriptionconf : true
-        site: <url()>y
+        site: <url()>
         numtel : <phoneNumber()>
         numtva : 000
         newsletter : true

@@ -36,6 +36,8 @@ class UtilisateurType extends AbstractType {
                 ->add('categories')
                 ->add('typeuser')
                 ->add('newsletter')
+                ->add('password')
+                
         ;
     }
 

@@ -93,8 +93,6 @@ class RecordController extends Controller {
             $user->setEmail($mail);
             $typeuser = $request->get('typeuser');
 
-
-
             $form = $this->createForm(UtilisateurType::class, $user);
 
             $form->handleRequest($request);
@@ -155,29 +153,23 @@ class RecordController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $encoder = $this->container->get('security.password_encoder');
-            
+
             $plainPassword = $user->getPassword();
             $encoded = $encoder->encodePassword($user, $plainPassword);
-            $confirmPwd = $user->getConfirmationpwd();
 
 
-            if ($plainPassword === $confirmPwd) {
+            $user->setPassword($encoded);
 
-                $user->setPassword($encoded);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($user);
-                $em->flush();
-
-                $this->addFlash('success', 'mot de passe modifié avec succès');
+            $this->addFlash('success', 'mot de passe modifié avec succès');
 
 
-                return $this->redirectToRoute('accueil');
-            } else {
-                $this->addFlash("success", "Les champs ne correspondent pas");
-            }
+            return $this->redirectToRoute('accueil');
         }
 
 

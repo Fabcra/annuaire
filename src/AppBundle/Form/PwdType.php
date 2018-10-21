@@ -16,8 +16,7 @@ class PwdType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
 //  verification à faire              ->add('oldpassword', PasswordType::class) 
-                ->add('password', PasswordType::class, array('always_empty'=>true))
-                ->add('confirmationpwd', PasswordType::class);
+                ->add('password', PasswordType::class, array('always_empty'=>true));
     }
 
     /**
